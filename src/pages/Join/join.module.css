@@ -1,0 +1,116 @@
+.form h2 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+
+.sns {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.sns a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #5E6278;
+  width: 100%;
+}
+
+.sns img {
+  width: 15px;
+}
+
+.divider {
+  margin-bottom: 40px;
+}
+
+.divider > div {
+  color: #A1A5B7 !important;
+  text-transform: none !important;
+}
+
+.input {
+  margin-bottom: 15px;
+}
+
+.input > div {
+  width: 100%;
+  flex-direction: column;
+  gap: 3px
+}
+
+.input > div span,
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.search {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.search a {
+  color: #222222 !important;
+  position: relative;
+}
+
+.search a:first-child::after {
+  content: '';
+  position: absolute;
+  height: 50%;
+  width: 1px;
+  top: 5px;
+  right: -5px;
+  background-color: #111;
+}
+
+.button {
+  margin-top: 40px;
+}
+
+.button button {
+  width: 100%;
+}
+
+.birth_input {
+  margin-bottom: 15px;
+}
+
+.birth {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid rgba(34,36,38,.15);
+  box-sizing: border-box;
+  height: 38px;
+  border-radius: .28571429rem;
+  margin-bottom: 0;
+}
+
+.birth input {
+  flex: 1;
+  outline: none;
+  background: transparent;
+  border: none;
+  appearance: none;
+  text-align: center;
+  color: #111;
+}
+
+.address button {
+  width: 100%;
+  background-color: #fff !important;
+  border: 1px solid #1678c2 !important;
+  color: #1678c2 !important;
+}
+
+.detail_address1 {
+  margin: 15px 0;
+}

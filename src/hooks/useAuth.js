@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import authApi from '../services/api/auth.api';
+import * as authApi from '../services/api/auth.api';
 import { setAuthorization } from "../services/api";
 
 const useAuth = () => {

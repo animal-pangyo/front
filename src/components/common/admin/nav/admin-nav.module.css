@@ -1,0 +1,13 @@
+.menu {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #2d3039;
+  height: 100%;
+  gap: 20px;
+}
+
+.menu div {
+  font-size: 20px;
+  color: #fff;
+}

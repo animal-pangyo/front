@@ -1,6 +1,11 @@
+import { NavLink } from 'react-router-dom';
 import styled from './admin-top.module.css';
+import useAuth from '../../../../hooks/useAuth';
+
 
 const AdminTop = () => {
+  const { user, logout } = useAuth();
+
   return (
     <>
       <div className={styled.top}>
@@ -10,8 +15,22 @@ const AdminTop = () => {
           <div>고객센터</div>
         </div>
         <div className={styled.right}>
-          <div>로그인</div>
-          <div>회원가입</div>
+          {
+            user ? (
+              <>
+                <div className={styled.user}>
+                  <span>{user.id} 님 환영합니다.</span>
+                  <div className={styled.logout} onClick={logout}>로그아웃</div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div><NavLink to='/login'>로그인</NavLink></div>
+                <div><NavLink to='/join'>회원가입</NavLink></div>
+              </>    
+            )
+          }
+          
         </div>
       </div>
     </>

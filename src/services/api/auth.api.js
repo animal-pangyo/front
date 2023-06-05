@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URL } from ".";
 
 export const getUser = () => {
 
@@ -13,5 +14,13 @@ export const join = () => (
 );
 
 export const logout = () => (
-  axios.post(`${URL}/api/logout`)
+  axios.get(`${URL}/api/logout`)
 );
+
+export const findAccount = (form) => (
+  axios.post(`${URL}/users/find-account`, form)
+)
+
+export const resetPassword = (form) => (
+  axios.post(`${URL}/users/reset-password`, form)
+)

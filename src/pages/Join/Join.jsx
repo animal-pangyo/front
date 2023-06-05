@@ -1,20 +1,21 @@
 import { useForm } from "react-hook-form";
 import styled from './join.module.css';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Google from '../../assets/google-icon.svg';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 const Join = () => {
-  const { register, handleSubmit, setValue, watch, formState: { errors }, setError } = useForm();
+  const { register, handleSubmit, getValues, setValue, watch, formState: { errors }, setError } = useForm();
   const open = useDaumPostcodePopup();
   const form = watch();
 
   const onSubmit = data => {
     if (data.password !== data.passwordChk) {
       setError('passwordChk');
+      return;
     }
 
-    auth.join();
+    auth.join(getValues());
   };
 
   const handleComplete = ({ address }) => {
@@ -43,7 +44,7 @@ const Join = () => {
       <div className={styled.input}>
         <div className="ui input">
           <input type="password" placeholder="비밀번호" {...register("password", { required: true })} />
-          {errors.password && <span>아이디를 입력해주세요.</span>}
+          {errors.password && <span>비밀번호를 입력해주세요.</span>}
         </div>
       </div>
       <div className={styled.input}>

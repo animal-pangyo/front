@@ -1,0 +1,29 @@
+
+.button {
+  margin-top: 40px;
+}
+
+.button button {
+  width: 100%;
+  padding: 0 !important;
+}
+
+.button a {
+  color: #fff !important;
+  display: block;
+  padding: 1em 1.5em 1em;
+}
+
+.result {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.text h4 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.text p {
+  margin-top: 10px;
+}

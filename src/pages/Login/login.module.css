@@ -63,13 +63,13 @@
   position: relative;
 }
 
-.search a:first-child::after {
+.search a + a::after {
   content: '';
   position: absolute;
   height: 50%;
   width: 1px;
   top: 5px;
-  right: -5px;
+  left: -5px;
   background-color: #111;
 }
 
@@ -79,4 +79,8 @@
 
 .button button {
   width: 100%;
+}
+
+.button a {
+  color: #fff !important;
 }

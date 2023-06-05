@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import styled from './login.module.css';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Google from '../../assets/google-icon.svg'
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, getValues, formState: { errors } } = useForm();
   const auth = useAuth();
 
   const onSubmit = () => {
-    auth.login();
+    auth.login(getValues());
   }
 
   return (
@@ -38,8 +38,9 @@ const Login = () => {
         </div>
       </div>
       <div className={styled.search}>
-        <Link>아이디 찾기</Link>
-        <Link>비밀번호 찾기</Link>
+        <NavLink to="/find/id">아이디 찾기</NavLink>
+        <NavLink to="/find/password">비밀번호 찾기</NavLink>
+        <NavLink to="/join">회원가입</NavLink>
       </div>
       <div className={styled.button}>
         <button className="ui large primary button">

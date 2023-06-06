@@ -24,3 +24,8 @@ export const findAccount = (form) => (
 export const resetPassword = (form) => (
   axios.post(`${URL}/users/reset-password`, form)
 )
+
+export const deleteUser = (id) => (
+  axios.delete(`${URL}/user/${id}`)
+)
+

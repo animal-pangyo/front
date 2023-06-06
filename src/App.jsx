@@ -9,7 +9,11 @@ import AuthFind from './pages/AuthFind/AuthFind'
 import styled from './app.module.css'
 import useMessage from './hooks/useMessage'
 import AuthResult from './pages/AuthFind/AuthResult'
-import AuthPassword from './pages/AuthFind/AuthPassword'
+import AuthPassword from './pages/AuthFind/AuthPassword';
+import Users from './pages/Users/Users';
+import Board from './pages/Board/Board'
+import BoardWrite from './pages/Board/BoardWrite'
+import BoardDetail from './pages/Board/BoardDetail'
 
 const queryClient = new QueryClient()
 
@@ -44,7 +48,27 @@ function App() {
     {
       path: "/find/reset/password",
       element: <AuthLayer><AuthPassword /></AuthLayer>
-    }
+    }, 
+    {
+      path: "/users",
+      element: <AdminLayer><Users /></AdminLayer>
+    },
+    {
+      path: "/board",
+      element: <AdminLayer><Board /></AdminLayer>
+    },
+    {
+      path: "/board/write",
+      element: <AdminLayer><BoardWrite /></AdminLayer>
+    },
+    {
+      path: "/board/write/:id",
+      element: <AdminLayer><BoardWrite /></AdminLayer>
+    },
+    {
+      path: "/board/detail/:id",
+      element: <AdminLayer><BoardDetail /></AdminLayer>
+    },
   ])
 
   return (

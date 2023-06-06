@@ -8,8 +8,8 @@ const Login = () => {
   const { register, handleSubmit, getValues, formState: { errors } } = useForm();
   const auth = useAuth();
 
-  const onSubmit = () => {
-    auth.login(getValues());
+  const onSubmit = (data) => {
+    auth.login(data);
   }
 
   return (

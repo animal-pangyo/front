@@ -37,9 +37,6 @@ const useAuth = () => {
   const joinMutation = useMutation({
     mutationFn(form) {
       return authApi.join(form);
-    },
-    onSuccess() {
-      navigate('/login');
     }
   });
 
@@ -67,8 +64,17 @@ const useAuth = () => {
     mutationFn(form) {
       return authApi.resetPassword(form);
     },
-    onSuccess({ data }) { 
+    onSuccess() { 
       navigate(`/find/reset/password`)
+    }
+  });
+
+  const deleteUserMutation = useMutation({
+    mutationFn(id) {
+      return authApi.deleteUser(id);
+    },
+    onSuccess() {
+      queryClient.invalidateQueries('user')
     }
   });
 
@@ -78,7 +84,8 @@ const useAuth = () => {
     join: joinMutation.mutateAsync,
     logout: logoutMutation.mutateAsync,
     findAccount: findMutation.mutateAsync,
-    resetPassword: resetMutation.mutateAsync
+    resetPassword: resetMutation.mutateAsync,
+    deleteUser: deleteUserMutation.mutateAsync
   }
 };
 

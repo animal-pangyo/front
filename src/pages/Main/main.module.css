@@ -1,5 +1,5 @@
 .main h2 {
-  font-size: 50px;
+  font-size: var(--title-size);
   color: var(--title-color);
   margin-bottom: 50px;
 }

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from './main.module.css';
 
 const Main = () => {
@@ -6,7 +6,7 @@ const Main = () => {
     <div className={styled.main}>
       <h2>반려동물종합정보시스템</h2>
       <div className={styled.list}>
-        <div>애견병원</div>
+        <div><NavLink to="/shop/hospital">애견병원</NavLink></div>
         <div>애견미용</div>
         <div>애견카페</div>
         <div>애견호텔</div>

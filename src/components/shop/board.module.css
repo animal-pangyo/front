@@ -1,0 +1,81 @@
+.subject {
+  margin-bottom: 20px;
+}
+
+form .subject {
+  margin-bottom: 0;
+}
+
+.subject, .subject input {
+  width: 100%;
+  min-height: 50px;
+}
+
+.content textarea {
+  width: 100%;
+  min-height: 400px;
+  background-color: #fff;
+  border-radius: .28571429rem;
+  border: 1px solid rgba(34,36,38,.15);
+  padding: .67857143em 1em;
+  font-size: 1em;
+  color: rgba(0,0,0,.87);
+  outline: none;
+  transition: box-shadow .1s ease, border-color .1s ease;
+}
+
+.content textarea:focus {
+  border-color: #85b7d9;
+}
+
+form span {
+  color: red;
+}
+
+
+.detail_subject  {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail_subject .phone {
+  display: flex;
+  gap: 20px;
+}
+
+.detail_content {
+  margin-top: 20px;
+  font-size: 18px;
+  min-height: 500px;
+}
+
+.time {
+  font-size: 13px;
+  font-weight: 100;
+}
+
+.time:first-child {
+  position: relative;
+}
+
+.time:first-child::after {
+  content: '';
+  width: 1px;
+  height: 40%;
+  background-color: #9c9c9c;
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+form .subject {
+  display: flex;
+  flex-direction: column;
+}
+
+form .subject span {
+  display: block;
+  padding-bottom: 10px;
+}

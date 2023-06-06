@@ -1,0 +1,14 @@
+.subject {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.write .subject {
+  margin-bottom: 20px;
+}
+
+.segment {
+  padding: 20px;
+}

@@ -1,22 +1,22 @@
 import { useMutation, useQuery } from "react-query";
 import * as boardApi from '../services/api/board.api';
 
-const useBoard = ({ type, value }) => {
+const useBoard = ({ type, value, name }) => {
   let board;
 
   if (type === 'list') {
     board = useQuery({
-      queryKey: ['board', value],
+      queryKey: [name, value],
       queryFn: async () => {
-        const response = await boardApi.fetchBoardList({ page: value });
+        const response = await boardApi.fetchBoardList({ page: value, name });
         return response.data;
       }
     });
   } else if (type === 'detail') {
     board = useQuery({
-      queryKey: ['board', 'detail', value],
+      queryKey: [name, 'detail', value],
       queryFn: async () => {
-        const response = await boardApi.fetchBoard(value);
+        const response = await boardApi.fetchBoard({ id: value, name });
         return response.data;
       }
     }); 
@@ -24,22 +24,22 @@ const useBoard = ({ type, value }) => {
 
   const deleteMutation = useMutation({
     mutationFn(id) {
-      return boardApi.deleteBoard(id);
+      return boardApi.deleteBoard({ id, name });
     },
     onSuccess() {
-      queryClient.invalidateQueries('board')
+      queryClient.invalidateQueries(name)
     }
   });
 
   const createMutation = useMutation({
     mutationFn(form) {
-      return boardApi.createBoard(form);
+      return boardApi.createBoard({ name, form });
     }
   });
 
   const updateMutation = useMutation({
     mutationFn(form) {
-      return boardApi.updateBoard(form);
+      return boardApi.updateBoard({ form, name });
     }
   });
 

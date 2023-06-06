@@ -38,3 +38,8 @@ form span {
   font-size: 18px;
   min-height: 500px;
 }
+
+form .subject {
+  display: flex;
+  flex-direction: column;
+}

@@ -58,7 +58,7 @@ const BoardList = ({ name }) => {
               </tr>
             )) : (
               <tr>
-                <td colSpan={5} style={{ height: '150px', textAlign: 'center' }}>회원이 존재하지 않습니다.</td>
+                <td colSpan={5} style={{ height: '150px', textAlign: 'center' }}>존재하지 않습니다.</td>
               </tr>
             )
           }

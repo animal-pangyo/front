@@ -1,8 +1,8 @@
 import axios from "axios"
 import { URL } from "."
 
-export const fetchBoardList = ({ page }) => (
-  axios.get(`${URL}/board/${page}`)
+export const fetchBoardList = ({ page, name }) => (
+  axios.get(`${URL}/${name}/${page}`)
 )
 
 export const deleteBoard = ({ id, name }) => (

@@ -20,12 +20,12 @@ const BoardDetailComponent = ({ name }) => {
   return (
     <>
       <Segment className={styled.segment}>
-        <h2 className={styled.detail_subject }>{board.board.id}</h2>
+        <h2 className={styled.detail_subject }>{board.board.subject}</h2>
         <Divider />
         <div className={styled.detail_content}>{board.board.content}</div>
       </Segment>
       <div>
-        <NavLink to="/board">
+        <NavLink to={`/${name}`}>
           <button className="ui button">
             목록
           </button>

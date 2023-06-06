@@ -7,7 +7,7 @@ import useBoard from '../../../hooks/useBoard';
 const BoardWriteComponent = ({ name }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const param = useParams();
-  const board = useBoard({ type: 'detail', value: param.id, name });
+  const board = useBoard({ name, ...(param.id ? { type: 'detail', value: param.id } : {}) });
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -57,7 +57,7 @@ const BoardWriteComponent = ({ name }) => {
           </div>
         </Segment>
         <div>
-          <NavLink to="/board">
+          <NavLink to={`/${name}`}>
             <button className="ui button">
               목록
             </button>

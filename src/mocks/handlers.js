@@ -96,4 +96,124 @@ export const handlers = [
       }),
     )
   )),
+
+
+  /* 공지사항 */
+  rest.get('/notice/1', (_, res, ctx) => (
+    res(
+      ctx.status(200),
+      ctx.json({
+        board: [
+          {
+            no: '1',
+            id: 1,
+            writer: '아이디',
+            subject: '오늘의 공지',
+            createdAt: '2023-05-12',
+          }
+        ],
+        total: 1
+      }),
+    )
+  )),
+
+  rest.post('/notice', (_, res, ctx) => (
+    res(
+      ctx.status(200),
+      ctx.json({
+        id: 1
+      }),
+    )
+  )),
+
+  rest.get('/notice/detail/1', (_, res, ctx) => (
+    res(
+      ctx.status(200),
+      ctx.json({
+        id: 1,
+        subject: '내용',
+        content: '제목'
+      }),
+    )
+  )),
+
+  /* qna */
+  rest.get('/qna/1', (_, res, ctx) => (
+    res(
+      ctx.status(200),
+      ctx.json({
+        board: [
+          {
+            no: '1',
+            id: 1,
+            writer: '아이디',
+            subject: '오늘의 QNA',
+            createdAt: '2023-05-12',
+          }
+        ],
+        total: 1
+      }),
+    )
+  )),
+
+  rest.post('/qna', (_, res, ctx) => (
+    res(
+      ctx.status(200),
+      ctx.json({
+        id: 1
+      }),
+    )
+  )),
+
+  rest.get('/qna/detail/1', (_, res, ctx) => (
+    res(
+      ctx.status(200),
+      ctx.json({
+        id: 1,
+        subject: '내용',
+        content: '제목'
+      }),
+    )
+  )),
+  
+  /* shop */
+  rest.get('/hospital/1', (_, res, ctx) => (
+    res(
+      ctx.status(200),
+      ctx.json({
+        board: [
+          {
+            no: '1',
+            id: 1,
+            name: '아이디',
+            time: '오늘의 QNA',
+            phone: '2023-05-12',
+          }
+        ],
+        total: 1
+      }),
+    )
+  )),
+
+  rest.post('/hospital', (_, res, ctx) => (
+    res(
+      ctx.status(200),
+      ctx.json({
+        id: 1
+      }),
+    )
+  )),
+
+  rest.get('/hospital/detail/1', (_, res, ctx) => (
+    res(
+      ctx.status(200),
+      ctx.json({
+        id: 1,
+        name: '업체명',
+        time: '영업시간',
+        detail: '상세 내용입니다.',
+        phone: '010-1234-5678'
+      }),
+    )
+  )),
 ]

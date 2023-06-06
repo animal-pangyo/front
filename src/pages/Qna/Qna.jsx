@@ -1,16 +1,16 @@
 import BoardList from '../../components/common/board/BoardList';
 import styled from '../Board/board.module.css';
 
-const Notice = () => {
+const Qna = () => {
 
   return (
     <>
       <div className={styled.main}>
-        <h2>공지사항</h2>
-        <BoardList name="notice" />
+        <h2>Q & A</h2>
+        <BoardList name="qna" />
       </div>
     </>
   )
 };
 
-export default Notice;
+export default Qna;

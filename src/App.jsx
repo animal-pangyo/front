@@ -1,75 +1,14 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import AuthLayer from './components/layers/AuthLayer/AuthLayer'
-import AdminLayer from './components/layers/AdminLayer/AdminLayer'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import Login from './pages/Login/Login'
-import Join from './pages/Join/Join'
-import Main from './pages/Main/Main'
-import AuthFind from './pages/AuthFind/AuthFind'
 import styled from './app.module.css'
 import useMessage from './hooks/useMessage'
-import AuthResult from './pages/AuthFind/AuthResult'
-import AuthPassword from './pages/AuthFind/AuthPassword';
-import Users from './pages/Users/Users';
-import Board from './pages/Board/Board'
-import BoardWrite from './pages/Board/BoardWrite'
-import BoardDetail from './pages/Board/BoardDetail'
+import routes from './routes';
 
 const queryClient = new QueryClient()
 
 function App() {
   const [message] = useMessage();
-
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <AdminLayer><Main /></AdminLayer>,
-    },
-    {
-      path: "/login",
-      element: <AuthLayer><Login /></AuthLayer>
-    },
-    {
-      path: "/join",
-      element: <AuthLayer><Join /></AuthLayer>
-    },
-    {
-      path: "/find/id",
-      element: <AuthLayer><AuthFind type="id" /></AuthLayer>
-    },
-    {
-      path: "/find/password",
-      element: <AuthLayer><AuthFind type="password" /></AuthLayer>
-    },
-    {
-      path: "/find/result/:id",
-      element: <AuthLayer><AuthResult /></AuthLayer>
-    },
-    {
-      path: "/find/reset/password",
-      element: <AuthLayer><AuthPassword /></AuthLayer>
-    }, 
-    {
-      path: "/users",
-      element: <AdminLayer><Users /></AdminLayer>
-    },
-    {
-      path: "/board",
-      element: <AdminLayer><Board /></AdminLayer>
-    },
-    {
-      path: "/board/write",
-      element: <AdminLayer><BoardWrite /></AdminLayer>
-    },
-    {
-      path: "/board/write/:id",
-      element: <AdminLayer><BoardWrite /></AdminLayer>
-    },
-    {
-      path: "/board/detail/:id",
-      element: <AdminLayer><BoardDetail /></AdminLayer>
-    },
-  ])
+  const router = createBrowserRouter(routes)
 
   return (
     <QueryClientProvider client={queryClient}>

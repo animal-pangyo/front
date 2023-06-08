@@ -50,7 +50,7 @@ const ShopList = ({ name }) => {
                     auth.user && auth.user.id === board.writer && (
                       <>
                         <Button onClick={() => deleteBoard(board.id)} primary>삭제</Button>
-                        <Button onClick={() => navigate(`/board/write/${board.id}`)} primary>수정</Button>
+                        <Button onClick={() => navigate(`/${name}/write/${board.id}`)} primary>수정</Button>
                       </>
                     )
                   }

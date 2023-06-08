@@ -2,8 +2,7 @@ import axios from "axios";
 import { URL, getUserId } from ".";
 
 export const getUser = () => {
-  const userId = getUserId();
-  return axios.get(`${URL}/user/refresh/${userId}`);
+  return axios.get(`${URL}/users/refresh`);
 }
 
 export const login = () => (

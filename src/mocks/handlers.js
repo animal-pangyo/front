@@ -25,7 +25,7 @@ export const handlers = [
     res(ctx.status(200))
   )),
 
-  rest.post('/users/refresh', (_, res, ctx) => (
+  rest.get('/users/refresh', (_, res, ctx) => (
     res(
       ctx.status(200),
       ctx.json({

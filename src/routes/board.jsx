@@ -12,19 +12,19 @@ import QnaDetail from '../pages/Qna/QnaDetail'
 export default [
   /* 자유게시판 */
   {
-    path: "/board",
+    path: "/free",
     element: <AdminLayer><Board /></AdminLayer>
   },
   {
-    path: "/board/write",
+    path: "/free/write",
     element: <AdminLayer><BoardWrite /></AdminLayer>
   },
   {
-    path: "/board/write/:id",
+    path: "/free/write/:id",
     element: <AdminLayer><BoardWrite /></AdminLayer>
   },
   {
-    path: "/board/detail/:id",
+    path: "/free/detail/:id",
     element: <AdminLayer><BoardDetail /></AdminLayer>
   },
 

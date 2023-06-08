@@ -44,11 +44,9 @@ const ShopWriteComponent = ({ name }) => {
     <>
       <form className={styled.form} onSubmit={handleSubmit(onSubmit)}>
         <Segment>
-          <div>
-            <div className={`ui input ${styled.subject}`}>
-              <input type="text" defaultValue={board.board.subject} placeholder="업체명을 입력해주세요." {...register("name", { required: true })} />
-              {errors.name && <span>제목을 입력해주세요.</span>}
-            </div>
+          <div className={`ui input ${styled.subject}`}>
+            <input type="text" defaultValue={board.board.subject} placeholder="업체명을 입력해주세요." {...register("name", { required: true })} />
+            {errors.name && <span>제목을 입력해주세요.</span>}
           </div>
 
           <div className={`ui input ${styled.subject}`}>

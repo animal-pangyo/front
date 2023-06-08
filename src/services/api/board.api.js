@@ -1,16 +1,28 @@
 import axios from "axios"
 import { URL } from "."
 
+const getContext = (name) => {
+  switch(name) {
+    case 'free':
+    case 'notice':
+    case 'faq':
+    case 'inquiry':
+      return 'posts';
+    default:
+      return 'stores';
+  }
+};
+
 export const fetchBoardList = ({ page, name }) => (
-  axios.get(`${URL}/posts/${name}?page=${page}`)
+  axios.get(`${URL}/${getContext(name)}/${name}?page=${page}`)
 )
 
-export const deleteBoard = ({ id }) => (
-  axios.delete(`${URL}/posts/${id}`)
+export const deleteBoard = ({ id, name }) => (
+  axios.delete(`${URL}/${getContext(name)}/${id}`)
 )
 
 export const createBoard = ({ form, name }) => (
-  axios.post(`${URL}/posts`, {
+  axios.post(`${URL}/${getContext(name)}`, {
     title: form.subject,
     content: form.conent,
     user_id: form.userId, 
@@ -18,15 +30,15 @@ export const createBoard = ({ form, name }) => (
   })
 )
 
-export const updateBoard = ({ form }) => (
-  axios.patch(`${URL}/posts/${form.id}`, {
+export const updateBoard = ({ form, name }) => (
+  axios.patch(`${URL}/${getContext(name)}/${form.id}`, {
     title: form.subject,
     content: form.conent,
   })
 )
 
-export const fetchBoard = ({ id }) => (
-  axios.get(`${URL}/posts/${id}`)
+export const fetchBoard = ({ id, name }) => (
+  axios.get(`${URL}/${getContext(name)}/${id}`)
 )
 
 export const transformBoard = (server) => {

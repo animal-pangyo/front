@@ -2,10 +2,6 @@
   margin-bottom: 20px;
 }
 
-form .subject {
-  margin-bottom: 0;
-}
-
 .subject, .subject input {
   width: 100%;
   min-height: 50px;

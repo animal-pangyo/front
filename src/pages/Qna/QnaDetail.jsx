@@ -8,7 +8,7 @@ const QnaDetail = () => {
       <div className={`${styled.main} ${styled.detail}`}>
         <h2>Q & A</h2>
         <Divider />
-        <BoardDetailComponent name="qna" />      
+        <BoardDetailComponent name="inquiry" />      
       </div>
     </>
   )

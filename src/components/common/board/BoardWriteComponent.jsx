@@ -30,7 +30,10 @@ const BoardWriteComponent = ({ name }) => {
   };
 
   const update = async () => {
-    const response = await board.updateBoard(data);
+    const response = await board.updateBoard({
+      ...data,
+      id: param.id
+    });
 
     if (!response?.data?.id) {
       navigate(`/${name}`);

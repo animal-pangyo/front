@@ -1,20 +1,21 @@
 import axios from "axios";
-import { URL } from ".";
+import { URL, getUserId } from ".";
 
 export const getUser = () => {
-
-};
+  const userId = getUserId();
+  return axios.get(`${URL}/user/refresh/${userId}`);
+}
 
 export const login = () => (
-  axios.post(`${URL}/api/login`)
+  axios.post(`${URL}/users/login`)
 )
 
 export const join = () => (
-  axios.post(`${URL}/api/join`)
+  axios.post(`${URL}/users/join`)
 );
 
 export const logout = () => (
-  axios.get(`${URL}/api/logout`)
+  axios.get(`${URL}/users/logout`)
 );
 
 export const findAccount = (form) => (
@@ -26,6 +27,8 @@ export const resetPassword = (form) => (
 )
 
 export const deleteUser = (id) => (
-  axios.delete(`${URL}/user/${id}`)
+  axios.post(`${URL}/admin/delete-user`, {
+    user_id: id
+  })
 )
 

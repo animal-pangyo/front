@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import * as authApi from '../services/api/auth.api';
 import { setAuthorization } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { transformUser } from "../services/api/user.api";
 
 const useAuth = () => {
   const navigate = useNavigate();
@@ -10,9 +11,10 @@ const useAuth = () => {
   const { data } = useQuery({
     queryKey: 'user',
     queryFn: async () => {
-      const { user, token } = await authApi.getUser();
-      setAuthorization(token);
-      return user;
+      const response = await authApi.getUser();
+      const { accessToken, ...user } = response.data;
+      setAuthorization(accessToken, user.user_id);
+      return transformUser(user);
     },
     staleTime: 15 * 60 * 1000,
     initialData: null,
@@ -27,9 +29,9 @@ const useAuth = () => {
       return authApi.login(form);
     },
     onSuccess(response) { 
-      const { user, token } = response.data;
-      setAuthorization(token);
-      queryClient.setQueryData('user', user);
+      const { accessToken, ...user } = response.data;
+      setAuthorization(accessToken, user.user_id);
+      queryClient.setQueryData('user', transformUser(user));
       navigate('/');
     }
   });

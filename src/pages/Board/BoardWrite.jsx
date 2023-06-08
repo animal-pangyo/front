@@ -8,7 +8,7 @@ const BoardWrite = () => {
       <div className={`${styled.main} ${styled.write}`}>
         <h2>자유게시판</h2>
         <Divider />
-        <BoardWriteComponent name="board" />
+        <BoardWriteComponent name="free" />
       </div>
     </>
   )

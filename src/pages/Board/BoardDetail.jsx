@@ -8,7 +8,7 @@ const BoardDetail = () => {
       <div className={`${styled.main} ${styled.detail}`}>
         <h2>자유게시판</h2>
         <Divider />
-        <BoardDetailComponent name="board" />      
+        <BoardDetailComponent name="free" />      
       </div>
     </>
   )

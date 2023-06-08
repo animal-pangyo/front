@@ -8,7 +8,7 @@ const QnaWrite = () => {
       <div className={`${styled.main} ${styled.write}`}>
         <h2>Q & A</h2>
         <Divider />
-        <BoardWriteComponent name="qna" />
+        <BoardWriteComponent name="inquiry" />
       </div>
     </>
   )

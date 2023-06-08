@@ -6,7 +6,10 @@ const useUser = (page) => {
     queryKey: ['users', page],
     queryFn: async () => {
       const response = await useApi.fetchUsers({ page });
-      return response.data;
+      const data = response.data.map((user) => (
+        useApi.transformUser(user)
+      ));
+      return data;
     }
   });
 

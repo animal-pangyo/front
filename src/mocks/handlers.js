@@ -2,24 +2,43 @@ import { rest } from 'msw'
 
 export const handlers = [
   // Handles a POST /login request
-  rest.post('/api/login', (_, res, ctx) => (
+  rest.post('/users/login', (_, res, ctx) => (
     res(
       ctx.status(200),
       ctx.json({
-        user: {
-          id: '아이디',
-          name: '이름'
-        },
-        token: '토큰'
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmluZHl1bmppMiIsImVtYWlsIjoiZmluZHl1bmppMkB0ZXN0LmNvbSIsInJvbGVzIjoidXNlciIsImlhdCI6MTY4NjA2OTkzMiwiZXhwIjoxNjg2MDczNTMyfQ.7xbJWqlLWB91WtnxFdwmeg72n4gb2FCLypELiEYAAbg",
+        "user_id": "findyunji2",
+        "user_name": "test5",
+        "email": "findyunji2@test.com",
+        "roles": "admin",
+        "phone": "01052804375",
+        "address": "home",
+        "birth": "961201"
       }))
   )),
 
-  rest.post('/api/join', (_, res, ctx) => (
+  rest.post('/users/join', (_, res, ctx) => (
     res(ctx.status(200))
   )),
 
-  rest.get('/api/logout', (_, res, ctx) => (
+  rest.get('/users/logout', (_, res, ctx) => (
     res(ctx.status(200))
+  )),
+
+  rest.post('/users/refresh', (_, res, ctx) => (
+    res(
+      ctx.status(200),
+      ctx.json({
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmluZHl1bmppMiIsImVtYWlsIjoiZmluZHl1bmppMkB0ZXN0LmNvbSIsInJvbGVzIjoidXNlciIsImlhdCI6MTY4NjA2OTkzMiwiZXhwIjoxNjg2MDczNTMyfQ.7xbJWqlLWB91WtnxFdwmeg72n4gb2FCLypELiEYAAbg",
+        "user_id": "findyunji2",
+        "user_name": "test5",
+        "email": "findyunji2@test.com",
+        "roles": "admin",
+        "phone": "01052804375",
+        "address": "home",
+        "birth": "961201"
+      })
+    )
   )),
   
   rest.post('/users/find-account', (_, res, ctx) => (
@@ -36,26 +55,33 @@ export const handlers = [
     )
   )),
 
-  rest.get('/users/1', (_, res, ctx) => (
+  rest.get('/admin/user-list', (_, res, ctx) => (
     res(
       ctx.status(200),
-      ctx.json({
-        users: [
-          {
-            id: 'test',
-            name: '이름',
-            birth: '2003-03-01',
-            email: 'a@a.com',
-            phone: '010-1234-5678',
-            address: '주소'
-          }
-        ],
-        total: 1
-      }),
+      ctx.json([
+        {
+            "user_id": "findyunji",
+            "user_name": "hello",
+            "email": "yunji@updateTest.com",
+            "roles": "user",
+            "phone": "01052804375",
+            "address": "home",
+            "birth": "961201"
+        },
+        {
+            "user_id": "findyunji2",
+            "user_name": "test5",
+            "email": "findyunji2@test.com",
+            "roles": "user",
+            "phone": "01052804375",
+            "address": "home",
+            "birth": "961201"
+        }
+      ]),
     )
   )),
 
-  rest.delete('/user/test', (_, res, ctx) => (
+  rest.delete('/users/test', (_, res, ctx) => (
     res(ctx.status(200))
   )),
 

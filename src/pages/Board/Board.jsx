@@ -7,7 +7,7 @@ const Board = () => {
     <>
       <div className={styled.main}>
         <h2>자유게시판</h2>
-        <BoardList name="board" />
+        <BoardList name="free" />
       </div>
     </>
   )

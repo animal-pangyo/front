@@ -6,8 +6,8 @@ const Qna = () => {
   return (
     <>
       <div className={styled.main}>
-        <h2>Q & A</h2>
-        <BoardList name="qna" />
+        <h2>Q&A</h2>
+        <BoardList name="inquiry" />
       </div>
     </>
   )

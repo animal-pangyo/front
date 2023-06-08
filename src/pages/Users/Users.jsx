@@ -63,7 +63,7 @@ const User = () => {
           </thead>
           <tbody>
             {
-              users?.users?.length ? users.users.map((user) => (
+              users?.length ? users.map((user) => (
                 <tr key={user.id}>
                   <td data-label="아이디">{user.id}</td>
                   <td data-label="이름">{user.name}</td>
@@ -87,11 +87,16 @@ const User = () => {
           </tfoot>
         </table>
 
-        <div>
-          <button className="ui primary button" onClick={() => setOpen(true)}>
-            유저 추가
-          </button>
-        </div>
+        {
+          auth.user?.roles?.includes('admin') && (
+            <div>
+              <button className="ui primary button" onClick={() => setOpen(true)}>
+                유저 추가
+              </button>
+            </div>
+          )
+        }
+        
 
         <JoinModal open={open} setOpen={setOpen} onSubmit={onSubmit} />
       </div>

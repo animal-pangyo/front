@@ -9,7 +9,11 @@ const useBoard = ({ type, value, name }) => {
       queryKey: [name, value],
       queryFn: async () => {
         const response = await boardApi.fetchBoardList({ page: value, name });
-        return response.data;
+        const data = response.data.map((board) => (
+          boardApi.transformBoard(board)
+        ));
+        
+        return data;
       }
     });
   } else if (type === 'detail') {
@@ -17,7 +21,7 @@ const useBoard = ({ type, value, name }) => {
       queryKey: [name, 'detail', value],
       queryFn: async () => {
         const response = await boardApi.fetchBoard({ id: value, name });
-        return response.data;
+        return boardApi.transformBoard(response.data);
       }
     }); 
   }

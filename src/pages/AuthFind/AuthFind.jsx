@@ -38,8 +38,8 @@ const AuthFind = ({ type }) => {
           <>
             <div className={styled.input}>
               <div className="ui input">
-                <input type="text" placeholder="아이디" {...register("id", { required: true })} />
-                {errors.id && <span>아이디를 입력해주세요.</span>}
+                <input type="text" placeholder="아이디" {...register("user_id", { required: true })} />
+                {errors.user_id && <span>아이디를 입력해주세요.</span>}
               </div>
             </div>
             <div className={styled.input}>

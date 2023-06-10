@@ -1,10 +1,9 @@
-import axios from "axios";
-import { URL, getUserId } from ".";
+import axios, { URL, getUserId } from ".";
 
 export const fetchUsers = ({ page }) => {
   const userId = getUserId();
-  return axios.get(`${URL}/admin/user-list?page=${page}`)
-}
+  return axios.get(`${URL}/admin/user-list?page=${page}`);
+};
 
 export const transformUser = (server) => {
   return {
@@ -15,5 +14,5 @@ export const transformUser = (server) => {
     phone: server.phone,
     address: server.address,
     birth: server.birth,
-  }
+  };
 };

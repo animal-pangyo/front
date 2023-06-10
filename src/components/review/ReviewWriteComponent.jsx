@@ -3,11 +3,8 @@ import styled from "./board.module.css";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import useBoard from "../../../hooks/useBoard";
-import { useRecoilState } from "recoil";
-import { reviewWriteState } from "../../../store/review";
 
-const BoardWriteComponent = ({ name }) => {
-  const [review] = useRecoilState(reviewWriteState);
+const ReviewWriteComponent = ({ name }) => {
   const {
     register,
     setValue,
@@ -30,10 +27,7 @@ const BoardWriteComponent = ({ name }) => {
   };
 
   const create = async (data) => {
-    const response = await board.createBoard({
-      ...data,
-      storeId: review.storeId,
-    });
+    const response = await board.createBoard(data);
 
     if (!response?.data?.id) {
       navigate(`/${name}`);
@@ -96,4 +90,4 @@ const BoardWriteComponent = ({ name }) => {
   );
 };
 
-export default BoardWriteComponent;
+export default ReviewWriteComponent;

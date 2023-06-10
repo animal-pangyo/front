@@ -1,26 +1,31 @@
-import styled from './board.module.css'
-import { Divider, Segment } from 'semantic-ui-react';
-import { NavLink, useParams } from 'react-router-dom';
-import useBoard from '../../hooks/useBoard';
-import useAuth from '../../hooks/useAuth';
+import styled from "./board.module.css";
+import { Divider, Segment } from "semantic-ui-react";
+import { NavLink, useParams } from "react-router-dom";
+import useBoard from "../../hooks/useBoard";
+import useAuth from "../../hooks/useAuth";
+import { useRecoilState } from "recoil";
+import { messageState } from "../../store/message";
+import ReviewList from "../review/ReviewList";
 
 const ShopDetailComponent = ({ name }) => {
   const param = useParams();
   const auth = useAuth();
-  const board = useBoard({ type: 'detail', value: param.id, name });
-    
+  const board = useBoard({ type: "detail", value: param.id, name });
+
+  const [message, setMessage] = useRecoilState(messageState);
+
   const deleteBoard = async (id) => {
     await board.deleteBoard(id);
     setMessage({
       visible: true,
-      message: '삭제되었습니다.'
+      message: "삭제되었습니다.",
     });
   };
 
   return (
     <>
       <Segment className={styled.segment}>
-        <h2 className={styled.detail_subject }>
+        <h2 className={styled.detail_subject}>
           <span>{board.board.name}</span>
           <div className={styled.phone}>
             <span className={styled.time}>전화번호 : {board.board.phone}</span>
@@ -30,22 +35,21 @@ const ShopDetailComponent = ({ name }) => {
         <Divider />
         <div className={styled.detail_content}>{board.board.detail}</div>
       </Segment>
+
+      <ReviewList name={name} storeId={param.id} />
+
       <div>
         <NavLink to={`/shop/${name}`}>
-          <button className="ui button">
-            목록
-          </button>
+          <button className="ui button">목록</button>
         </NavLink>
-        {
-          auth?.user?.id && auth?.user?.id === board.writer && (
-            <button className="ui primary button" onClick={deleteBoard}>
-              삭제
-            </button>
-          )
-        }
+        {auth?.user?.id && auth?.user?.id === board.writer && (
+          <button className="ui primary button" onClick={deleteBoard}>
+            삭제
+          </button>
+        )}
       </div>
     </>
-  )
+  );
 };
 
-export default ShopDetailComponent
+export default ShopDetailComponent;

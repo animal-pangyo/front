@@ -1,24 +1,25 @@
 import { Button } from "semantic-ui-react";
-import TablePagination from "../paging/TablePagination";
+import TablePagination from "../common/paging/TablePagination";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import useAuth from "../../../hooks/useAuth";
-import useBoard from "../../../hooks/useBoard";
-import usePagination from "../../../hooks/usePagination";
-import Search from "../../common/search/search";
+import useAuth from "../../hooks/useAuth";
+import useBoard from "../../hooks/useBoard";
+import usePagination from "../../hooks/usePagination";
+import { useRecoilState } from "recoil";
+import { reviewWriteState } from "../../store/review";
 
-const BoardList = ({ name }) => {
+const ReviewList = ({ name, storeId }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const [searchKeyword, setSearchKeyword] = useState("");
   const auth = useAuth();
-  const board = useBoard({ type: "list", value: page, name, searchKeyword });
+  const board = useBoard({ type: "list", value: page, name });
   console.log(board, "board ------------", board.posts);
   const { start, end, total, last } = usePagination({
     page,
     perPage: 10,
     total: board?.total,
   });
+  const [_, setState] = useRecoilState(reviewWriteState);
 
   const deleteBoard = async (id) => {
     await board.deleteBoard(id);
@@ -28,9 +29,14 @@ const BoardList = ({ name }) => {
     });
   };
 
+  const moveWrite = () => {
+    setState({
+      storeId,
+    });
+  };
+
   return (
     <>
-      <Search searchKeyword={setSearchKeyword} />
       <table className="ui celled table">
         <thead>
           <tr>
@@ -48,14 +54,13 @@ const BoardList = ({ name }) => {
                 <td data-label="번호">{board.post_id}</td>
                 <td data-label="글쓴이">{board.author_id}</td>
                 <td data-label="제목" width={500}>
-                  <NavLink to={`/${name}/detail/${board.post_id}`}>
+                  <NavLink to={`/review/${name}/detail/${board.post_id}`}>
                     {board.subject}
                   </NavLink>
                 </td>
                 <td data-label="등록일">{board.created_at}</td>
                 <td data-label="기능">
-                  {((auth.user && auth.user.roles === "admin") ||
-                    auth.user.id === board.author_id) && (
+                  {auth.user && auth.user.id === board.author_id && (
                     <>
                       <Button
                         onClick={() => deleteBoard(board.post_id)}
@@ -65,7 +70,7 @@ const BoardList = ({ name }) => {
                       </Button>
                       <Button
                         onClick={() =>
-                          navigate(`/${name}/write/${board.post_id}`)
+                          navigate(`/review/${name}/write/${board.post_id}`)
                         }
                         primary
                       >
@@ -99,7 +104,11 @@ const BoardList = ({ name }) => {
 
       <div>
         {auth?.user?.id && (
-          <NavLink color="#fff" to={`/${name}/write`}>
+          <NavLink
+            color="#fff"
+            to={`/review/${name}/write`}
+            onClick={moveWrite}
+          >
             <button className="ui primary button">글쓰기</button>
           </NavLink>
         )}
@@ -108,4 +117,4 @@ const BoardList = ({ name }) => {
   );
 };
 
-export default BoardList;
+export default ReviewList;

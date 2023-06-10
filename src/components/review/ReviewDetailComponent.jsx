@@ -7,7 +7,7 @@ import useAuth from "../../../hooks/useAuth";
 import { useRecoilState } from "recoil";
 import { messageState } from "../../../store/message";
 
-const BoardDetailComponent = ({ name }) => {
+const ReviewDetailComponent = ({ name }) => {
   const param = useParams();
   const auth = useAuth();
   const board = useBoard({ type: "detail", value: param.id, name });
@@ -20,12 +20,9 @@ const BoardDetailComponent = ({ name }) => {
     setText(e.target.value);
   };
 
-  const addAnswer = async () => {
-    console.log("addAnswer");
-    const response = await board.createAnswer({
-      answer: text,
-      postId: param.id,
-    });
+  const addAnswer = async (text) => {
+    console.log("addAnswer", text);
+    const response = await board.createBoard(data);
 
     if (!response?.data?.id) {
       navigate(`/${name}`);
@@ -48,14 +45,7 @@ const BoardDetailComponent = ({ name }) => {
         <h2 className={styled.detail_subject}>{board.board.subject}</h2>
         <Divider />
         <div className={styled.detail_content}>{board.board.content}</div>
-        <h3 className={styled.detail_subject}>답변</h3>
-        <Divider />
-        {!board?.board?.comments?.length ? (
-          <p> 답변 진행중입니다.</p>
-        ) : (
-          <p> {board.board.comments[0].content} </p>
-        )}
-        {auth?.user?.roles === "admin" && !board?.board?.comments?.length && (
+        {auth?.user?.roles === "admin" && (
           <div>
             <TextArea
               placeholder="답변을 입력해주세요."
@@ -82,4 +72,4 @@ const BoardDetailComponent = ({ name }) => {
   );
 };
 
-export default BoardDetailComponent;
+export default ReviewDetailComponent;

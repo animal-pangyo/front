@@ -1,8 +1,7 @@
-import BoardList from '../../components/common/board/BoardList';
-import styled from '../Board/board.module.css';
+import BoardList from "../../components/common/board/BoardList";
+import styled from "../Board/board.module.css";
 
 const Qna = () => {
-
   return (
     <>
       <div className={styled.main}>
@@ -10,7 +9,7 @@ const Qna = () => {
         <BoardList name="inquiry" />
       </div>
     </>
-  )
+  );
 };
 
 export default Qna;

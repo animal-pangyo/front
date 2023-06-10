@@ -5,8 +5,8 @@ const Board = () => {
   return (
     <>
       <div className={styled.main}>
-        <h2>자유게시판</h2>
-        <BoardList name="free" />
+        <h2>업체 후기</h2>
+        <BoardList name="review" />
       </div>
     </>
   );

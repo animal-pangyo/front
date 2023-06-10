@@ -1,33 +1,38 @@
-import axios from "axios";
+import axios from ".";
 import { URL, getUserId } from ".";
 
 export const getUser = () => {
-  return axios.get(`${URL}/users/refresh`);
-}
+  return axios.get(`${URL}/users/refresh/mine`);
+};
 
-export const login = () => (
-  axios.post(`${URL}/users/login`)
-)
+export const login = (form) =>
+  axios.post(`${URL}/users/login`, {
+    user_id: form.id,
+    pwd: form.password,
+  });
 
-export const join = () => (
-  axios.post(`${URL}/users/join`)
-);
+export const join = (form) =>
+  axios.post(`${URL}/users/join`, {
+    user_id: form.id,
+    pwd: form.password,
+    user_name: form.name,
+    birth: form.yaer + form.month + form.day,
+    pwdConfirm: form.passwordChk,
+    address: form.address1 + form.address2,
+    ...form,
+  });
 
-export const logout = () => (
-  axios.get(`${URL}/users/logout`)
-);
+export const logout = () => axios.delete(`${URL}/users/session/logout`);
 
-export const findAccount = (form) => (
-  axios.post(`${URL}/users/find-account`, form)
-)
+export const findAccount = (form) =>
+  axios.post(`${URL}/users/find-account`, form);
 
-export const resetPassword = (form) => (
-  axios.post(`${URL}/users/reset-password`, form)
-)
+export const resetPassword = (form) =>
+  axios.post(`${URL}/users/reset-password`, {
+    ...form,
+    pwd: form.password,
+    pwdConfirm: form.passwordChk,
+  });
 
-export const deleteUser = (id) => (
-  axios.post(`${URL}/admin/delete-user`, {
-    user_id: id
-  })
-)
-
+export const deleteUser = (id) =>
+  axios.delete(`${URL}/admin/delete-user/${id}`);

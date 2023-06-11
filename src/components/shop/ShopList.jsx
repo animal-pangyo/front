@@ -10,12 +10,13 @@ import { useDaumPostcodePopup } from "react-daum-postcode";
 const DEFAULT_POSITION = [37.402187224511, 127.10304698035];
 
 const ShopList = ({ name }) => {
+  const [bounds, setBounds] = useState({});
   const [searchKeyword, setSearchKeyword] = useState('');
   const [address, setAddress] = useState('');
   const auth = useAuth();
   const navigate = useNavigate();
   const [position, setPosition] = useState([]);
-  const board = useBoard({ type: "list", value: position, name, searchKeyword, address });
+  const board = useBoard({ type: "list", value: position, name, searchKeyword, address, bounds });
   const [map, setMap] = useState(null);
   const clusterer = useMemo(() => {
     if (!map) return null;
@@ -101,6 +102,7 @@ const ShopList = ({ name }) => {
     if (!map) return;
 
     const fn = debounce((position) => {
+      setBounds(map.getBounds());
       showPosition(position);
     }, 1000);
 

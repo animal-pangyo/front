@@ -3,7 +3,7 @@ import * as boardApi from "../services/api/board.api";
 import * as storeApi from "../services/api/store.api";
 import * as reviewApi from "../services/api/review.api";
 
-const useBoard = ({ type, value, name, searchKeyword, address, storeId }) => {
+const useBoard = ({ type, value, name, searchKeyword, address, storeId, bounds }) => {
 
   const queryClient = useQueryClient();
   let board;
@@ -31,7 +31,8 @@ const useBoard = ({ type, value, name, searchKeyword, address, storeId }) => {
           page: value,
           name,
           searchKeyword,
-          address
+          address,
+          bounds
         });
 
         if (Array.isArray(response.data)) {

@@ -14,8 +14,6 @@ const BoardDetailComponent = ({ name }) => {
   const [message, setMessage] = useRecoilState(messageState);
   const [text, setText] = useState("");
 
-  console.log(board, "detail", auth?.user?.roles, param, param.id, name);
-
   const onChange = (e) => {
     setText(e.target.value);
   };

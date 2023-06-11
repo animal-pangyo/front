@@ -27,7 +27,6 @@ export const createBoard = ({ form, name }) =>
     content: form.content,
     user_id,
     board_type: name,
-    store_id: form.storeId,
   });
 
 export const createAnswer = ({ answer, name, postId }) => {

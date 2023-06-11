@@ -31,12 +31,12 @@ const BoardList = ({ name }) => {
   return (
     <>
       <Search searchKeyword={setSearchKeyword} />
-      <table className="ui celled table">
+      <table className="ui celled table boardList">
         <thead>
           <tr>
             <th>No.</th>
             <th>글쓴이</th>
-            <th>제목</th>
+            <th className="subject">제목</th>
             <th>등록일</th>
             <th>기능</th>
           </tr>
@@ -47,7 +47,7 @@ const BoardList = ({ name }) => {
               <tr key={board.post_id}>
                 <td data-label="번호">{board.post_id}</td>
                 <td data-label="글쓴이">{board.author_id}</td>
-                <td data-label="제목" width={500}>
+                <td className="subject" data-label="제목" width={500}>
                   <NavLink to={`/${name}/detail/${board.post_id}`}>
                     {board.subject}
                   </NavLink>

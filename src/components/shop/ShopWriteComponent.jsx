@@ -31,23 +31,23 @@ const ShopWriteComponent = ({ name }) => {
   const create = async (data) => {
     const response = await board.createBoard(data);
 
-    if (!response?.data?.id) {
-      navigate(`/${name}`);
+    if (!response?.data?.store_id) {
+      navigate(`/shop/${name}`);
       return;
     }
 
-    navigate(`/${name}/detail/${response.data.id}`);
+    navigate(`/shop/${name}/detail/${response.data.store_id}`);
   };
 
   const update = async () => {
     const response = await board.updateBoard(data);
 
-    if (!response?.data?.id) {
-      navigate(`/${name}`);
+    if (!response?.data?.store_id) {
+      navigate(`/shop/${name}`);
       return;
     }
 
-    navigate(`/${name}/detail/${response.data.id}`);
+    navigate(`/shop/${name}/detail/${response.data.store_id}`);
   };
 
   const open = useDaumPostcodePopup();
@@ -111,7 +111,7 @@ const ShopWriteComponent = ({ name }) => {
             </div>
 
             <div
-              className={`ui input ${styled.detail_address2}`}
+              className={`ui input ${styled.detail_address1}`}
               style={!form.address1 ? { display: "none" } : {}}
             >
               <input

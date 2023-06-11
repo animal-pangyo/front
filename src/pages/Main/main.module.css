@@ -5,8 +5,8 @@
 }
 
 .list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -20,12 +20,17 @@
   background-color: #fff;
   box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,.03), 0 0.9375rem 1.40625rem rgba(4,9,20,.03), 0 0.25rem 0.53125rem rgba(4,9,20,.05), 0 0.125rem 0.1875rem rgba(4,9,20,.03);
   color: var(--color);
+  width: calc(25% - 20px);
+}
+
+.list > div:nth-child(4) {
+  width: calc(25%);
 }
 
 .list > div:last-child {
-  grid-column: 3 / span 2;
   display: flex;
   flex-direction: column;
+  width: 50%;
 }
 
 
@@ -57,4 +62,53 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .list > div,
+  .list > div:nth-child(4) {
+    width: calc(50% - 10px);
+  }
+
+  .list > div:last-child {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .list > div {
+    height: 200px;
+    font-size: 1.5rem;
+  }
+
+  .list > div,
+  .list > div:nth-child(4) {
+    width: 100%;
+  }
+
+  .list > div:last-child {
+    width: 100%;
+  }
+
+  .list > div:last-child h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .list > div:not(:last-child) a {
+    font-size: 1.5rem;
+  }
+
+  .list > div:last-child div a {
+    font-size: 1.2rem;
+  }
+  
+  .list > div:last-child div {
+    gap: 20px;
+    align-items: center;
+  }
+
+  .list > div:last-child {
+    gap: 20px;
+  }
 }

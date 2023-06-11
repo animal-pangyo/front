@@ -28,7 +28,7 @@ const Shop = () => {
       <div className={styled.main}>
         <h2>
           {SHOP_LIST[category]}
-          <div>
+          <div className={styled.write_button}>
             {auth?.user?.id && (
               <NavLink color="#fff" to={`/shop/${category}/write`}>
                 <button className="ui primary button">글쓰기</button>

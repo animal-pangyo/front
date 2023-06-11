@@ -36,7 +36,7 @@ const ShopDetailComponent = ({ name }) => {
         <div className={styled.detail_content}>{board.board.detail}</div>
       </Segment>
 
-      <ReviewList name={name} storeId={param.id} />
+      <ReviewList name={name} storeId={param.id} type="" />
 
       <div>
         <NavLink to={`/shop/${name}`}>

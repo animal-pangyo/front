@@ -38,10 +38,11 @@ export const createBoard = ({ form, name }) => {
     name: form.name,
     details: form.detail,
     address: form.address1,
-    detail_address: form.addressn2,
+    detail_address: form.address2,
     user_id,
     business_hours: form.time,
     contact: form.phone,
+    address_id: ""
   });
 };
 
@@ -59,8 +60,11 @@ export const updateBoard = ({ form, name }) =>
     content: form.conent,
   });
 
-export const fetchBoard = ({ id, name }) =>
-  axios.get(`${URL}/${getContext(name)}/${id}`);
+export const fetchBoard = ({ id, name }) => {
+  const user_id = getUserId();
+  return axios.get(`${URL}/${getContext(name)}/detail/${id}?userId=${user_id}`);
+}
+  
 
 export const transformBoard = (server) => {
   return {

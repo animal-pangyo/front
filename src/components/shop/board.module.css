@@ -76,6 +76,10 @@ form .subject span {
   padding-bottom: 10px;
 }
 
+.address {
+  margin-bottom: 20px;
+}
+
 .address button {
   width: 100%;
   background-color: #fff !important;
@@ -84,7 +88,7 @@ form .subject span {
 }
 
 .detail_address1 {
-  margin: 15px 0;
+  margin: 5px 0;
 }
 
 .mapContainer,
@@ -97,4 +101,8 @@ form .subject span {
   box-sizing: border-box;
   height: 80%;
   padding-bottom: 50px;
+}
+
+.detail_address1 {
+  width: 100%;
 }

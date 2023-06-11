@@ -1,24 +1,26 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import * as boardApi from "../services/api/board.api";
 import * as storeApi from "../services/api/store.api";
+import * as reviewApi from "../services/api/review.api";
 
-const getContext = (name) => {
+const useBoard = ({ type, value, name, searchKeyword }) => {
+  const queryClient = useQueryClient();
+  let board;
+  let api;
+
   switch (name) {
     case "free":
     case "notice":
     case "faq":
     case "inquiry":
+      api = boardApi;
+      break;
     case "review":
-      return "posts";
+      api = reviewApi;
+      break;
     default:
-      return "stores";
+      api = storeApi;
   }
-};
-
-const useBoard = ({ type, value, name, searchKeyword }) => {
-  const queryClient = useQueryClient();
-  let board;
-  let api = getContext(name) === "posts" ? boardApi : storeApi;
 
   if (type === "list") {
     board = useQuery({
@@ -29,13 +31,18 @@ const useBoard = ({ type, value, name, searchKeyword }) => {
           name,
           searchKeyword,
         });
-        const { posts, ...rest } = response.data;
-        const data = posts.map((board) => api.transformBoard(board));
 
-        return {
-          posts: data,
-          ...rest,
-        };
+        if (Array.isArray(response.data)) {
+          return response.data;
+        } else {
+          const { posts, ...rest } = response.data;
+          const data = (posts || []).map((board) => api.transformBoard(board));
+  
+          return {
+            posts: data,
+            ...rest,
+          };
+        }
       },
     });
   } else if (type === "detail") {

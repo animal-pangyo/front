@@ -11,7 +11,7 @@ const Search = ({ searchKeyword }) => {
   };
 
   return (
-    <div className={styled.serachConatiner}>
+    <div className={`${styled.serachConatiner} searchCom`}>
       <Input
         placeholder="업체를 검색하세요..."
         value={searchTerm}

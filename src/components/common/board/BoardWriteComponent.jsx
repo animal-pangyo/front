@@ -1,13 +1,12 @@
 import { Segment } from "semantic-ui-react";
 import styled from "./board.module.css";
 import { useForm } from "react-hook-form";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import useBoard from "../../../hooks/useBoard";
 import { useRecoilState } from "recoil";
 import { reviewWriteState } from "../../../store/review";
 
 const BoardWriteComponent = ({ name }) => {
-  const [review] = useRecoilState(reviewWriteState);
   const {
     register,
     setValue,
@@ -15,6 +14,8 @@ const BoardWriteComponent = ({ name }) => {
     formState: { errors },
   } = useForm();
   const param = useParams();
+  const { search } = useLocation();
+  const searchPrams = new URLSearchParams(search);
   const board = useBoard({
     name,
     ...(param.id ? { type: "detail", value: param.id } : {}),
@@ -32,7 +33,7 @@ const BoardWriteComponent = ({ name }) => {
   const create = async (data) => {
     const response = await board.createBoard({
       ...data,
-      storeId: review.storeId,
+      storeId: searchPrams.get('storeid'),
     });
 
     if (!response?.data?.id) {
@@ -84,9 +85,18 @@ const BoardWriteComponent = ({ name }) => {
           </div>
         </Segment>
         <div>
-          <NavLink to={`/${name}`}>
-            <button className="ui button">목록</button>
-          </NavLink>
+          {
+            name === 'review' ? (
+              <NavLink to={`/shop/${searchPrams.get('type')}/detail/${searchPrams.get('storeid')}`}>
+                <button className="ui button">목록</button>
+              </NavLink>
+            ) : (
+              <NavLink to={`/${name}`}>
+                <button className="ui button">목록</button>
+              </NavLink>
+            )
+          }
+          
           <button className="ui primary button">
             {param.id ? "수정하기" : "글쓰기"}
           </button>

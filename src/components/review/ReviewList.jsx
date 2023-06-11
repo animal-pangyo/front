@@ -7,6 +7,7 @@ import useBoard from "../../hooks/useBoard";
 import usePagination from "../../hooks/usePagination";
 import { useRecoilState } from "recoil";
 import { reviewWriteState } from "../../store/review";
+import styled from './board.module.css'
 
 const ReviewList = ({ name, storeId }) => {
   const navigate = useNavigate();
@@ -102,11 +103,11 @@ const ReviewList = ({ name, storeId }) => {
         </tfoot>
       </table>
 
-      <div>
+      <div className={styled.write_button}>
         {auth?.user?.id && (
           <NavLink
             color="#fff"
-            to={`/review/${name}/write`}
+            to={`/review/${name}/write?storeid=${storeId}&type=${name}`}
             onClick={moveWrite}
           >
             <button className="ui primary button">글쓰기</button>

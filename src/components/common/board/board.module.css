@@ -47,3 +47,9 @@ form .subject {
   display: flex;
   flex-direction: column;
 }
+
+h2 {
+  font-size: var(--title-size) !important;
+  color: var(--title-color);
+  margin-bottom: 50px;
+}

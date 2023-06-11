@@ -1,16 +1,15 @@
-import { Button } from "semantic-ui-react";
 import TablePagination from "../common/paging/TablePagination";
-import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useBoard from "../../hooks/useBoard";
-import usePagination from "../../hooks/usePagination";
 import styled from "./board.module.css";
 
+const DEFAULT_POSITION = [37.402187224511, 127.10304698035];
+
 const ShopList = ({ name }) => {
-  const navigate = useNavigate();
   const [position, setPosition] = useState([]);
   const board = useBoard({ type: "list", value: position, name });
-  const { kakao } = window;
+  let map;
+  const markers = [];
 
   function showPosition(position) {
     const latitude = position.coords.latitude;
@@ -18,9 +17,30 @@ const ShopList = ({ name }) => {
     setPosition([latitude, longitude]);
   }
 
+  function errorPosition() {
+    showPosition({
+      coords: {
+        latitude: DEFAULT_POSITION[0],
+        longitude: DEFAULT_POSITION[1]
+      }
+    });
+  }
+
+  function createMarker(shop) {
+    var markerPosition  = new kakao.maps.LatLng(shop.latitude, shop.longitude); 
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+  }
+
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+      navigator.geolocation.getCurrentPosition(showPosition, errorPosition);
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
@@ -30,14 +50,22 @@ const ShopList = ({ name }) => {
     let container = document.getElementById("map");
     let options = {
       center: new window.kakao.maps.LatLng(
-        position[0] || 37.402187224511,
-        position[1] || 127.10304698035
+        position[0] || DEFAULT_POSITION[0],
+        position[1] || DEFAULT_POSITION[1]
       ),
       level: 3,
     };
 
-    let map = new window.kakao.maps.Map(container, options);
+    map = new window.kakao.maps.Map(container, options);
   }, [position]);
+
+  useEffect(() => {
+    markers.forEach((marker) => marker.setMap(null));
+
+    board.board.forEach((shop) => {
+      createMarker(shop);
+    })
+  }, [board.board]);
 
   return (
     <div className={styled.map}>

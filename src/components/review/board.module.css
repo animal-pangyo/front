@@ -47,3 +47,8 @@ form .subject {
   display: flex;
   flex-direction: column;
 }
+
+.write_button {
+  display: flex;
+  justify-content: flex-end;
+}

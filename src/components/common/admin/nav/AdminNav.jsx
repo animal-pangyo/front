@@ -5,6 +5,7 @@ const AdminNav = () => {
   return (
     <>
       <div className={styled.menu}>
+        <NavLink to="/"><div className="logo"></div></NavLink>
         <div className={styled.home}><NavLink to="/"><i className="home icon"></i></NavLink></div>
         <div className={styled.user}><NavLink to="/users"><i className="user icon"></i></NavLink></div>
         <div className={styled.board}><NavLink to="/free"><i className="file icon"></i></NavLink></div>

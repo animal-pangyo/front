@@ -27,9 +27,7 @@ const AdminTop = () => {
   return (
     <>
       <div className={styled.top}>
-        <div className={styled.left}>
-          <div>고객센터</div>
-        </div>
+        <div className={styled.left}></div>
         <div className={styled.right}>
           {
             user ? (

@@ -30,6 +30,10 @@ body {
   min-height: 100%;
 }
 
+*:not(i) {
+  font-family: 'Noto Sans KR', sans-serif !important;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -152,6 +156,14 @@ body {
   top: 0;
   left: 0;
   opacity: 0.5;
+}
+
+.logo {
+  width: 35px;
+  height: 35px;
+  background: url(/images/dog-house.png) no-repeat;
+  background-size: cover;
+  border-radius: 50%;
 }
 
 @media screen and (max-width: 1200px) {

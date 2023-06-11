@@ -9,6 +9,8 @@
 .menu div {
   font-size: 20px;
   color: #fff;
+  display: flex;
+  justify-content: center;
 }
 
 .menu div a {

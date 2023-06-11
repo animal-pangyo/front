@@ -78,7 +78,9 @@ export const fetchBoard = ({ id, name }) => {
 }
 
 export const transformBoard = (server) => {
+
   return {
+    ...server,
     subject: server.title,
     content: server.content,
     userId: server.user_id,

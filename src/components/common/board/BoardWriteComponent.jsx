@@ -36,13 +36,17 @@ const BoardWriteComponent = ({ name }) => {
       ...data,
       storeId: searchPrams.get('storeid'),
     });
-
-    if (!response?.data?.id) {
+    const id = response?.data?.id || response?.data?.review_id;
+    if (!id) {
       navigate(`/${name}`);
       return;
     }
-
-    navigate(`/${name}/detail/${response.data.id}`);
+    if(!response?.data?.review_id){
+      navigate(`/${name}/detail/${response.data.id}`);
+    }else{
+      navigate(`/review/${param.category}/detail/${id}?storeId=${searchPrams.get('storeid')}`);
+    }
+    
   };
 
   const update = async (data) => {

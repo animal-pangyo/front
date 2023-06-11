@@ -13,17 +13,9 @@ const getContext = (name) => {
 };
 
 export const fetchBoardList = ({ page, storeId }) => {
-  if (position.length) {
-    return axios.get(
-      `${URL}/stores/${storeId}/reviews?page=${page}`
-    ); 
-  } else {
-    return Promise.resolve({
-      data: {
-        posts: [],
-      },
-    });
-  }
+  return axios.get(
+    `${URL}/stores/${storeId}/reviews?page=${page}`
+  ); 
 };
 
 export const deleteBoard = ({ id }) =>

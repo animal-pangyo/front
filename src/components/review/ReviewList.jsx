@@ -37,12 +37,12 @@ const ReviewList = ({ name, storeId, storeInfo }) => {
 
   return (
     <>
-      <table className="ui celled table">
+      <table className="ui celled table boardList">
         <thead>
           <tr>
             <th>No.</th>
             <th>글쓴이</th>
-            <th>제목</th>
+            <th className="subject">제목</th>
             <th>등록일</th>
             <th>기능</th>
           </tr>
@@ -53,7 +53,7 @@ const ReviewList = ({ name, storeId, storeInfo }) => {
               <tr key={board.review_id}>
                 <td data-label="번호">{board.review_id}</td>
                 <td data-label="글쓴이">{board.user_id}</td>
-                <td data-label="제목" width={500}>
+                <td className="subject" data-label="제목" width={500}>
                   <NavLink to={`/review/${name}/detail/${board.review_id}?storeId=${storeId}`}>
                     {board.content}
                   </NavLink>

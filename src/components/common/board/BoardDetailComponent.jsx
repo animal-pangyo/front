@@ -59,7 +59,7 @@ const BoardDetailComponent = ({ name }) => {
             )}
           </>
         )}
-        {auth?.user?.roles === "admin" && !board?.board?.comments?.length && (
+        {name === 'inquiry' && auth?.user?.roles === "admin" && !board?.board?.comments?.length && (
           <div>
             <TextArea
               placeholder="답변을 입력해주세요."

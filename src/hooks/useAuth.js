@@ -77,6 +77,9 @@ const useAuth = () => {
   const updateMutation = useMutation({
     mutationFn(form) {
       return authApi.updateProfile(form);
+    },
+    onSuccess() {
+      queryClient.invalidateQueries("user");
     }
   });
 

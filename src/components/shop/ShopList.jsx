@@ -63,6 +63,8 @@ const ShopList = ({ name }) => {
   }, []);
 
   useEffect(() => {
+    if (!position.length) return;
+
     let container = document.getElementById("map");
     let options = {
       center: new window.kakao.maps.LatLng(

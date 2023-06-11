@@ -5,7 +5,7 @@ const Main = () => {
   return (
     <div className={styled.main}>
       <h2>반려동물종합정보시스템</h2>
-      <div className={styled.list}>
+      <div className={`${styled.list} main_list`}>
         <div>
           <NavLink to="/shop/hospital">애견병원</NavLink>
         </div>

@@ -52,7 +52,10 @@ const useBoard = ({ type, value, name, searchKeyword, address, storeId }) => {
       queryKey: [name, "detail", value],
       queryFn: async () => {
         const response = await api.fetchBoard({ id: value, name, storeId });
-        return api.transformBoard(response.data);
+        if(api.transformBoard){
+          return api.transformBoard(response.data);
+        }
+        return response.data;
       },
     });
   }

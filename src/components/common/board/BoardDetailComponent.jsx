@@ -45,7 +45,7 @@ const BoardDetailComponent = ({ name }) => {
   return (
     <>
       <Segment className={styled.segment}>
-        <h2 className={styled.detail_subject}>{board.board.subject}</h2>
+        <h2 className={styled.detail_subject}>{board.board.subject || board?.board?.title}</h2>
         <Divider />
         <div className={styled.detail_content}>{board.board.content}</div>
         { name === "inquiry" && (
@@ -73,7 +73,7 @@ const BoardDetailComponent = ({ name }) => {
         )}
       </Segment>
       <div>
-        <NavLink to={`/${name}`}>
+        <NavLink to={name === 'review' ? `/shop/${param.category}/detail/${searchPrams.get("storeId")}` : `/${name}`}>
           <button className="ui button">목록</button>
         </NavLink>
         {auth?.user?.id && auth?.user?.id === board.board.userId && (

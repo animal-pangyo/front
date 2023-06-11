@@ -36,7 +36,7 @@ function LikeButton({storeId, isLiked}) {
 
     <button className= {styled.like_button} onClick={handleToggleLike}>
       {/* {isLike ? '좋아요 취소' : '좋아요'} */}
-      {isLike ? <img src={Like} /> :  <img src={UnLike} /> }
+      {isLike ? <img src={UnLike} /> :  <img src={Like} /> }
     </button>
 
 

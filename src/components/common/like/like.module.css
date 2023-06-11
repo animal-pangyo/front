@@ -2,4 +2,5 @@
     font-size: 0.1em;
     background-color: transparent;
     border: none;
+    outline: none !important;
 }

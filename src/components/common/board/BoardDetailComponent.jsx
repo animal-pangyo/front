@@ -14,8 +14,6 @@ const BoardDetailComponent = ({ name }) => {
   const [message, setMessage] = useRecoilState(messageState);
   const [text, setText] = useState("");
 
-  console.log(board, "detail", auth?.user?.roles);
-
   const onChange = (e) => {
     setText(e.target.value);
   };
@@ -48,12 +46,16 @@ const BoardDetailComponent = ({ name }) => {
         <h2 className={styled.detail_subject}>{board.board.subject}</h2>
         <Divider />
         <div className={styled.detail_content}>{board.board.content}</div>
-        <h3 className={styled.detail_subject}>답변</h3>
-        <Divider />
-        {!board?.board?.comments?.length ? (
-          <p> 답변 진행중입니다.</p>
-        ) : (
-          <p> {board.board.comments[0].content} </p>
+        { name === "inquiry" && (
+          <>
+            <h3 className={styled.detail_subject}>답변</h3>
+            <Divider />
+            { !board?.board?.comments?.length ? (
+              <p>답변 진행중입니다.</p>
+            ) : (
+              <p>{board.board.comments[0].content}</p>
+            )}
+          </>
         )}
         {auth?.user?.roles === "admin" && !board?.board?.comments?.length && (
           <div>

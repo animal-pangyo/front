@@ -59,17 +59,27 @@ export const updateBoard = ({ form, name }) =>
     title: form.subject,
     content: form.conent,
   });
+  
+export const updateLike = ({ storeId, isLiked }) =>{
+  const user_id = getUserId();
+  return axios.post(`${URL}/stores/likes`, {
+    user_id,
+    storeId: storeId,
+    isLike: isLiked
+  });
+}
 
 export const fetchBoard = ({ id, name }) => {
-  const user_id = getUserId();
-  return axios.get(`${URL}/${getContext(name)}/detail/${id}?userId=${user_id}`);
+  const userId = getUserId();
+  const queryString = userId ? `?userId=${userId}` : '';
+  return axios.get(`${URL}/${getContext(name)}/detail/${id}${queryString}`);
 }
-  
 
 export const transformBoard = (server) => {
   return {
     subject: server.title,
     content: server.content,
     userId: server.user_id,
+    storeInfo: server
   };
 };

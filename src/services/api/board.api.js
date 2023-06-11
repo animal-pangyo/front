@@ -43,9 +43,12 @@ export const updateBoard = ({ form, name }) =>
     content: form.content,
   });
 
-export const fetchBoard = ({ id, name }) =>
-  axios.get(`${URL}/${getContext(name)}/${id}`);
-
+  export const fetchBoard = ({ id, name }) => {
+    const userId = getUserId();
+    const queryString = userId ? `?userId=${userId}` : '';
+    return axios.get(`${URL}/${getContext(name)}/${id}${queryString}`);
+  }
+  
 export const transformBoard = (server) => {
   return {
     ...server,

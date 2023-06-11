@@ -17,7 +17,7 @@ const Shop = () => {
   const { category } = useParams();
   const navigate = useNavigate();
   const auth = useAuth();
-
+  
   if (!SHOP_LIST[category]) {
     navigate("/");
     return;
@@ -29,7 +29,7 @@ const Shop = () => {
         <h2>
           {SHOP_LIST[category]}
           <div className={styled.write_button}>
-            {auth?.user?.id && (
+            {auth?.user?.roles === "admin" && (
               <NavLink color="#fff" to={`/shop/${category}/write`}>
                 <button className="ui primary button">글쓰기</button>
               </NavLink>

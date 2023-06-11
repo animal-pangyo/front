@@ -6,11 +6,14 @@ import useAuth from "../../hooks/useAuth";
 import { useRecoilState } from "recoil";
 import { messageState } from "../../store/message";
 import ReviewList from "../review/ReviewList";
+import LikeButton from "../common/like/LikeButton";
 
 const ShopDetailComponent = ({ name }) => {
   const param = useParams();
   const auth = useAuth();
   const board = useBoard({ type: "detail", value: param.id, name });
+  const storeInfo = board.board.storeInfo || board ;
+  const userLike = !storeInfo?.likes?.length ? false : true;
 
   const [message, setMessage] = useRecoilState(messageState);
 
@@ -26,14 +29,15 @@ const ShopDetailComponent = ({ name }) => {
     <>
       <Segment className={styled.segment}>
         <h2 className={styled.detail_subject}>
-          <span>{board.board.name}</span>
+          <span>{storeInfo.name}</span>
           <div className={styled.phone}>
-            <span className={styled.time}>전화번호 : {board.board.phone}</span>
-            <span className={styled.time}>영업시간 : {board.board.time}</span>
-          </div>
+            <span className={styled.time}>전화번호 : {storeInfo.contact}</span>
+            <span className={styled.time}>영업시간 : {storeInfo.business_hours}</span>
+            <LikeButton storeId={param.id} isLiked={userLike} />
+          </div>    
         </h2>
         <Divider />
-        <div className={styled.detail_content}>{board.board.detail}</div>
+        <div className={styled.detail_content}>{storeInfo.details}</div>
       </Segment>
 
       <ReviewList name={name} storeId={param.id} type="" />

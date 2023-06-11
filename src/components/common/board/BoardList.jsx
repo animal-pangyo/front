@@ -13,7 +13,7 @@ const BoardList = ({ name }) => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const auth = useAuth();
   const board = useBoard({ type: "list", value: page, name, searchKeyword });
-  console.log(board, "board ------------", board.posts);
+
   const { start, end, total, last } = usePagination({
     page,
     perPage: 10,
@@ -98,12 +98,12 @@ const BoardList = ({ name }) => {
       </table>
 
       <div>
-        {auth?.user?.id && (
+        {name !== "notice" || (name === "notice" && auth?.user?.id === "admin") ? (
           <NavLink color="#fff" to={`/${name}/write`}>
             <button className="ui primary button">글쓰기</button>
           </NavLink>
-        )}
-      </div>
+        ) : null}
+    </div>
     </>
   );
 };

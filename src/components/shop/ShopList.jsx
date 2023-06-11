@@ -21,7 +21,7 @@ const ShopList = ({ name }) => {
     if (!map) return null;
 
     return new window.kakao.maps.MarkerClusterer({
-      map: map,
+      map,
       averageCenter: true,
       minLevel: 6,
     });
@@ -72,7 +72,12 @@ const ShopList = ({ name }) => {
       level: 3,
     };
 
-    if (map) return;
+    if (map) {
+      const moveLatLon = new kakao.maps.LatLng(position[0], position[1]);
+      map.setCenter(moveLatLon); 
+      return;
+    }
+
     setMap(new window.kakao.maps.Map(container, options));
   }, [position]);
 

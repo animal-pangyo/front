@@ -31,7 +31,7 @@ export const deleteBoard = ({ id }) =>
 
 export const createBoard = ({ form }) => {
   const userId = getUserId();
-  return axios.post(`${URL}/stores/${form.storeId}/reviews`, {
+  return axios.post(`${URL}/stores/review/${form.storeId}`, {
     title: form.subject,
     content: form.content,
     userId,
@@ -39,14 +39,17 @@ export const createBoard = ({ form }) => {
   });
 };
 
-export const updateBoard = ({ form }) =>
-  axios.patch(`${URL}/stores/${form.storeId}/reviews`, {
+export const updateBoard = ({ form, storeId, reviewId }) =>{
+  const userId = getUserId();
+  return axios.patch(`${URL}/stores/review/${reviewId}`, {
     title: form.subject,
     content: form.content,
     userId,
-    storeId: form.storeId
+    storeId: storeId
   });
+}
+
 
 export const fetchBoard = ({ id, storeId }) =>
-  axios.get(`${URL}/stores/${storeId}/reviews/${id}`);
+  axios.get(`${URL}/stores/review/${id}`);
 

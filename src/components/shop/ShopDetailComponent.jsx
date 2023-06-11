@@ -14,7 +14,6 @@ const ShopDetailComponent = ({ name }) => {
   const board = useBoard({ type: "detail", value: param.id, name });
   const storeInfo = board.board.storeInfo || board ;
   const userLike = !storeInfo?.likes?.length ? false : true;
-
   const [message, setMessage] = useRecoilState(messageState);
 
   const deleteBoard = async (id) => {
@@ -40,7 +39,7 @@ const ShopDetailComponent = ({ name }) => {
         <div className={styled.detail_content}>{storeInfo.details}</div>
       </Segment>
 
-      <ReviewList name={name} storeId={param.id} type="" />
+      <ReviewList name={name} storeId={param.id} storeInfo={storeInfo} type="" />
 
       <div>
         <NavLink to={`/shop/${name}`}>

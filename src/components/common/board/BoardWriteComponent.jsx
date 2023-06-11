@@ -17,7 +17,8 @@ const BoardWriteComponent = ({ name }) => {
   const { search } = useLocation();
   const searchPrams = new URLSearchParams(search);
   const board = useBoard({
-    name,
+    name, 
+    storeId: searchPrams.get("storeId"),
     ...(param.id ? { type: "detail", value: param.id } : {}),
   });
   const navigate = useNavigate();

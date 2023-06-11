@@ -1,7 +1,7 @@
 import styled from "./board.module.css";
 import { useState } from "react";
 import { Divider, Segment, TextArea } from "semantic-ui-react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import useBoard from "../../../hooks/useBoard";
 import useAuth from "../../../hooks/useAuth";
 import { useRecoilState } from "recoil";
@@ -10,7 +10,9 @@ import { messageState } from "../../../store/message";
 const BoardDetailComponent = ({ name }) => {
   const param = useParams();
   const auth = useAuth();
-  const board = useBoard({ type: "detail", value: param.id, name });
+  const { search } = useLocation();
+  const searchPrams = new URLSearchParams(search);
+  const board = useBoard({ type: "detail", value: param.id, name, storeId: searchPrams.get("storeId") });
   const [message, setMessage] = useRecoilState(messageState);
   const [text, setText] = useState("");
 

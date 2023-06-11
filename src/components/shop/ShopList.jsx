@@ -62,7 +62,7 @@ const ShopList = ({ name }) => {
   useEffect(() => {
     markers.forEach((marker) => marker.setMap(null));
 
-    board.board.forEach((shop) => {
+    (board?.board || []).forEach((shop) => {
       createMarker(shop);
     })
   }, [board.board]);

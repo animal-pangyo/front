@@ -3,7 +3,7 @@ import * as boardApi from "../services/api/board.api";
 import * as storeApi from "../services/api/store.api";
 import * as reviewApi from "../services/api/review.api";
 
-const useBoard = ({ type, value, name, searchKeyword }) => {
+const useBoard = ({ type, value, name, searchKeyword, address }) => {
   const queryClient = useQueryClient();
   let board;
   let api;
@@ -26,10 +26,11 @@ const useBoard = ({ type, value, name, searchKeyword }) => {
     board = useQuery({
       queryKey: [name, value],
       queryFn: async () => {
-        const response = await api.fetchBoardList({
+      const response = await api.fetchBoardList({
           page: value,
           name,
           searchKeyword,
+          address
         });
 
         if (Array.isArray(response.data)) {

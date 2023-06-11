@@ -53,8 +53,8 @@ const ShopWriteComponent = ({ name }) => {
   const open = useDaumPostcodePopup();
   const form = watch();
 
-  const handleComplete = ({ address }) => {
-    setValue("address1", address);
+  const handleComplete = ({ jibunAddress }) => {
+    setValue("address1", jibunAddress);
   };
 
   return (

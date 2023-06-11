@@ -12,19 +12,21 @@ const getContext = (name) => {
   }
 };
 
-export const fetchBoardList = ({ name, page: position }) => {
+export const fetchBoardList = ({ name, page: position, searchKeyword, address }) => {
   if (position.length) {
     return axios.get(
       `${URL}/${getContext(name)}/map?latitude=${position[0]}&longitude=${
         position[1]
       }&keyword=${name}`
     );
+  } else if (address) {
+    return axios.get(
+      `${URL}/${getContext(name)}/map?address=${address}&keyword=${name}`
+    );
   } else {
-    return Promise.resolve({
-      data: {
-        posts: [],
-      },
-    });
+    return axios.get(
+      `${URL}/stores/find?&word=${searchKeyword}keyword=${name}`
+    );
   }
 };
 

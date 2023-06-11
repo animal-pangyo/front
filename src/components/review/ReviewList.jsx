@@ -9,11 +9,11 @@ import { useRecoilState } from "recoil";
 import { reviewWriteState } from "../../store/review";
 import styled from './board.module.css'
 
-const ReviewList = ({ name, storeId }) => {
+const ReviewList = ({ name, storeId, storeInfo }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const auth = useAuth();
-  const board = useBoard({ type: "list", value: page, name });
+  const board = useBoard({ type: "list", value: page, name: "review" });
   const { start, end, total, last } = usePagination({
     page,
     perPage: 10,
@@ -48,29 +48,29 @@ const ReviewList = ({ name, storeId }) => {
           </tr>
         </thead>
         <tbody>
-          {board?.board?.posts?.length ? (
-            board?.board?.posts.map((board) => (
-              <tr key={board.post_id}>
-                <td data-label="번호">{board.post_id}</td>
-                <td data-label="글쓴이">{board.author_id}</td>
+          {board && storeInfo?.reviews?.length ? (
+            storeInfo.reviews.map((board) => (
+              <tr key={board.review_id}>
+                <td data-label="번호">{board.review_id}</td>
+                <td data-label="글쓴이">{board.user_id}</td>
                 <td data-label="제목" width={500}>
-                  <NavLink to={`/review/${name}/detail/${board.post_id}`}>
-                    {board.subject}
+                  <NavLink to={`/review/${name}/detail/${board.review_id}?storeId=${storeId}`}>
+                    {board.content}
                   </NavLink>
                 </td>
                 <td data-label="등록일">{board.created_at}</td>
                 <td data-label="기능">
-                  {auth.user && auth.user.id === board.author_id && (
+                  {auth.user && auth.user.id === board.user_id && (
                     <>
                       <Button
-                        onClick={() => deleteBoard(board.post_id)}
+                        onClick={() => deleteBoard(board.review_id)}
                         primary
                       >
                         삭제
                       </Button>
                       <Button
                         onClick={() =>
-                          navigate(`/review/${name}/write/${board.post_id}`)
+                          navigate(`/review/${name}/write/${board.review_id}?storeId=${storeId}`)
                         }
                         primary
                       >
@@ -109,7 +109,7 @@ const ReviewList = ({ name, storeId }) => {
             to={`/review/${name}/write?storeid=${storeId}&type=${name}`}
             onClick={moveWrite}
           >
-            <button className="ui primary button">글쓰기</button>
+            <button className="ui primary button">리뷰 작성</button>
           </NavLink>
         )}
       </div>

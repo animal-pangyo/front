@@ -3,7 +3,8 @@ import * as boardApi from "../services/api/board.api";
 import * as storeApi from "../services/api/store.api";
 import * as reviewApi from "../services/api/review.api";
 
-const useBoard = ({ type, value, name, searchKeyword, address }) => {
+const useBoard = ({ type, value, name, searchKeyword, address, storeId }) => {
+
   const queryClient = useQueryClient();
   let board;
   let api;
@@ -50,7 +51,7 @@ const useBoard = ({ type, value, name, searchKeyword, address }) => {
     board = useQuery({
       queryKey: [name, "detail", value],
       queryFn: async () => {
-        const response = await api.fetchBoard({ id: value, name });
+        const response = await api.fetchBoard({ id: value, name, storeId });
         return api.transformBoard(response.data);
       },
     });
@@ -79,7 +80,7 @@ const useBoard = ({ type, value, name, searchKeyword, address }) => {
 
   const updateMutation = useMutation({
     mutationFn(form) {
-      return api.updateBoard({ form, name });
+      return api.updateBoard({ form, name, storeId, reviewId: value });
     },
   });
 

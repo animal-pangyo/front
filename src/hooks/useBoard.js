@@ -32,7 +32,8 @@ const useBoard = ({ type, value, name, searchKeyword, address, storeId, bounds }
           name,
           searchKeyword,
           address,
-          bounds
+          bounds,
+          storeId
         });
 
         if (Array.isArray(response.data)) {

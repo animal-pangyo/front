@@ -8,10 +8,12 @@ import usePagination from "../../hooks/usePagination";
 import { useRecoilState } from "recoil";
 import { reviewWriteState } from "../../store/review";
 import styled from './board.module.css'
+import useMessage from "../../hooks/useMessage";
 
 const ReviewList = ({ name, storeId, storeInfo }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
+  const [, setMessage] = useMessage();
   const auth = useAuth();
   const board = useBoard({ type: "list", value: page, name: "review" });
   const { start, end, total, last } = usePagination({

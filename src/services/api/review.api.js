@@ -13,13 +13,15 @@ const getContext = (name) => {
 };
 
 export const fetchBoardList = ({ page, storeId }) => {
+  if (!storeId) return { data: {} };
+
   return axios.get(
     `${URL}/stores/${storeId}/reviews?page=${page}`
   ); 
 };
 
 export const deleteBoard = ({ id }) =>
-  axios.delete(`${URL}/stores/${id}/reviews`);
+  axios.delete(`${URL}/stores/review/${id}`);
 
 export const createBoard = ({ form }) => {
   const userId = getUserId();

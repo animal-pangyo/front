@@ -13,7 +13,6 @@ const ReviewList = ({ name, storeId }) => {
   const [page, setPage] = useState(1);
   const auth = useAuth();
   const board = useBoard({ type: "list", value: page, name });
-  console.log(board, "board ------------", board.posts);
   const { start, end, total, last } = usePagination({
     page,
     perPage: 10,

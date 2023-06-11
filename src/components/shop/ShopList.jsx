@@ -27,7 +27,7 @@ const ShopList = ({ name }) => {
   }
 
   function createMarker(shop) {
-    var markerPosition  = new kakao.maps.LatLng(shop.latitude, shop.longitude); 
+    var markerPosition  = new kakao.maps.LatLng(shop.longitude, shop.latitude); 
 
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
@@ -60,6 +60,10 @@ const ShopList = ({ name }) => {
   }, [position]);
 
   useEffect(() => {
+    if (!Array.isArray(board?.board)) {
+      return;
+    }
+
     markers.forEach((marker) => marker.setMap(null));
 
     (board?.board || []).forEach((shop) => {

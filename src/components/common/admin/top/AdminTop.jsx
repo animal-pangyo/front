@@ -1,22 +1,41 @@
 import { NavLink } from 'react-router-dom';
 import styled from './admin-top.module.css';
 import useAuth from '../../../../hooks/useAuth';
+import JoinModal from '../../../modal/joinModal/JoinModal';
+import useMessage from '../../../../hooks/useMessage';
+import { useState } from 'react';
 
 
 const AdminTop = () => {
   const { user, logout } = useAuth();
+  const [open, setOpen] = useState(false);
+  const [, setMessage] = useMessage();
+  const auth = useAuth();
+
+  const onSubmit = async (data) => {
+    await auth.updateProfile({
+      ...data,
+      userId: user.id
+    });
+    setOpen(false);
+    setMessage({
+      visible: true,
+      message: '수정되었습니다.'
+    });
+  };
 
   return (
     <>
       <div className={styled.top}>
         <div className={styled.left}>
+          <div>고객센터</div>
         </div>
         <div className={styled.right}>
           {
             user ? (
               <>
                 <div className={styled.user}>
-                  <span>{user.id} 님 환영합니다.</span>
+                  <span onClick={() => setOpen(true)}>{user.id} 님 환영합니다.</span>
                   <div className={styled.logout} onClick={logout}>로그아웃</div>
                 </div>
               </>
@@ -29,6 +48,8 @@ const AdminTop = () => {
           }
           
         </div>
+
+        <JoinModal user={user} open={open} setOpen={setOpen} onSubmit={onSubmit} />
       </div>
     </>
   )

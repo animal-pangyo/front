@@ -16,7 +16,9 @@ export const join = (form) =>
     user_id: form.id,
     pwd: form.password,
     user_name: form.name,
-    birth: form.yaer + form.month + form.day,
+    yaer: form.yaer,
+    month: form.month,
+    day: form.day,
     pwdConfirm: form.passwordChk,
     address: form.address1 + form.address2,
     ...form,
@@ -36,3 +38,6 @@ export const resetPassword = (form) =>
 
 export const deleteUser = (id) =>
   axios.delete(`${URL}/admin/delete-user/${id}`);
+
+export const updateProfile = (form) => 
+  axios.patch(`${URL}/users/${form.userId}`, form);

@@ -21,7 +21,7 @@ const Login = () => {
     <form className={styled.form} onSubmit={handleSubmit(onSubmit)}>
       <h2>로그인</h2>
       <div className={styled.sns}>
-        <button className="ui basic large button">
+        <button type="button" className="ui basic large button">
           <a href="/google">
             <img src={Google} />
             구글 로그인

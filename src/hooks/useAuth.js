@@ -74,6 +74,12 @@ const useAuth = () => {
     },
   });
 
+  const updateMutation = useMutation({
+    mutationFn(form) {
+      return authApi.updateProfile(form);
+    }
+  });
+
   const deleteUserMutation = useMutation({
     mutationFn(id) {
       return authApi.deleteUser(id);
@@ -91,6 +97,7 @@ const useAuth = () => {
     findAccount: findMutation.mutateAsync,
     resetPassword: resetMutation.mutateAsync,
     deleteUser: deleteUserMutation.mutateAsync,
+    updateProfile: updateMutation.mutateAsync
   };
 };
 

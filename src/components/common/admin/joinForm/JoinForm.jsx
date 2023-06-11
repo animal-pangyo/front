@@ -22,6 +22,8 @@ const JoinForm = ({ onSubmit, modal, user }) => {
   };
 
   useEffect(() => {
+    if (!user?.address) return;
+    
     setValue("address1", user.address);
   }, [user]);
 
@@ -49,7 +51,7 @@ const JoinForm = ({ onSubmit, modal, user }) => {
           <input
             type="text"
             placeholder="아이디"
-            defaultValue={user.id}
+            defaultValue={user?.id}
             {...register("id", { required: user ? false : true })}
             disabled={user}
           />
@@ -88,7 +90,7 @@ const JoinForm = ({ onSubmit, modal, user }) => {
           <input
             type="text"
             placeholder="이름"
-            defaultValue={user.name}
+            defaultValue={user?.name}
             {...register("name", { required: true })}
           />
           {errors.name && <span>이름을 입력해주세요.</span>}
@@ -99,7 +101,7 @@ const JoinForm = ({ onSubmit, modal, user }) => {
           <input
             type="text"
             placeholder="이메일"
-            defaultValue={user.email}
+            defaultValue={user?.email}
             {...register("email", { required: true })}
           />
           {errors.email && <span>이메일을 입력해주세요.</span>}
@@ -110,7 +112,7 @@ const JoinForm = ({ onSubmit, modal, user }) => {
           <input
             type="text"
             placeholder="휴대폰"
-            defaultValue={user.phone}
+            defaultValue={user?.phone}
             {...register("phone", { required: true })}
           />
           {errors.phone && <span>휴대폰을 입력해주세요.</span>}
@@ -121,21 +123,21 @@ const JoinForm = ({ onSubmit, modal, user }) => {
           <input
             type="text"
             placeholder="YYYY"
-            defaultValue={user.year}
+            defaultValue={user?.year}
             {...register("year", { required: true, maxLength: 4 })}
           />
           /
           <input
             type="text"
             placeholder="MM"
-            defaultValue={user.month}
+            defaultValue={user?.month}
             {...register("month", { required: true, maxLength: 2 })}
           />
           /
           <input
             type="text"
             placeholder="DD"
-            defaultValue={user.day}
+            defaultValue={user?.day}
             {...register("day", { required: true, maxLength: 2 })}
           />
         </div>
@@ -157,7 +159,7 @@ const JoinForm = ({ onSubmit, modal, user }) => {
         >
           <input
             type="text"
-            defaultValue={user.address}
+            defaultValue={user?.address}
             {...register("address1", { required: true })}
             disabled
           />
@@ -170,7 +172,7 @@ const JoinForm = ({ onSubmit, modal, user }) => {
           <input
             type="text"
             placeholder="상세주소입력"
-            defaultValue={user.detail_address}
+            defaultValue={user?.detail_address}
             {...register("address2", { required: true })}
           />
         </div>

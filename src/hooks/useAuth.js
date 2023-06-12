@@ -9,7 +9,7 @@ const useAuth = () => {
   const queryClient = useQueryClient();
 
   const { data } = useQuery({
-    queryKey: "user",
+    queryKey: ["user"],
     queryFn: async () => {
       const response = await authApi.getUser();
       const { accessToken, ...user } = response.data;

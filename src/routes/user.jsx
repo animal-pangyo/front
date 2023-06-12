@@ -7,6 +7,7 @@ import AuthFind from '../pages/AuthFind/AuthFind'
 import AuthResult from '../pages/AuthFind/AuthResult'
 import AuthPassword from '../pages/AuthFind/AuthPassword';
 import Users from '../pages/Users/Users';
+import LoginCallback from '../pages/LoginCallback/LoginCallback'
 
 export default [
   {
@@ -41,4 +42,8 @@ export default [
     path: "/users",
     element: <AdminLayer><Users /></AdminLayer>
   },
+  {
+    path: "/login/callback",
+    element: <LoginCallback />
+  }
 ]

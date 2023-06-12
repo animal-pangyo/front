@@ -4,7 +4,7 @@ import styled from "./app.module.css";
 import useMessage from "./hooks/useMessage";
 import routes from "./routes";
 import { useEffect } from "react";
-import { getAuthorization, setAuthorization } from "./services/api";
+import { getAuthorization, getUserId, setAuthorization } from "./services/api";
 
 function App() {
   const [message] = useMessage();
@@ -13,9 +13,10 @@ function App() {
 
   useEffect(() => {
     const token = getAuthorization();
+    const userId = getUserId();
 
     if (token) {
-      setAuthorization(token, "");
+      setAuthorization(token, userId);
       queryClient.invalidateQueries("user");
     }
   }, []);

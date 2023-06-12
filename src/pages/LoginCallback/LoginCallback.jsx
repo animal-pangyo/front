@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { setAuthorization } from "../../services/api";
 import { useQueryClient } from "react-query";
 import { useEffect } from "react";
@@ -6,13 +6,12 @@ import { useEffect } from "react";
 const LoginCallback = () => {
   const { search } = useLocation();
   const searchPrams = new URLSearchParams(search);
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
+  setAuthorization(searchPrams.get('token'), searchPrams.get('email'));
+  queryClient.refetchQueries(['user']);
 
   useEffect(() => {
-    setAuthorization(searchPrams.get('token'), searchPrams.get('userId'));
-    queryClient.invalidateQueries('user');
-    navigate('/');
+    window.location.reload()
   }, []);
   
 };

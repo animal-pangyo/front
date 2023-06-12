@@ -34,10 +34,10 @@ const JoinForm = ({ onSubmit, modal, user }) => {
           <h2>회원가입</h2>
           <div className={styled.sns}>
             <button type="button" className="ui basic large button">
-              <Link>
+              <a href="/google">
                 <img src={Google} />
                 구글 로그인
-              </Link>
+              </a>
             </button>
           </div>
           <div className={styled.divider}>

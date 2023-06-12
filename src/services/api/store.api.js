@@ -12,12 +12,12 @@ const getContext = (name) => {
   }
 };
 
-export const fetchBoardList = ({ name, page: position, searchKeyword, address, bounds }) => {
+export const fetchBoardList = ({ name, page: position, searchKeyword, address, level }) => {
   if (position.length) {
     return axios.get(
       `${URL}/${getContext(name)}/map?latitude=${position[0]}&longitude=${
         position[1]
-      }&keyword=${name}&qa=${bounds.qa}&ha=${bounds.ha}&oa=${bounds.oa}&pa=${bounds.pa}`
+      }&keyword=${name}&level=${level}`
     );
   } else if (address) {
     return axios.get(

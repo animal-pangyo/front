@@ -3,7 +3,7 @@ import * as boardApi from "../services/api/board.api";
 import * as storeApi from "../services/api/store.api";
 import * as reviewApi from "../services/api/review.api";
 
-const useBoard = ({ type, value, name, searchKeyword, address, storeId, bounds }) => {
+const useBoard = ({ type, value, name, searchKeyword, address, storeId, level }) => {
 
   const queryClient = useQueryClient();
   let board;
@@ -32,7 +32,7 @@ const useBoard = ({ type, value, name, searchKeyword, address, storeId, bounds }
           name,
           searchKeyword,
           address,
-          bounds,
+          level,
           storeId
         });
 

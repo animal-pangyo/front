@@ -11,7 +11,7 @@ const LoginCallback = () => {
   queryClient.refetchQueries(['user']);
 
   useEffect(() => {
-    window.location.reload()
+    window.location.href = '/'
   }, []);
   
 };

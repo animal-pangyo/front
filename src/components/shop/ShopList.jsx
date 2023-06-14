@@ -5,16 +5,27 @@ import { debounce } from "../../utils/debounce";
 import useAuth from "../../hooks/useAuth";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { SHOP_LIST } from "../../pages/Shop/Shop";
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/css';
+import { Button, Select } from "semantic-ui-react";
+import { city, dong, gu } from "./address";
 
 const DEFAULT_POSITION = [37.402187224511, 127.10304698035];
 
 const ShopList = ({ name }) => {
-  const [level, setLevel] = useState(12);
+  const [citygudong, setCitygudong] = useState({
+    city: '',
+    gu: '',
+    dong: ''
+  });
+  const [level, setLevel] = useState(6);
   const [address, setAddress] = useState('');
   const auth = useAuth();
   const navigate = useNavigate();
   const [position, setPosition] = useState([]);
   const [map, setMap] = useState(null);
+  const [mapList, setMapList] = useState([]);
+  const [center, setCenter] = useState(false);
   const clusterer = useMemo(() => {
     if (!map) return null;
 
@@ -33,8 +44,15 @@ const ShopList = ({ name }) => {
       return false;
     }
 
+    if (center) {
+      const moveLatLon = new kakao.maps.LatLng(latitude, longitude);
+      map.setCenter(moveLatLon); 
+      setCenter(false);
+      placesSearchCB([latitude, longitude]);
+    }
+
     setPosition([latitude, longitude]);
-    return true;
+    return [latitude, longitude];
   }, [position]);
 
   function errorPosition() {
@@ -51,7 +69,6 @@ const ShopList = ({ name }) => {
       position: new kakao.maps.LatLng(shop.y, shop.x),
       clickable: true
     });
-    console.log(shop);
 
     kakao.maps.event.addListener(marker, 'click', function() {
       navigate(`/shop/${name}/detail/${shop.id}`);
@@ -59,12 +76,17 @@ const ShopList = ({ name }) => {
     return marker;
   }
 
-  useEffect(() => {
+  const setCurrentPosition = () => {
+    setCenter(true);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, errorPosition);
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
+  };
+
+  useEffect(() => {
+    setCurrentPosition();
   }, []);
 
   useEffect(() => {
@@ -79,13 +101,9 @@ const ShopList = ({ name }) => {
       level,
     };
 
-    if (map) {
-      const moveLatLon = new kakao.maps.LatLng(position[0], position[1]);
-      map.setCenter(moveLatLon); 
-      return;
+    if (!map) {
+      setMap(new window.kakao.maps.Map(container, options));
     }
-
-    setMap(new window.kakao.maps.Map(container, options));
   }, [position]);
 
   useEffect(() => {
@@ -95,7 +113,7 @@ const ShopList = ({ name }) => {
 
     clusterer.clear();
 
-    placesSearchCB();
+    placesSearchCB(position);
   }, [clusterer]);
 
   const fn = useCallback(debounce((_position) => {
@@ -104,16 +122,15 @@ const ShopList = ({ name }) => {
     const result = showPosition(_position);
 
     if (result) {
-      placesSearchCB();
+      placesSearchCB(result);
     }
-  }, 1000), [map, position]);
+  }, 500), [map, position]);
 
   useEffect(() => {
     if (!map) return;
 
     const move = () => {
       const center = map.getCenter();
-
       if (address) return;
 
       fn({
@@ -131,20 +148,21 @@ const ShopList = ({ name }) => {
     }
   }, [map, address]);
 
-  const placesSearchCB = () => {
+  const placesSearchCB = (position) => {
     clusterer.clear();
+    console.log(position);
     // 장소 검색 객체를 생성합니다
     const ps = new kakao.maps.services.Places(); 
-    const bounds = new kakao.maps.LatLngBounds();
     const markers = [];
+    const list = [];
     const option = {
       location: new window.kakao.maps.LatLng(
-        position[1] || DEFAULT_POSITION[0],
-        position[0] || DEFAULT_POSITION[1]
+        position[0] || DEFAULT_POSITION[0],
+        position[1] || DEFAULT_POSITION[1]
       ),
-      radius: 5000,
-      useMapCenter: true,
-      useMapBounds: true,
+      radius: 10000,
+      useMapCenter: false,
+      useMapBounds: false,
       page: 1
     };
 
@@ -157,7 +175,13 @@ const ShopList = ({ name }) => {
       // LatLngBounds 객체에 좌표를 추가합니다
       for (let i = 0; i < data.length; i++) {
         markers.push(createMarker(data[i]));
-        bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        list.push({
+          id: data[i].id,
+          address: data[i].address_name,
+          phone: data[i].phone,
+          name: data[i].place_name,
+          link: data[i].place_url
+        });
       }       
       
       if (current < last) {
@@ -166,9 +190,9 @@ const ShopList = ({ name }) => {
       }
   
       if (current === last && markers.length) {
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        map.setBounds(bounds);
+        // 검색된 장소 위치를 기준으로 마커를 추가합니다.
         clusterer.addMarkers(markers);
+        setMapList(list);
       }
     };
 
@@ -179,19 +203,32 @@ const ShopList = ({ name }) => {
   
 
   const open = useDaumPostcodePopup();
-  const handleComplete = ({ jibunAddress }) => {
+  const handleComplete = ({ address }) => {
     setPosition([]);
-    setAddress(jibunAddress);
+    setAddress(address);
 
-    if (jibunAddress) {
+    if (address) {
       const geocoder = new kakao.maps.services.Geocoder();
-      geocoder.addressSearch(jibunAddress, function(result, status) {
+      geocoder.addressSearch(address, function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
           const moveLatLon = new kakao.maps.LatLng(result[0].y, result[0].x);
           map.setCenter(moveLatLon); 
+          placesSearchCB([result[0].y, result[0].x]);
         }
       });
     }
+  };
+
+  const reset = () => {
+    setAddress('');
+    setCurrentPosition();
+  }
+
+  const change = (name, value) => {
+    setCitygudong({
+      ...citygudong,
+      [name]: value.target.textContent
+    })
   };
 
   return (
@@ -211,6 +248,12 @@ const ShopList = ({ name }) => {
             >
               <i className="search icon"></i>주소 검색
             </button>
+            <button
+              className={`ui button ${styled.reset}`}
+              onClick={reset}
+            >
+                초기화
+            </button>
           </div>
         </div>
       </div>
@@ -221,7 +264,38 @@ const ShopList = ({ name }) => {
           </NavLink>
         )}
       </div>
-      <div className={styled.mapContainer} id="map"></div>
+      <div className={styled.map_box}>
+        <div className={styled.citygudong}>
+          <div className={styled.city}>
+            <Select placeholder="도시" options={city} onChange={(v) => change('city', v)} />
+          </div>
+          <div className={styled.gu}>
+            <Select placeholder="군/구" options={gu.seoul} onChange={(v) => change('gu', v)} />
+          </div>
+          <div className={styled.dong}>
+            <Select placeholder="동" options={dong.seoul} onChange={(v) => change('dong', v)} />
+          </div>
+          
+        </div>
+        <div className={styled.mapContainer} id="map"></div>
+        <div className={styled.map_list}>
+          <Swiper 
+            spaceBetween={50}
+            slidesPerView={4}
+          >
+            {
+              mapList.length && mapList.map((map) => (
+                <SwiperSlide key={map.id}>
+                  <h2>{map.name}</h2>
+                  <p>{map.address}</p>
+                  <p>{map.phone}</p>
+                  <p><a target="_blank" href={map.link}>{map.link}</a></p>
+                </SwiperSlide>
+              ))
+            }
+          </Swiper>
+        </div>
+      </div>
     </div>
   );
 };

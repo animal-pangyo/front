@@ -1,22 +1,19 @@
-import { useState, useEffect, useMemo } from "react";
-import useBoard from "../../hooks/useBoard";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import styled from "./board.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { debounce } from "../../utils/debounce";
 import useAuth from "../../hooks/useAuth";
-import Search from "../common/search/search";
 import { useDaumPostcodePopup } from "react-daum-postcode";
+import { SHOP_LIST } from "../../pages/Shop/Shop";
 
 const DEFAULT_POSITION = [37.402187224511, 127.10304698035];
 
 const ShopList = ({ name }) => {
-  const [level, setLevel] = useState(3);
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [level, setLevel] = useState(12);
   const [address, setAddress] = useState('');
   const auth = useAuth();
   const navigate = useNavigate();
   const [position, setPosition] = useState([]);
-  const board = useBoard({ type: "list", value: position, name, searchKeyword, address, level });
   const [map, setMap] = useState(null);
   const clusterer = useMemo(() => {
     if (!map) return null;
@@ -28,11 +25,17 @@ const ShopList = ({ name }) => {
     });
   }, [map]);
   
-  function showPosition(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
+  const showPosition = useCallback((_position) => {
+    const latitude = _position.coords.latitude;
+    const longitude = _position.coords.longitude;
+  
+    if (position.length && position[0] === latitude && position[1] === longitude) {
+      return false;
+    }
+
     setPosition([latitude, longitude]);
-  }
+    return true;
+  }, [position]);
 
   function errorPosition() {
     showPosition({
@@ -45,12 +48,13 @@ const ShopList = ({ name }) => {
 
   function createMarker(shop) {
     const marker = new kakao.maps.Marker({
-      position: new kakao.maps.LatLng(shop.longitude, shop.latitude),
+      position: new kakao.maps.LatLng(shop.y, shop.x),
       clickable: true
     });
+    console.log(shop);
 
     kakao.maps.event.addListener(marker, 'click', function() {
-      navigate(`/shop/${name}/detail/${shop.store_id}`);
+      navigate(`/shop/${name}/detail/${shop.id}`);
     });
     return marker;
   }
@@ -85,31 +89,32 @@ const ShopList = ({ name }) => {
   }, [position]);
 
   useEffect(() => {
-    if (!Array.isArray(board?.board) || !clusterer) {
+    if (!clusterer) {
       return;
     }
 
     clusterer.clear();
 
-    const markers = board.board.map((shop) => createMarker(shop));
+    placesSearchCB();
+  }, [clusterer]);
 
-    if (markers.length) {
-      clusterer.addMarkers(markers);
+  const fn = useCallback(debounce((_position) => {
+    if (!map) return;
+    setLevel(map.getLevel());
+    const result = showPosition(_position);
+
+    if (result) {
+      placesSearchCB();
     }
-  }, [clusterer, board.board]);
+  }, 1000), [map, position]);
 
   useEffect(() => {
     if (!map) return;
 
-    const fn = debounce((position) => {
-      setLevel(map.getLevel());
-      showPosition(position);
-    }, 1000);
-
     const move = () => {
       const center = map.getCenter();
 
-      if (searchKeyword || address) return;
+      if (address) return;
 
       fn({
         coords: {
@@ -119,16 +124,62 @@ const ShopList = ({ name }) => {
       });
     }
 
-    kakao.maps.event.addListener(map, 'center_changed', move);
+    kakao.maps.event.addListener(map, 'drag', move);
 
     return () => {
-      kakao.maps.event.removeListener(map, 'center_changed', move)
+      kakao.maps.event.removeListener(map, 'drag', move)
     }
-  }, [map, searchKeyword, address]);
+  }, [map, address]);
+
+  const placesSearchCB = () => {
+    clusterer.clear();
+    // 장소 검색 객체를 생성합니다
+    const ps = new kakao.maps.services.Places(); 
+    const bounds = new kakao.maps.LatLngBounds();
+    const markers = [];
+    const option = {
+      location: new window.kakao.maps.LatLng(
+        position[1] || DEFAULT_POSITION[0],
+        position[0] || DEFAULT_POSITION[1]
+      ),
+      radius: 5000,
+      useMapCenter: true,
+      useMapBounds: true,
+      page: 1
+    };
+
+    const placeSerach = (data, status, { last, current }) => {
+      if (status !== kakao.maps.services.Status.OK) {
+        return
+      }
+      
+      // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+      // LatLngBounds 객체에 좌표를 추가합니다
+      for (let i = 0; i < data.length; i++) {
+        markers.push(createMarker(data[i]));
+        bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+      }       
+      
+      if (current < last) {
+        option.page = option.page + 1;
+        ps.keywordSearch(SHOP_LIST[name], placeSerach, option)
+      }
+  
+      if (current === last && markers.length) {
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map.setBounds(bounds);
+        clusterer.addMarkers(markers);
+      }
+    };
+
+    // 키워드로 장소를 검색합니다
+    ps.keywordSearch(SHOP_LIST[name], placeSerach, option)
+  }
+
+  
 
   const open = useDaumPostcodePopup();
   const handleComplete = ({ jibunAddress }) => {
-    setSearchKeyword('');
     setPosition([]);
     setAddress(jibunAddress);
 
@@ -143,17 +194,10 @@ const ShopList = ({ name }) => {
     }
   };
 
-  const searchName = (value) => {
-    setSearchKeyword(value);
-    setPosition([]);
-    setAddress('');
-  };
-
   return (
     <div className={styled.map}>
       <div className={styled.write_button}>
         <div className={styled.search}>
-          <Search searchKeyword={searchName} />
           <div className={styled.address}>
             {
               address && (

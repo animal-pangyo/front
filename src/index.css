@@ -166,6 +166,21 @@ body {
   border-radius: 50%;
 }
 
+.swiper-slide {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.swiper-slide h2 {
+  font-size: 20px !important;
+}
+
+.swiper-slide p {
+  margin-bottom: 2px;
+}
+
+
 @media screen and (max-width: 1200px) {
   .boardList .subject {
     max-width: 300px;

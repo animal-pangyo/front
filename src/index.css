@@ -1,221 +1,171 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* 폰트 사용 */
+  line-height: 1.5; /* 라인 간격 1.5 */
+  font-weight: 400; /* 폰트 굵기 400 */
 
-  color-scheme: light dark;
-  background-color: #242424;
+  background-color: #242424; /* 배경 컬러 설정 */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-
-  --color: #616161;
-  --title-color: #495057;
-  --title-size: 40px;
+  --color: #616161; /* 기본 컬러 변수 설정 */
+  --title-color: #495057; /* 타이틀 커러 변수 설정 */
+  --title-size: 40px; /* 타이을 폰트 사이즈 변수 설정 */
 }
 
 a {
-  font-weight: 500;
-  text-decoration: inherit;
+  font-weight: 500; /* 폰트 굵기 500 */
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100%;
+  margin: 0; /* 여백 0 */
+  display: flex; /* Flexbox 레이아웃 사용 */
+  min-width: 320px; /* 최소 너비 320px */
+  min-height: 100%; /* 최소 높이 100% */
 }
 
-*:not(i) {
-  font-family: 'Noto Sans KR', sans-serif !important;
+*:not(i) { 
+  font-family: 'Noto Sans KR', sans-serif !important; /* 아이콘 태그 제외 모든 태그의 폰트 설정 */
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 3.2em; /* 폰트 크기 3.2 */
+  line-height: 1.1; /* 라인 각격 1.1 */
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+  border-radius: 8px; /* 테두리 반경 8px */
+  border: 1px solid transparent; /* 테두리 굵기 1px, 직선, 투명하게 설정 */
+  padding: 0.6em 1.2em; /* 여백의 좌우 1.2em, 상하 0.6em */
+  font-size: 1em; /* 폰트 사이즈 1em */
+  font-weight: 500; /* 폰트 굵기 500 */
+  background-color: #1a1a1a; /* 배경 컬러 설정 */
+  cursor: pointer; /* 마우스 커서를 포인터로 설정 */
+  transition: border-color 0.25s; /* 테두리 컬러가 변경될때 0.25 초만큼 애니메이션 적용 */
 }
 button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border-color: #646cff; /* 테두리 컬러 설정 */
 }
 
 #root {
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-text-fill-color: #000;
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-  box-shadow: 0 0 0px 1000px #fff inset;
-  transition: background-color 5000s ease-in-out 0s;
-}
-
-input:autofill,
-input:autofill:hover,
-input:autofill:focus,
-input:autofill:active {
-  -webkit-text-fill-color: #000;
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-  box-shadow: 0 0 0px 1000px #fff inset;
-  transition: background-color 5000s ease-in-out 0s;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  width: 100%; /* 너비 100% */
+  height: 100%; /* 높이 100% */
+  min-height: 100vh; /* 최소 높이를 화면 사이즈로 지정 */
 }
 
 body, html {
-  min-height: 100vh;
-  height: auto;
-}
-
-body {
-  place-items: start;
+  min-height: 100vh; /* 최소 높이를 화면 사이즈로 지정 */
+  height: auto; /* 높이를 자동 설정 */
 }
 
 .main_list div {
-  background-size: 80px;
-  background-repeat: no-repeat;
-  background-position: 10px 13px;
+  background-size: 80px; /* 배경 사이즈를 80px */
+  background-repeat: no-repeat; /* 요소의 사이즈보다 배경사이즈가 작은 경우 반복 설정 안함 */
+  background-position: 10px 13px; /* 배경의 위치를 상단 10px 좌 13px */
 }
 
 .main_list > div:nth-child(1) {
-  background-image: url('/images/veterinary.png');
+  background-image: url('/images/veterinary.png'); /* 배경 이미지 설정 */
 }
 
 .main_list > div:nth-child(2) {
-  background-image: url('/images/hairstyle.png');
+  background-image: url('/images/hairstyle.png'); /* 배경 이미지 설정 */
 }
 
 .main_list > div:nth-child(3) {
-  background-image: url('/images/spa.png');
+  background-image: url('/images/spa.png'); /* 배경 이미지 설정 */
 }
 
 .main_list > div:nth-child(4) {
-  background-image: url('/images/free-icon-hotel-3009487.png');
+  background-image: url('/images/free-icon-hotel-3009487.png'); /* 배경 이미지 설정 */
 }
 
 .main_list > div:nth-child(5) {
-  background-image: url('/images/education.png');
+  background-image: url('/images/education.png'); /* 배경 이미지 설정 */
 }
 
 .main_list > div:nth-child(6) {
-  background-image: url('/images/gravestone.png');
+  background-image: url('/images/gravestone.png'); /* 배경 이미지 설정 */
 }
 
 .main_list > div:nth-child(7) {
-  background-image: url('/images/pets.png');
+  background-image: url('/images/pets.png'); /* 배경 이미지 설정 */
 }
 
 .auth_layer {
-  position: relative;
+  position: relative; /* 요소의 위치를 자기 자신을 기준으로 배치 */
 }
 
 .auth_layer::before {
-  content: '';
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-image: url(/images/dog_walking.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  top: 0;
-  left: 0;
-  opacity: 0.5;
+  content: ''; /* 가상 선택자의 내용을 빈값으로 설정 */
+  width: 100%; /* 너비 100% */
+  height: 100%; /* 높이 100% */
+  position: absolute;  /* 요소의 위치를 부모 요소를 기존으로 설정 */
+  background-image: url(/images/dog_walking.jpg); /* 배경 이미지 설정 */
+  background-repeat: no-repeat; /* 요소의 사이즈보다 배경사이즈가 작은 경우 반복 설정 안함 */
+  background-position: center; /* 배경 위치를 중아에 위치 */
+  background-size: cover; /* 배경 사이즈를 요소의 사이즈만큼 채움 */
+  top: 0; /* 부모 위치 상단 0부터 시작 */
+  left: 0; /* 부모 위치 좌측 0부터 시작 */
+  opacity: 0.5; /* 투명도 0.5 */
 }
 
 .logo {
-  width: 35px;
-  height: 35px;
-  background: url(/images/dog-house.png) no-repeat;
-  background-size: cover;
-  border-radius: 50%;
+  width: 35px; /* 너비 35px */
+  height: 35px; /* 높이 35px */
+  background: url(/images/dog-house.png) no-repeat; /* 배경 설정 및 반복 설정하지 않음 */
+  background-size: cover; /* 배경 사이즈를 요소의 사이즈만큼 채움 */
+  border-radius: 50%; /* 테두리 반경 50% */
 }
 
 .swiper-slide {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
+  background-color: #fff; /* 배경 컬러 흰색 설정 */
+  border-radius: 10px; /* 테두리 반경 10px */
+  padding: 20px; /* 여백 상하좌우 20px */
 }
 
 .swiper-slide h2 {
-  font-size: 20px !important;
+  font-size: 20px !important; /* 폰트 사이즈 20px 강제 */
 }
 
 .swiper-slide p {
-  margin-bottom: 2px;
+  margin-bottom: 2px; /* 하단 여백 2px */
 }
 
-
+/* 가로 사이즈 1200px 이하인 경우 설정 */
 @media screen and (max-width: 1200px) {
   .boardList .subject {
-    max-width: 300px;
-    min-width: 150px;
-    width: auto;
+    max-width: 300px; /* 너비 최대 사이즈 300px */
+    min-width: 150px; /* 너비 최소 사이즈 150px  */
+    width: auto; /* 너비는 자동 */
   }
   
   .boardList button {
-    width: 70px;
-    font-size: 1.3rem;
-    height: 30px;
+    width: 70px; /* 너비 70px */
+    font-size: 1.3rem; /* 폰트 사이즈 1.3rem */
+    height: 30px; /* 높이 30px */
   }
 }
 
+/* 가로 사이즈 767px 이하인 경우 설정 */
 @media screen and (max-width: 767px) {
   .ui.table:not(.unstackable) tfoot tr {
-    box-shadow: none !important;
-    height: 78px;
+    box-shadow: none !important; /* 요소의 테두리 금자 효과 제거 */
+    height: 78px; /* 높이 78px */
   }
 
   :root {
-    --title-size: 30px;
+    --title-size: 30px; /* 타이틀 사이즈 30px */
   }
 }
 
-
+/* 가로 사이즈 450px 이하인 경우 설정 */
 @media screen and (max-width: 450px) {
   .searchCom button {
-    padding: .78571429em .78571429em !important;
-    width: 50px;
-    font-size: 0.8em;
-    height: 38px;
+    padding: .78571429em .78571429em !important; /* 여백 설정 */
+    width: 50px; /* 너비 50px */
+    font-size: 0.8em; /* 폰트 사이즈 0.8em */
+    height: 38px; /* 높이 38px */
   }
   
   :root {
-    --title-size: 2rem;
+    --title-size: 2rem; /* 타이틀 사이즈 2rem */
   }
 }

@@ -8,8 +8,11 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 
 const queryClient = new QueryClient()
 
+/* id가 root인 태그에 렌더링 */
 ReactDOM.createRoot(document.getElementById('root')).render(
+  /* 리코일 등록 */
   <RecoilRoot>
+    {/* 리액트 쿼리 등록 */}
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>

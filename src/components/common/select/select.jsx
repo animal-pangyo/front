@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Select } from "semantic-ui-react";
 import {hangjungdong} from "../../../utils/adress"
 
-const AddressSelect = () => {
+const AddressSelect = ({ searchAddress}) => {
   // 선택된 시, 구, 동의 상태를 관리하는 state 변수
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('');
@@ -47,12 +47,16 @@ const AddressSelect = () => {
     }));
 
 
-  const handleRequest = () => {
+  const handleChage = () => {
     if (selectedCity && selectedDistrict && selectedTown) {
       const cityCodeNm = hangjungdong.sido.find((sido) => sido.sido === selectedCity)?.codeNm;
-      const districtCodeNm = hangjungdong.sigugun.find((sigugun) => sigugun.sigugun === selectedDistrict)?.codeNm;
-      const townCodeNm = hangjungdong.dong.find((dong) => dong.dong === selectedTown)?.codeNm;
-  
+      const districtCodeNm = hangjungdong.sigugun.find((sigugun) => sigugun.sido === selectedCity && sigugun.sigugun === selectedDistrict)?.codeNm;
+      const townCodeNm = hangjungdong.dong.find((dong) => dong.sido === selectedCity && dong.sigugun === selectedDistrict && dong.dong === selectedTown)?.codeNm;
+      searchAddress({
+        city: cityCodeNm,
+        gu: districtCodeNm,
+        dong: townCodeNm
+      })
       console.log(`요청: ${cityCodeNm}, ${districtCodeNm}, ${townCodeNm}`);
     } else {
       console.log('시, 구, 동을 모두 선택해주세요.');
@@ -70,7 +74,7 @@ const AddressSelect = () => {
       <Select placeholder="동 선택" options={townOptions} value={selectedTown} onChange={handleTownChange}>
       </Select>
 
-      <button onClick={handleRequest}>검색</button>
+      <button onClick={handleChage}>검색</button>
     </div>
   );
 };

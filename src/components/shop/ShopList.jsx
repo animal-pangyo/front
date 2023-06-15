@@ -11,11 +11,6 @@ import  Select  from "../common/select/select"
 const DEFAULT_POSITION = [37.402187224511, 127.10304698035];
 
 const ShopList = ({ name }) => {
-  const [citygudong, setCitygudong] = useState({
-    city: '',
-    gu: '',
-    dong: ''
-  });
   const [level, setLevel] = useState(6);
   const [address, setAddress] = useState('');
   const auth = useAuth();
@@ -146,13 +141,18 @@ const ShopList = ({ name }) => {
     }
   }, [map, address]);
 
-  const placesSearchCB = (position) => {
+  //지도 검색 부분  //position 좌표 값 배열 첫번째 작은 값 두번쨰 큰 값 
+  const placesSearchCB = (position, citygudong = '') => {
+    console.log("palcb",position, citygudong )
     clusterer.clear();
     console.log(position);
+  
+
     // 장소 검색 객체를 생성합니다
     const ps = new kakao.maps.services.Places(); 
     const markers = [];
     const list = [];
+    setMapList([]);
     const option = {
       location: new window.kakao.maps.LatLng(
         position[0] || DEFAULT_POSITION[0],
@@ -163,6 +163,10 @@ const ShopList = ({ name }) => {
       useMapBounds: false,
       page: 1
     };
+
+    if(!position.length) {
+      delete option.location;
+    }
 
     const placeSerach = (data, status, { last, current }) => {
       if (status !== kakao.maps.services.Status.OK) {
@@ -184,18 +188,24 @@ const ShopList = ({ name }) => {
       
       if (current < last) {
         option.page = option.page + 1;
-        ps.keywordSearch(SHOP_LIST[name], placeSerach, option)
+        ps.keywordSearch(`${citygudong} ${SHOP_LIST[name]}`, placeSerach, option)
       }
   
       if (current === last && markers.length) {
         // 검색된 장소 위치를 기준으로 마커를 추가합니다.
         clusterer.addMarkers(markers);
         setMapList(list);
+
+        if (citygudong) {
+          const moveLatLon = new kakao.maps.LatLng(data[0].y, data[0].x);
+          map.setCenter(moveLatLon); 
+        }
       }
     };
-
+     
     // 키워드로 장소를 검색합니다
-    ps.keywordSearch(SHOP_LIST[name], placeSerach, option)
+     ps.keywordSearch(`${citygudong} ${SHOP_LIST[name]}`, placeSerach, option)
+
   }
 
   
@@ -222,12 +232,10 @@ const ShopList = ({ name }) => {
     setCurrentPosition();
   }
 
-  const change = (name, value) => {
-    setCitygudong({
-      ...citygudong,
-      [name]: value.target.textContent
-    })
-  };
+  const searchAddress = (citygudong) => {
+    const { city, gu, dong } = citygudong;
+    placesSearchCB([], `${city} ${gu} ${dong}`)
+  }
 
   return (
     <div className={styled.map}>
@@ -264,8 +272,7 @@ const ShopList = ({ name }) => {
       </div>
       <div className={styled.map_box}>
         <div className={styled.citygudong}>
-         <Select />
-          
+         <Select searchAddress={searchAddress}/>
         </div>
         <div className={styled.mapContainer} id="map"></div>
         <div className={styled.map_list}>
@@ -276,9 +283,11 @@ const ShopList = ({ name }) => {
             {
               mapList.length && mapList.map((map) => (
                 <SwiperSlide key={map.id}>
-                  <h2>{map.name}</h2>
-                  <p>{map.address}</p>
-                  <p>{map.phone}</p>
+                  <NavLink to={`/shop/${name}/detail/${map.id}?name=${encodeURIComponent(map.name)}`}>
+                    <h2>{map.name}</h2>
+                    <p>{map.address}</p>
+                    <p>{map.phone}</p>
+                  </NavLink>
                   <p><a target="_blank" href={map.link}>{map.link}</a></p>
                 </SwiperSlide>
               ))

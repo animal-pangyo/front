@@ -7,9 +7,7 @@ import { useDaumPostcodePopup } from "react-daum-postcode";
 import { SHOP_LIST } from "../../pages/Shop/Shop";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
-import { Button, Select } from "semantic-ui-react";
-import { city, dong, gu } from "./address";
-
+import  Select  from "../common/select/select"
 const DEFAULT_POSITION = [37.402187224511, 127.10304698035];
 
 const ShopList = ({ name }) => {
@@ -266,15 +264,7 @@ const ShopList = ({ name }) => {
       </div>
       <div className={styled.map_box}>
         <div className={styled.citygudong}>
-          <div className={styled.city}>
-            <Select placeholder="도시" options={city} onChange={(v) => change('city', v)} />
-          </div>
-          <div className={styled.gu}>
-            <Select placeholder="군/구" options={gu.seoul} onChange={(v) => change('gu', v)} />
-          </div>
-          <div className={styled.dong}>
-            <Select placeholder="동" options={dong.seoul} onChange={(v) => change('dong', v)} />
-          </div>
+         <Select />
           
         </div>
         <div className={styled.mapContainer} id="map"></div>

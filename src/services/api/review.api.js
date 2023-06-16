@@ -15,6 +15,7 @@ export const fetchBoardList = ({ page, storeId }) => {
 /* id에 해당하는 게시글을 삭제하는 서비스 */
 /* id : 게시글 아이디 */
 /* name : 게시판 이름 */
+export const deleteBoard = ({ id }) =>
   axios.delete(`${URL}/stores/review/${id}`);
 
 /* 유저가 작성한 폼을 토대로 게시글을 생성하는 서비스 */

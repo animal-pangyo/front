@@ -12,6 +12,8 @@ function App() {
 
   // 라우트 정보를 바탕으로 브라우저 라우터를 생성합니다.
   const router = createBrowserRouter(routes);
+
+  /* 리액트 쿼리 스토어에 접근하기 위한 훅입니다. */
   const queryClient = useQueryClient();
 
   useEffect(() => {

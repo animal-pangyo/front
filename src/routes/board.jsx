@@ -8,12 +8,12 @@ import NoticeDetail from "../pages/Notice/NoticeDetail";
 import Qna from "../pages/Qna/Qna";
 import QnaWrite from "../pages/Qna/QnaWrite";
 import QnaDetail from "../pages/Qna/QnaDetail";
-import Review from "../pages/Review/Review";
 import ReviewWrite from "../pages/Review/ReviewWrite";
 import ReviewDetail from "../pages/Review/ReviewDetail";
 
+/* 게시판과 관련 된 페이지의 경로와 페이지 컴포넌트를 설정합니다. */
 export default [
-  /* 자유게시판 */
+  /* 자유게시판 리스트 페이지 */
   {
     path: "/free",
     element: (
@@ -22,6 +22,7 @@ export default [
       </AdminLayer>
     ),
   },
+  /* 자유게시판 글쓰기 페이지 */
   {
     path: "/free/write",
     element: (
@@ -30,6 +31,7 @@ export default [
       </AdminLayer>
     ),
   },
+  /* 자유게시판 수정 페이지 */
   {
     path: "/free/write/:id",
     element: (
@@ -38,6 +40,7 @@ export default [
       </AdminLayer>
     ),
   },
+  /* 자유게시판 상세 페이지 */
   {
     path: "/free/detail/:id",
     element: (
@@ -47,7 +50,7 @@ export default [
     ),
   },
 
-  /* 공지사항 */
+  /* 공지사항 리스트 페이지 */
   {
     path: "/notice",
     element: (
@@ -56,6 +59,8 @@ export default [
       </AdminLayer>
     ),
   },
+
+  /* 공지사항 글쓰기 페이지 */
   {
     path: "/notice/write",
     element: (
@@ -64,6 +69,8 @@ export default [
       </AdminLayer>
     ),
   },
+
+  /* 공지사항 수정 페이지 */
   {
     path: "/notice/write/:id",
     element: (
@@ -72,6 +79,8 @@ export default [
       </AdminLayer>
     ),
   },
+
+  /* 공지사항 상세 페이지 */
   {
     path: "/notice/detail/:id",
     element: (
@@ -81,7 +90,7 @@ export default [
     ),
   },
 
-  /* qna */
+  /* 문의게시판 리스트 페이지 */
   {
     path: "/inquiry",
     element: (
@@ -90,6 +99,8 @@ export default [
       </AdminLayer>
     ),
   },
+
+  /* 문의게시판 글쓰기 페이지 */
   {
     path: "/inquiry/write",
     element: (
@@ -98,6 +109,8 @@ export default [
       </AdminLayer>
     ),
   },
+
+  /* 문의게시판 수정 페이지 */
   {
     path: "/inquiry/write/:id",
     element: (
@@ -106,6 +119,8 @@ export default [
       </AdminLayer>
     ),
   },
+
+  /* 자유게시판 수정 페이지 */
   {
     path: "/inquiry/detail/:id",
     element: (
@@ -115,7 +130,7 @@ export default [
     ),
   },
 
-  /* 리뷰 게시판 */
+  /* 리뷰게시판 글쓰기 페이지 */
   {
     path: "/review/:category/write",
     element: (
@@ -124,6 +139,8 @@ export default [
       </AdminLayer>
     ),
   },
+
+  /* 리뷰게시판 수정 페이지 */
   {
     path: "/review/:category/write/:id",
     element: (
@@ -132,6 +149,8 @@ export default [
       </AdminLayer>
     ),
   },
+
+  /* 리뷰게시판 상세 페이지 */
   {
     path: "/review/:category/detail/:id",
     element: (

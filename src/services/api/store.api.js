@@ -116,3 +116,7 @@ export const transformBoard = (server) => {
     storeInfo: server
   };
 };
+
+export const getStoreInfo = ({ storeId, storeName, name}) => {
+  return axios.get(`${URL}/${getContext(name)}/detail/${storeId}${storeName}`)
+}

@@ -58,7 +58,6 @@ const ShopList = ({ name }) => {
   }
 
   function createMarker(shop) {
-    console.log(shop, "sdfsd")
     const marker = new kakao.maps.Marker({
       position: new kakao.maps.LatLng(shop.y, shop.x),
       clickable: true,

@@ -28,7 +28,7 @@ const Search = ({ searchKeyword }) => {
       <div className={styled.button}>
         {/* 검색어 버튼입니다. */}
         {/* onClick : 검색어 클릭 시 호출되는 함수입니다. */}
-        <Button onClick={handleSearch}>검색</Button>
+        <button className={styled.button} onClick={handleSearch}>검색</button>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import './index.css'
 import { RecoilRoot } from 'recoil'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
+/* 리액트 쿼리 생성 */
 const queryClient = new QueryClient()
 
 /* id가 root인 태그에 렌더링 */
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <RecoilRoot>
     {/* 리액트 쿼리 등록 */}
     <QueryClientProvider client={queryClient}>
+      {/* App 컴포넌트 렌더링 */}
       <App />
     </QueryClientProvider>
   </RecoilRoot>

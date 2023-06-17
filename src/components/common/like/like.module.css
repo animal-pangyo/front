@@ -1,6 +1,7 @@
 .like_button {
-    font-size: 0.1em;
-    background-color: transparent;
-    border: none;
-    outline: none !important;
-}
+    font-size: 0.1em; /* 글꼴 크기 0.1em */
+    background-color: transparent; /* 배경색 투명 */
+    border: none; /* 테두리 없음 */
+    outline: none !important; /* 아웃라인 스타일 없음 (!important를 사용하여 우선순위 부여) */
+  }
+  

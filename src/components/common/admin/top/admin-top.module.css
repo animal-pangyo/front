@@ -1,27 +1,27 @@
 .top {
-  display: flex;
-  width: 100%;
-  padding: 20px;
-  box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,.03), 0 0.9375rem 1.40625rem rgba(4,9,20,.03), 0 0.25rem 0.53125rem rgba(4,9,20,.05), 0 0.125rem 0.1875rem rgba(4,9,20,.03);
-  justify-content: space-between;
+  display: flex; /* 플렉스 박스로 표시 */
+  width: 100%; /* 너비 100% */
+  padding: 20px; /* 내부 여백 20px */
+  box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,.03), 0 0.9375rem 1.40625rem rgba(4,9,20,.03), 0 0.25rem 0.53125rem rgba(4,9,20,.05), 0 0.125rem 0.1875rem rgba(4,9,20,.03); /* 그림자 */
+  justify-content: space-between; /* 양쪽 정렬 */
 }
 
 .left, .right {
-  display: flex;
-  gap: 20px;
-  color: var(--color);
+  display: flex; /* 플렉스 박스로 표시 */
+  gap: 20px; /* 요소 사이 간격 20px */
+  color: var(--color); /* 글꼴 색상 */
 }
 
 a {
-  color: var(--color) !important;
+  color: var(--color) !important; /* 글꼴 색상 (!important를 사용하여 우선순위 부여) */
 }
 
 .user {
-  display: flex;
-  gap: 20px;
-  cursor: pointer;
+  display: flex; /* 플렉스 박스로 표시 */
+  gap: 20px; /* 요소 사이 간격 20px */
+  cursor: pointer; /* 커서 스타일 변경 */
 }
 
 .logout {
-  cursor: pointer;
+  cursor: pointer; /* 커서 스타일 변경 */
 }

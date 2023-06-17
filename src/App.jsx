@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { QueryClient, QueryClientProvider, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
 import styled from "./app.module.css";
 import useMessage from "./hooks/useMessage";
 import routes from "./routes";
@@ -40,7 +40,7 @@ function App() {
           message.visible ? { display: "inline-block" } : { display: "none" } // 메시지 visible이 true인 경우 화면에 보여주고 아닌 경우 화면에 보여주지 않습니다.
         }
       >
-        <p>{message.message}</p>
+        <p>{message.message}</p> {/* message 출력 */}
       </div>
 
       {/* 라우터를 토대로 URL에 따라 페이지를 렌더링하게 됩니다. */}

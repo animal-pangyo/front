@@ -1,194 +1,200 @@
 .subject {
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* 하단 여백 20px */
 }
 
 .subject,
 .subject input {
-  width: 100%;
-  min-height: 50px;
+  width: 100%; /* 너비 100% */
+  min-height: 50px; /* 최소 높이 50px */
 }
 
 .content textarea {
-  width: 100%;
-  min-height: 300px;
-  background-color: #fff;
-  border-radius: 0.28571429rem;
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  padding: 0.67857143em 1em;
-  font-size: 1em;
-  color: rgba(0, 0, 0, 0.87);
-  outline: none;
-  transition: box-shadow 0.1s ease, border-color 0.1s ease;
+  width: 100%; /* 너비 100% */
+  min-height: 300px; /* 최소 높이 300px */
+  background-color: #fff; /* 배경색 */
+  border-radius: 0.28571429rem; /* 테두리 반지름 */
+  border: 1px solid rgba(34, 36, 38, 0.15); /* 테두리 */
+  padding: 0.67857143em 1em; /* 내부 여백 */
+  font-size: 1em; /* 글꼴 크기 1em */
+  color: rgba(0, 0, 0, 0.87); /* 글꼴 색상 */
+  outline: none; /* 아웃라인 스타일 없음 */
+  transition: box-shadow 0.1s ease, border-color 0.1s ease; /* 전환 효과 */
 }
 
 .content textarea:focus {
-  border-color: #85b7d9;
+  border-color: #85b7d9; /* 테두리 색상 (포커스 시) */
 }
 
+/* 폼 안의 스팬 스타일 */
 form span {
-  color: red;
+  color: red; /* 글꼴 색상 */
 }
 
+/* 상세 제목 스타일 */
 .detail_subject {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 25px !important;
-  margin-bottom: 0;
+  margin-bottom: 20px; /* 하단 여백 20px */
+  display: flex; /* 플렉스 박스로 표시 */
+  justify-content: space-between; /* 양쪽 정렬 */
+  font-size: 25px !important; /* 글꼴 크기 25px (!important를 사용하여 우선순위 부여) */
+  margin-bottom: 0; /* 하단 여백 없음 */
 }
 
 .detail_subject .phone {
-  display: flex;
-  gap: 20px;
+  display: flex; /* 플렉스 박스로 표시 */
+  gap: 20px; /* 요소 사이 간격 20px */
 }
 
+/* 상세 내용 스타일 */
 .detail_content {
-  margin-top: 20px;
-  font-size: 18px;
-  min-height: 300px;
+  margin-top: 20px; /* 상단 여백 20px */
+  font-size: 18px; /* 글꼴 크기 18px */
+  min-height: 300px; /* 최소 높이 300px */
 }
 
 .time {
-  font-size: 13px;
-  font-weight: 100;
+  font-size: 13px; /* 글꼴 크기 13px */
+  font-weight: 100; /* 글꼴 두께 100 */
 }
 
 .time:first-child {
-  position: relative;
+  position: relative; /* 위치 설정 */
 }
 
 .time:first-child::after {
-  content: "";
-  width: 1px;
-  height: 40%;
-  background-color: #9c9c9c;
-  position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: translateY(-50%);
+  content: ""; /* 콘텐츠 없음 */
+  width: 1px; /* 너비 1px */
+  height: 40%; /* 높이 40% */
+  background-color: #9c9c9c; /* 배경색 */
+  position: absolute; /* 위치 설정 */
+  right: -10px; /* 오른쪽 여백 -10px */
+  top: 50%; /* 위쪽 여백 50% */
+  transform: translateY(-50%); /* 수직 가운데 정렬 */
 }
 
+/* 폼 내부의 제목 스타일 */
 form .subject {
-  display: flex;
-  flex-direction: column;
+  display: flex; /* 플렉스 박스로 표시 */
+  flex-direction: column; /* 수직 방향으로 정렬 */
 }
 
 form .subject span {
-  display: block;
-  padding-bottom: 10px;
+  display: block; /* 블록 요소로 표시 */
+  padding-bottom: 10px; /* 하단 여백 10px */
 }
 
 .address {
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* 하단 여백 20px */
 }
 
 .address button {
-  width: 100%;
-  background-color: #fff !important;
-  border: 1px solid #1678c2 !important;
-  color: #1678c2 !important;
+  width: 100%; /* 너비 100% */
+  background-color: #fff !important; /* 배경색 (!important를 사용하여 우선순위 부여) */
+  border: 1px solid #1678c2 !important; /* 테두리 (!important를 사용하여 우선순위 부여) */
+  color: #1678c2 !important; /* 글꼴 색상 (!important를 사용하여 우선순위 부여) */
 }
 
 .detail_address1 {
-  margin: 5px 0;
+  margin: 5px 0; /* 상단 및 하단 여백 5px */
 }
 
 .mapContainer,
 .map,
 .map_box {
-  width: 100%;
-  height: 100%;
+  width: 100%; /* 너비 100 */
+  height: 100%; /* 높이 100 */
 }
 
 .map {
-  box-sizing: border-box;
-  padding-bottom: 20px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  box-sizing: border-box; /* 상자 크기 설정 */
+  padding-bottom: 20px; /* 하단 여백 20px */
+  flex: 1; /* 남은 공간 차지 */
+  display: flex; /* 플렉스 박스로 표시 */
+  flex-direction: column; /* 수직 방향으로 정렬 */
+  position: relative; /* 위치 설정 */
 }
 
 .detail_address1 {
-  width: 100%;
+  width: 100%; /* 너비 100% */
 }
 
 .write_button {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
+  display: flex; /* 플렉스 박스로 표시 */
+  justify-content: space-between; /* 양쪽 정렬 */
+  margin-bottom: 5px; /* 하단 여백 5px */
 }
 
 .search {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  flex: 1;
+  display: flex; /* 플렉스 박스로 표시 */
+  flex-direction: column; /* 수직 방향으로 정렬 */
+  gap: 20px; /* 요소 사이 간격 20px */
+  flex: 1; /* 남은 공간 차지 */
 }
 
 .address {
-  display: flex;
-  gap: 20px;
-  align-items: center;
+  display: flex; /* 플렉스 박스로 표시 */
+  gap: 20px; /* 요소 사이 간격 20px */
+  align-items: center; /* 수직 가운데 정렬 */
 }
 
 .address button {
-  width: 300px;
+  width: 300px; /* 너비 */
 }
 
 .button {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
+  display: flex; /* 플렉스 박스로 표시 */
+  justify-content: flex-end; /* 우측 정렬 */
+  margin-bottom: 20px; /* 하단 여백 20px */
 }
 
 .map_list {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  padding: 0 20px;
-  padding-bottom: 50px;
+  width: 100%; /* 너비 100% */
+  position: absolute; /* 위치 설정 */
+  bottom: 0; /* 하단 여백 */
+  padding: 0 20px; /* 좌우 여백 20px */
+  padding-bottom: 50px; /* 하단 여백 50px */
 }
 
 button.reset {
-  width: 100px !important;
-  color: #fff !important;
-  background-color: #7a7a7a !important;
-  border: none !important;
+  width: 100px !important; /* 너비 100px (!important를 사용하여 우선순위 부여) */
+  color: #fff !important; /* 글꼴 색상 (!important를 사용하여 우선순위 부여) */
+  background-color: #7a7a7a !important; /* 배경색 (!important를 사용하여 우선순위 부여) */
+  border: none !important; /* 테두리 없음 (!important를 사용하여 우선순위 부여) */
 }
 
 .citygudong {
-  display: flex;
-  position: absolute;
-  z-index: 10;
+  display: flex; /* 플렉스 박스로 표시 */
+  position: absolute; /* 위치 설정 */
+  z-index: 10; /* Z-인덱스 */
 }
 
 .citygudong > div {
-  position: relative;
-  background: #cfcfcf;
-  min-width: 196px;
-  cursor: pointer;
+  position: relative; /* 위치 설정 */
+  background: #cfcfcf; /* 배경색 */
+  min-width: 196px; /* 최소 너비 196px */
+  cursor: pointer; /* 커서 스타일 변경 */
 }
 
 .citygudong [role=listbox] {
-  border-radius: 0 !important;
-  background: #cfcfcf !important;
-  border: none !important;
+  border-radius: 0 !important; /* 테두리 반경 (!important를 사용하여 우선순위 부여) */
+  background: #cfcfcf !important; /* 배경색 (!important를 사용하여 우선순위 부여) */
+  border: none !important; /* 테두리 없음 (!important를 사용하여 우선순위 부여) */
 }
 
 .citygudong [role=listbox] [aria-atomic="true"] {
-  color: #777 !important;
+  color: #777 !important; /* 글꼴 색상 (!important를 사용하여 우선순위 부여) */
 }
 
+/* 가로 사이즈 700px 이하인 경우 설정 */
 @media screen and (max-width: 700px) {
   .address {
-    flex-direction: column;
-    align-items: start;
+    flex-direction: column; /* 수직 방향으로 정렬 */
+    align-items: start; /* 좌측 정렬 */
   }
 }
 
+/* 가로 사이즈 500px 이하인 경우 설정 */
 @media screen and (max-width: 500px) {
   .address button {
-    width: 100%;
+    width: 100%; /* 너비 100% */
   }
 }

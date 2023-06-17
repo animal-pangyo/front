@@ -1,116 +1,121 @@
 .form h2 {
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 50px;
+  text-align: center; /* 가운데 정렬 */
+  font-size: 30px; /* 글꼴 크기 30px */
+  margin-bottom: 50px; /* 하단 여백 50px */
 }
 
 .sns {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 50px;
+  display: flex; /* 플렉스 박스로 표시 */
+  justify-content: center; /* 가운데 정렬 */
+  margin-bottom: 50px; /* 하단 여백 50px */
 }
 
 .sns a {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #5E6278;
-  width: 100%;
+  display: flex; /* 플렉스 박스로 표시 */
+  align-items: center; /* 수직 가운데 정렬 */
+  gap: 5px; /* 요소 사이 간격 5px */
+  color: #5E6278; /* 글꼴 색상 */
+  width: 100%; /* 너비 100% */
 }
 
 .sns img {
-  width: 15px;
+  width: 15px; /* 이미지 너비 15px */
 }
 
 .divider {
-  margin-bottom: 40px;
+  margin-bottom: 40px;/* 하단 여백 40px */
 }
 
 .divider > div {
-  color: #A1A5B7 !important;
-  text-transform: none !important;
+  color: #A1A5B7 !important; /* 글꼴 색상 (!important를 사용하여 우선순위 부여) */
+  text-transform: none !important; /* 텍스트 변형 없음 (!important를 사용하여 우선순위 부여) */
 }
 
 .input {
-  margin-bottom: 15px;
+  margin-bottom: 15px; /* 하단 여백 15px */
 }
 
 .input > div {
-  width: 100%;
-  flex-direction: column;
-  gap: 3px
+  width: 100%; /* 너비 100% */
+  flex-direction: column; /* 수직 방향으로 정렬 */
+  gap: 3px; /* 요소 사이 간격 3px */
 }
 
 .input > div span,
 .error {
-  color: red;
-  font-size: 12px;
+  color: red; /* 글꼴 색상 */
+  font-size: 12px; /* 글꼴 크기 12px */
 }
 
+/* 검색 스타일 */
 .search {
-  display: flex;
-  justify-content: end;
-  gap: 10px;
-  margin-top: 20px;
+  display: flex; /* 플렉스 박스로 표시 */
+  justify-content: end; /* 오른쪽 정렬 */
+  gap: 10px; /* 요소 사이 간격 10px */
+  margin-top: 20px; /* 상단 여백 20px */
 }
 
 .search a {
-  color: #222222 !important;
-  position: relative;
+  color: #222222 !important; /* 글꼴 색상 (!important를 사용하여 우선순위 부여) */
+  position: relative; /* 위치 설정 */
 }
 
 .search a + a::after {
-  content: '';
-  position: absolute;
-  height: 50%;
-  width: 1px;
-  top: 5px;
-  left: -5px;
-  background-color: #111;
+  content: ''; /* 콘텐츠 없음 */
+  position: absolute; /* 위치 설정 */
+  height: 50%; /* 높이 5px */
+  width: 1px; /* 너비 1px */
+  top: 5px; /* 위쪽 여백 5px */
+  left: -5px; /* 왼쪽 여백 -5px */
+  background-color: #111; /* 배경색 */
 }
 
+/* 버튼 스타일 */
 .button {
-  margin-top: 40px;
+  margin-top: 40px; /* 상단 여백 40px */
 }
 
 .button button {
-  width: 100%;
+  width: 100%; /* 너비 10%% */
 }
 
+/* 생년월일 입력 스타일 */
 .birth_input {
-  margin-bottom: 15px;
+  margin-bottom: 15px; /* 하단 여백 15px */
 }
 
 .birth {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  border: 1px solid rgba(34,36,38,.15);
-  box-sizing: border-box;
-  height: 38px;
-  border-radius: .28571429rem;
-  margin-bottom: 0;
+  width: 100%; /* 너비 100% */
+  display: flex; /* 플렉스 박스로 표시 */
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: center; /* 가운데 정렬 */
+  padding: 20px; /* 내부 여백 20px */
+  border: 1px solid rgba(34,36,38,.15); /* 테두리 */
+  box-sizing: border-box; /* 상자 크기 설정 */
+  height: 38px; /* 높이 38px */
+  border-radius: .28571429rem; /* 테두리 반지름 */
+  margin-bottom: 0; /* 하단 여백 없음 */
 }
 
 .birth input {
-  flex: 1;
-  outline: none;
-  background: transparent;
-  border: none;
-  appearance: none;
-  text-align: center;
-  color: #111;
+  flex: 1; /* 남은 공간 차지 */
+  outline: none; /* 아웃라인 스타일 없음 */
+  background: transparent; /* 배경 없음 */
+  border: none; /* 테두리 없음 */
+  appearance: none; /* 기본 스타일 없음 */
+  text-align: center; /* 가운데 정렬 */
+  color: #111; /* 글꼴 색상 */
 }
 
+/* 주소 입력 버튼 스타일 */
 .address button {
-  width: 100%;
-  background-color: #fff !important;
-  border: 1px solid #1678c2 !important;
-  color: #1678c2 !important;
+  width: 100%; /* 너비 100% */
+  background-color: #fff !important; /* 배경색 (!important를 사용하여 우선순위 부여) */
+  border: 1px solid #1678c2 !important; /* 테두리 (!important를 사용하여 우선순위 부여) */
+  color: #1678c2 !important; /* 글꼴 색상 (!important를 사용하여 우선순위 부여) */
 }
 
+/* 상세 주소 입력 스타일 */
 .detail_address1 {
-  margin: 15px 0;
+  margin: 15px 0; /* 상단 및 하단 여백 15px */
 }

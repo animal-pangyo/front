@@ -1,7 +1,7 @@
-.serachConatiner {
-  display: flex;
+.searchContainer {
+  display: flex; /* 플렉스 박스로 표시 */
 }
 
 .button {
-  margin-left: 8px;
+  margin-left: 8px; /* 왼쪽 여백 8px */
 }

@@ -16,14 +16,12 @@ const ShopDetailComponent = ({ name }) => {
   const auth = useAuth();
   const [loading, setLoading] = useState(true);
   const [storeInfo, setStoreInfo] = useState(null);
-  const userLike = !storeInfo?.likes?.length ? false : true;
+  const [reviewInfo, setReviewInfo] = useState(null);
   const [message, setMessage] = useRecoilState(messageState);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const encodedName = queryParams.get('name');
   const storeName = decodeURIComponent(encodedName);
-
-  console.log(encodedName, storeName, param.id);
 
   useEffect(() => {
     const fetchStoreInfo = async () => {
@@ -36,7 +34,7 @@ const ShopDetailComponent = ({ name }) => {
 
         // 스토어 정보 설정 및 "데이터 받는 중" 표시 종료
         setStoreInfo(response.data.stores);
-        console.log(storeInfo, "dd", response.data)
+        setReviewInfo(response.data.reviews)
         setLoading(false);
       } catch (error) {
         //에러 콘솔 
@@ -78,7 +76,7 @@ const ShopDetailComponent = ({ name }) => {
         </div>
       </Segment>
 
-      <ReviewList name={name} storeId={param.id} storeInfo={storeInfo && storeInfo} type="" />
+      <ReviewList name={name} storeId={param.id} storeInfo={reviewInfo && reviewInfo} type="" />
 
       <div>
         <NavLink to={`/shop/${name}`}>

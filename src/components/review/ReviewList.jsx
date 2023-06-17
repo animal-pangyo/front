@@ -14,7 +14,7 @@ import useMessage from "../../hooks/useMessage";
 /* name : 게시판의 이름을 나타냅니다. */
 /* storeId : 업체 아이디를 전달받습니다. */
 /* storeInfo : 업체에 대한 정보를 전달받습니다. */
-const ReviewList = ({ name, storeId, storeInfo }) => {
+const ReviewList = ({ name, storeId, reviewInfo }) => {
   /* 페이지 이동을 위한 훅입니다. */
   const navigate = useNavigate();
 
@@ -92,9 +92,9 @@ const ReviewList = ({ name, storeId, storeInfo }) => {
         </thead>
         <tbody>
            {/* 게시글이 존재하는 경우 아래를 렌더링합니다. */}
-          {board && storeInfo?.reviews?.length ? (
+          {reviewInfo && reviewInfo.length ? (
             /* 게시글이 존재하는 만큼 반복문을 실행해서 게시글을 렌더링합니다. */
-            storeInfo.reviews.map((board) => (
+            reviewInfo.map((board) => (
               /* key : 각컴포넌트를 구분하기 위한 용도 */
               /* board.review_id : 게시글 아이디 */
               <tr key={board.review_id}>

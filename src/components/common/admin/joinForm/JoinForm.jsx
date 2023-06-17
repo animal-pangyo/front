@@ -3,7 +3,7 @@ import styled from "./join.module.css";
 import { Link } from "react-router-dom";
 import Google from "../../../../assets/google-icon.svg";
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
  
 // 회원가입의 폼을 렌더링합니다.
@@ -20,10 +20,17 @@ const JoinForm = ({ onSubmit, modal, user }) => {
     handleSubmit,
     setValue,
     watch,
+    getValues,
+    trigger,
     formState: { errors },
   } = useForm();
   const open = useDaumPostcodePopup(); // 주소 검색을 하기 위한 팝업을 호출합니다.
   const form = watch(); // form의 값이 변경되었을 때 추적하기 위해 사용합니다.
+
+  /* 두개의 비밀번호 확인 후 에러 표현을 위한 함수 */
+  const handleNextInput = async () => {
+    const isMatch = await trigger('passwordChk');        
+  };
 
   /* 주소검색 버튼 클릭 후 주소검색이 완료 된 후 form의 address1 속성에 값 할당합니다.  */
   const handleComplete = ({ address }) => {
@@ -112,10 +119,18 @@ const JoinForm = ({ onSubmit, modal, user }) => {
                 {/* 비밀번호 확인 입력 용 태그 렌더링 */}
                 {/* type: 비밀번호 */}
                 {/* placeholder : 입력 전 표시될 문자 */}
+                {/* validate : 비밀번호 확인 */}
                 <input
                   type="password"
                   placeholder="비밀번호 확인"
-                  {...register("passwordChk", { required: true })}
+                  {...register("passwordChk", { required: true,
+                    validate: {
+                      matchesPreviousPassword: (value) => {
+                        const { password } = getValues();
+                        return password === value || '비밀번호가 일치하지 않습니다.';
+                      },
+                    },})}
+                    onBlur={handleNextInput}
                 />
                 {/* 에러가 존재하는 경우 에러메시지 출력 */}
                 {errors.passwordChk && <span>비밀번호가 일치하지 않습니다.</span>}

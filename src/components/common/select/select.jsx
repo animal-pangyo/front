@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Select } from "semantic-ui-react";
 import {hangjungdong} from "../../../utils/adress"
+import styled from "./select.module.css";
 
 const AddressSelect = ({ searchAddress}) => {
   // 선택된 시, 구, 동의 상태를 관리하는 state 변수
@@ -74,7 +75,7 @@ const AddressSelect = ({ searchAddress}) => {
       <Select placeholder="동 선택" options={townOptions} value={selectedTown} onChange={handleTownChange}>
       </Select>
 
-      <button onClick={handleChage}>검색</button>
+      <button className={styled.button} onClick={handleChage}>검색</button>
     </div>
   );
 };

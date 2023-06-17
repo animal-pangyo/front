@@ -8,7 +8,7 @@ import { messageState } from "../../store/message";
 import ReviewList from "../review/ReviewList";
 import LikeButton from "../common/like/LikeButton";
 import * as storeApi from "../../services/api/store.api";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 const ShopDetailComponent = ({ name }) => {
@@ -16,7 +16,7 @@ const ShopDetailComponent = ({ name }) => {
   const auth = useAuth();
   const [loading, setLoading] = useState(true);
   const [storeInfo, setStoreInfo] = useState(null);
-  const userLike = true //!storeInfo?.likes?.length ? false : true;
+  const userLike = !storeInfo?.likes?.length ? false : true;
   const [message, setMessage] = useRecoilState(messageState);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -30,12 +30,13 @@ const ShopDetailComponent = ({ name }) => {
       try {
         // 데이터 요청 시작 시 "데이터 받는 중" 표시
         setLoading(true);
-
+        const storeId = param.id;
         // 스토어 정보 요청
-        const response = await storeApi.getStoreInfo(name, storeId, storeName);
+        const response =  await  storeApi.getStoreInfo({ name: name, storeId: storeId, storeName: decodeURIComponent(storeName)  });
 
         // 스토어 정보 설정 및 "데이터 받는 중" 표시 종료
-        setStoreInfo(response.data);
+        setStoreInfo(response.data.stores);
+        console.log(storeInfo, "dd", response.data)
         setLoading(false);
       } catch (error) {
         //에러 콘솔 
@@ -57,30 +58,33 @@ const ShopDetailComponent = ({ name }) => {
 
   return (
     <>
+
       <Segment className={styled.segment}>
         <h2 className={styled.detail_subject}>
           <span>{storeName}</span>
           <div className={styled.phone}>
-            <span className={styled.time}>전화번호 : {storeInfo.phone}</span>
-            <span className={styled.time}>영업시간 : {storeInfo.business_hours}</span>
-            <LikeButton storeId={param.id} isLiked={userLike} />
+            <span className={styled.time}>전화번호 : {storeInfo && storeInfo.phone}</span>
+            <span className={styled.time}>영업시간 : {storeInfo && storeInfo.time}</span>
+            <LikeButton storeId={param.id} isLiked={storeInfo && storeInfo.like} />
           </div>    
         </h2>
         <Divider />
-        <div className={styled.detail_content}>{storeInfo.details}</div>
+        <div className={styled.detail_content}>
+          <div>카테고리 : {storeInfo && storeInfo.category_name}</div>
+          <br/>
+          <div>주소: {storeInfo && storeInfo.road_address_name}</div>
+          <br/>
+          <div>{storeInfo && storeInfo.place_url}</div>
+        </div>
       </Segment>
 
-      <ReviewList name={name} storeId={param.id} storeInfo={storeInfo} type="" />
+      <ReviewList name={name} storeId={param.id} storeInfo={storeInfo && storeInfo} type="" />
 
       <div>
         <NavLink to={`/shop/${name}`}>
           <button className="ui button">목록</button>
         </NavLink>
-        {auth?.user?.id && auth?.user?.id === board.writer && (
-          <button className="ui primary button" onClick={deleteBoard}>
-            삭제
-          </button>
-        )}
+      
       </div>
     </>
   );

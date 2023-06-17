@@ -58,13 +58,15 @@ const ShopList = ({ name }) => {
   }
 
   function createMarker(shop) {
+    console.log(shop, "sdfsd")
     const marker = new kakao.maps.Marker({
       position: new kakao.maps.LatLng(shop.y, shop.x),
-      clickable: true
+      clickable: true,
     });
 
     kakao.maps.event.addListener(marker, 'click', function() {
-      navigate(`/shop/${name}/detail/${shop.id}`);
+      navigate(`/shop/${name}/detail/${shop.id}?name=${encodeURIComponent(shop.place_name)}`);
+      
     });
     return marker;
   }

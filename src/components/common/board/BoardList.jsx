@@ -167,16 +167,16 @@ const BoardList = ({ name }) => {
 
       <div>
         {/* 게시판이 공지사항이 아니거나, 공지사항 게시판이면서 관리자인 경우에는 글쓰기 버튼을 렌더링합니다. */}
-        {name !== "notice" || (name === "notice" && auth?.user?.id === "admin") ? (
+        {name !== "notice"|| (name === "notice" && auth?.user?.id === "admin") ? (
           /* to : 이동할 페이지입니다. */
           /* color : 링크의 컬러를 변경합니다. */
           /* 링크 클릭 시 글쓰기 페이지로 이동합니다. */
-          <NavLink color="#fff" to={`/${name}/write`}>
+          <NavLink color="#fff" to={auth?.user? `/${name}/write` : '/login'}>
             {/* className : className이름 설정 */}
             <button className="ui primary button">글쓰기</button>
           </NavLink>
         ) : null}
-    </div>
+      </div>
     </>
   );
 };

@@ -6,6 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 import useBoard from "../../../hooks/useBoard";
 import usePagination from "../../../hooks/usePagination";
 import Search from "../../common/search/search";
+import useMessage from "../../../hooks/useMessage";
 
 /* 게시판 리스트를 보여주기 위한 함수입니다. */
 /* name : 게시판의 이름을 나타냅니다. */
@@ -28,6 +29,9 @@ const BoardList = ({ name }) => {
   /* name : 게시판의 이름을 할당합니다(자유게시판, QNA 등) */
   /* searchKeyword : 게시판을 검색 정보를 전달합니다. */
   const board = useBoard({ type: "list", value: page, name, searchKeyword });
+
+  /* 화면 상단 메시지를 출력하기 위한 setMessage 함수 */
+  const [, setMessage] = useMessage();
 
   /* 페이지네이션 컴포넌트를 생성하기 위한 정보를 얻어오는 데 사용하는 훅입니다. */
   /* start : 시작 페이지 번호 */
@@ -107,8 +111,8 @@ const BoardList = ({ name }) => {
                 {/* data-label : 라벨 정보를 데이터로 저장 */}
                 <td data-label="기능">
                   {/* 유저가 로그인상태이면서 관리자인 경우 또는 작성자와 로그인 유저가 동일한 경우 아래를 렌더링합니다. */}
-                  {((auth.user && auth.user.roles === "admin") ||
-                    auth.user.id === board.author_id) && (
+                  {(auth?.user?.roles === "admin" ||
+                    (auth?.user?.id ===  board?.author_id)) && (
                     <>
                       {/* 삭제 버튼으로 게시글을 삭제합니다. */}
                       {/* onClick : 삭제 버튼 클릭 시 실행될 함수입니다. */}

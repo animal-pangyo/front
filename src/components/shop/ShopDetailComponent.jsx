@@ -53,7 +53,6 @@ const ShopDetailComponent = ({ name }) => {
       message: "삭제되었습니다.",
     });
   };
-
   return (
     <>
 
@@ -76,7 +75,7 @@ const ShopDetailComponent = ({ name }) => {
         </div>
       </Segment>
 
-      <ReviewList name={name} storeId={param.id} storeInfo={reviewInfo && reviewInfo} type="" />
+      <ReviewList name={name} storeId={param.id} reviewInfo={reviewInfo && reviewInfo} type="" />
 
       <div>
         <NavLink to={`/shop/${name}`}>

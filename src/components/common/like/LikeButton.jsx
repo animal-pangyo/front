@@ -11,6 +11,10 @@ function LikeButton({storeId, isLiked}) {
   /* 좋아요 유무를 저장하는 상태를 생성합니다. */
   const [isLike, setIsLike] = useState(isLiked);
 
+  useEffect(()=>{
+    setIsLike(isLiked)
+  },[isLiked])
+
   /* 좋아요 버튼 클릭 시 좋아요 유무를 변경하는 함수입니다. */
   const handleToggleLike = () => {
     setIsLike((prevIsLiked) => !prevIsLiked);

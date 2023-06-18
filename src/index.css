@@ -36,7 +36,8 @@ button {
   padding: 0.6em 1.2em; /* 여백의 좌우 1.2em, 상하 0.6em */
   font-size: 1em; /* 폰트 사이즈 1em */
   font-weight: 500; /* 폰트 굵기 500 */
-  background-color: #1a1a1a; /* 배경 컬러 설정 */
+  background-color: #1d4461; /* 배경 컬러 설정 */
+  color: #fff; /*  컬러 설정 */
   cursor: pointer; /* 마우스 커서를 포인터로 설정 */
   transition: border-color 0.25s; /* 테두리 컬러가 변경될때 0.25 초만큼 애니메이션 적용 */
 }

@@ -16,12 +16,13 @@ export const transformUser = (server) => {
     /* phone : 유저 연락처 */
     /* address : 유저 주소 */
     /* birth : 유저 탄생일 */
+    ...server,
     id: server.user_id,
     name: server.user_name,
     email: server.email,
     roles: server.roles,
     phone: server.phone,
-    address: server.address,
-    birth: server.birth,
+    address: server.address1 + ' ' + server.address2,
+    birth: server.year + ' ' + server.month + ' '  + server.day,
   };
 };

@@ -112,6 +112,7 @@ const useBoard = ({ type, value, name, searchKeyword, address, storeId, level })
 
     /* 삭제가 정상적으로 처리된 경우 게시글 리스트를 다시 호출합니다. */
     onSuccess() {
+      // 유효하지 않은 상태로 만들어 정보 리로드
       queryClient.invalidateQueries(name);
     },
   });

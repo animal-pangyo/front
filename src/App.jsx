@@ -27,6 +27,7 @@ function App() {
     // 토큰이 존재하는 경우 유저정보를 유효하지 않은 상태로 만들어 다시 서버로부터 유저 정보를 로드하도록 합니다.
     if (token) {
       setAuthorization(token, userId);
+      // 유효하지 않은 상태로 만들어 정보 리로드
       queryClient.invalidateQueries("user");
     }
   }, []);

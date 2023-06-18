@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import useBoard from "../../../hooks/useBoard";
 
+
 /* 게시글을 작성 폼을 렌더링하는 컴포넌트 입니다.  */
 /* name : 게시판의 이름을 나타냅니다. */
 const BoardWriteComponent = ({ name }) => {
@@ -60,7 +61,7 @@ const BoardWriteComponent = ({ name }) => {
     });
 
     /* 서버로 부터 응답받은 아이디를 저장합니다. */
-    const id = response?.data?.id || response?.data?.review_id;
+    const id = response?.data?.post_id || response?.data?.review_id;
 
     /* 서버로부터 응답받은 결과에 id가 존재하지 않는 경우 게시판 리스트 페이지로 이동합니다. */
     if (!id) {
@@ -70,11 +71,11 @@ const BoardWriteComponent = ({ name }) => {
 
     /* 리뷰게시판이 아닌 경우 일반 게시판 리스트 페이지로 이동합니다. */
     if(!response?.data?.review_id){
-      navigate(`/${name}/detail/${response.data.id}`);
+      navigate(`/${name}/detail/${response.data.post_id}`);
     }else{
 
       /* 리뷰게시판인 경우 리뷰 게시판 리스트 페이지로 이동합니다. */
-      navigate(`/review/${param.category}/detail/${id}?storeId=${searchPrams.get('storeid')}`);
+      navigate(`/review/${param.category}/detail/${id}?storeId=${searchPrams.get('storeid')}&name=${searchPrams.get('name')}`);
     }
     
   };
@@ -89,14 +90,23 @@ const BoardWriteComponent = ({ name }) => {
       id: param.id,
     });
 
+    /* 서버로 부터 응답받은 아이디를 저장합니다. */
+    const id = param.id || response?.data?.updatedReview?.review_id;
+
     /* 서버로부터 응답받은 결과에 id가 존재하지 않는 경우 게시판 리스트 페이지로 이동합니다. */
-    if (!response?.data?.id) {
+    if (!id) {
       navigate(`/${name}`);
       return;
     }
-
-    /* 서버로부터 응답받은 결과에 id가 존재하는 경우 해당 게시글 상세페이지로 이동합니다. */
-    navigate(`/${name}/detail/${response.data.id}`);
+   
+    /* 리뷰게시판이 아닌 경우 일반 게시판 리스트 페이지로 이동합니다. */
+    if(!response?.data?.updatedReview?.review_id){
+      navigate(`/${name}/detail/${param.id}`);
+    }else{
+      /* 리뷰게시판인 경우 리뷰 게시판 리스트 페이지로 이동합니다. */
+      navigate(`/review/${param.category}/detail/${id}?storeId=${searchPrams.get('storeid')}&name=${searchPrams.get('name')}`);
+    }
+    
   };
 
   return (
@@ -113,7 +123,7 @@ const BoardWriteComponent = ({ name }) => {
               {/* defaultValue : 기본값 설정 */}
               <input
                 type="text"
-                defaultValue={board.board.subject}
+                defaultValue={board.board.subject || board.board.title}
                 placeholder="제목을 입력해주세요."
                 {...register("subject", { required: true })}
               />
@@ -145,7 +155,7 @@ const BoardWriteComponent = ({ name }) => {
           {
             name === 'review' ? (
               /* 리뷰 게시판인 경우 업체 상세페이지로 이동합니다. */
-              <NavLink to={`/shop/${searchPrams.get('type')}/detail/${searchPrams.get('storeid')}`}>
+              <NavLink to={`/shop/${searchPrams.get('type')}/detail/${searchPrams.get('storeid')}?name=${searchPrams.get('name')}`}>
                 {/* className : className이름 설정 */}
                 <button className="ui button">목록</button>
               </NavLink>

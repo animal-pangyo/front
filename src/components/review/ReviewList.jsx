@@ -1,6 +1,6 @@
 import { Button } from "semantic-ui-react";
 import TablePagination from "../common/paging/TablePagination";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import useBoard from "../../hooks/useBoard";
@@ -15,6 +15,10 @@ import useMessage from "../../hooks/useMessage";
 /* storeId : 업체 아이디를 전달받습니다. */
 /* storeInfo : 업체에 대한 정보를 전달받습니다. */
 const ReviewList = ({ name, storeId, reviewInfo }) => {
+  /* URL에서 쿼리스트링으로 전달된 데이터를 추출하기 위한 훅입니다. */
+  const { search } = useLocation();
+  const searchPrams = new URLSearchParams(search);
+
   /* 페이지 이동을 위한 훅입니다. */
   const navigate = useNavigate();
 
@@ -110,7 +114,7 @@ const ReviewList = ({ name, storeId, reviewInfo }) => {
                 <td className="subject" data-label="제목" width={500}>
                   {/* to : 이동할 페이지 */}
                   {/* board.subject : 게시글 제목 */}
-                  <NavLink to={`/review/${name}/detail/${board.review_id}?storeId=${storeId}`}>
+                  <NavLink to={`/review/${name}/detail/${board.review_id}?storeId=${storeId}&name=${searchPrams.get('name')}`}>
                     {board.content}
                   </NavLink>
                 </td>
@@ -119,8 +123,8 @@ const ReviewList = ({ name, storeId, reviewInfo }) => {
                 <td data-label="등록일">{board.created_at}</td>
                 {/* data-label : 라벨 정보를 데이터로 저장 */}
                 <td data-label="기능">
-                  {/* 작성자와 로그인 유저가 동일한 경우 아래를 렌더링합니다. */}
-                  {auth.user && auth.user.id === board.user_id && (
+                  {/* 작성자와 로그인 유저가 동일한 경우, 관리자인경우 아래를 렌더링합니다. */}
+                  {(auth?.user.id === board?.user_id || auth?.user?.roles === 'admin') && (
                     <>
                       {/* 삭제 버튼으로 게시글을 삭제합니다. */}
                       {/* onClick : 삭제 버튼 클릭 시 실행될 함수입니다. */}
@@ -134,7 +138,7 @@ const ReviewList = ({ name, storeId, reviewInfo }) => {
                       {/* onClick : 수정 버튼 클릭 시 실행될 함수입니다. */}
                       <Button
                         onClick={() =>
-                          navigate(`/review/${name}/write/${board.review_id}?storeId=${storeId}`)
+                          navigate(`/review/${name}/write/${board.review_id}?storeid=${storeId}&type=${name}&name=${searchPrams.get('name')}`)
                         }
                         primary
                       >
@@ -186,7 +190,7 @@ const ReviewList = ({ name, storeId, reviewInfo }) => {
           /* onClick : 리뷰 작성 버튼 클릭 시 호출될 함수입니다.  */
           <NavLink
             color="#fff"
-            to={`/review/${name}/write?storeid=${storeId}&type=${name}`}
+            to={`/review/${name}/write?storeid=${storeId}&type=${name}&name=${searchPrams.get('name')}`}
             onClick={moveWrite}
           >
             {/* className : className이름 설정 */}

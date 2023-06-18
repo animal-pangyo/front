@@ -15,7 +15,7 @@ const Search = ({ searchKeyword }) => {
 
   return (
     /* className : className이름 설정 */
-    <div className={`${styled.serachConatiner} searchCom`}>
+    <div className={`${styled.searchContainer} searchCom`}>
       {/* 검색어 입력 용 태그 렌더링 */}
       {/* value : input에 검색어 상태 할당 */}
       {/* onChange : 사용자가 검색어를 입력하는 경우 호출되는 함수입니다. input의 값이 저장됩니다. */}

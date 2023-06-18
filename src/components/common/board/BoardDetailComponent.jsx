@@ -1,7 +1,7 @@
 import styled from "./board.module.css";
 import { useState } from "react";
 import { Divider, Segment, TextArea } from "semantic-ui-react";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useLocation, useParams, useNavigate } from "react-router-dom";
 import useBoard from "../../../hooks/useBoard";
 import useAuth from "../../../hooks/useAuth";
 import { useRecoilState } from "recoil";
@@ -14,6 +14,10 @@ const BoardDetailComponent = ({ name }) => {
 
   /* 유저와 관련 된 처리를 하기 위한 훅입니다. */
   const auth = useAuth();
+
+
+  /* navigate 사용 */
+  const navigate = useNavigate();
 
   /* URL에서 쿼리스트링으로 전달된 데이터를 추출하기 위한 훅입니다. */
   const { search } = useLocation();
@@ -117,7 +121,7 @@ const BoardDetailComponent = ({ name }) => {
       <div>
         {/* to : 이동할 페이지 */}
         {/* 게시판의 리스트 페이지로 이동합니다. */}
-        <NavLink to={name === 'review' ? `/shop/${param.category}/detail/${searchPrams.get("storeId")}` : `/${name}`}>
+        <NavLink to={name === 'review' ? `/shop/${param.category}/detail/${searchPrams.get("storeId")}?name=${searchPrams.get("name")}` : `/${name}`}>
           {/* className : className이름 설정 */}
           <button className="ui button">목록</button>
         </NavLink>

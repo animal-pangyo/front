@@ -383,22 +383,32 @@ const ShopList = ({ name }) => {
   }
 
   return (
+    // className : className이름 설정
     <div className={styled.map}>
+      {/* className : className이름 설정 */}
       <div className={styled.write_button}>
+      {/* className : className이름 설정 */}
               <div className={styled.search}>
+                {/* className : className이름 설정 */}
                 <div className={styled.address}>
+            {/* 주소 검색 중이라면 검색중인 주소를 출력합니다. */}
             {
               address && (
                     <span>{address}</span>
               )
             }
 
+                  {/* className : className이름 설정 */}
+                  {/* 주소검색 버튼을 클릭 시 다음 주소 검색 팝업을 호출합니다. */}
                   <button
                     className="ui button"
                     onClick={() => open({ onComplete: handleComplete })}
                   >
+                    {/* className : className이름 설정 */}
                     <i className="search icon"></i>주소 검색
                   </button>
+                  {/* className : className이름 설정 */}
+                  {/* 초기화 버튼을 클릭 시 주소 검색을 초기화 합니다. */}
                   <button
                     className={`ui button ${styled.reset}`}
                     onClick={reset}
@@ -408,42 +418,62 @@ const ShopList = ({ name }) => {
                 </div>
               </div>
       </div>
-      <div className={styled.button}>
-                {auth?.user?.roles === "admin" && (
-                  <NavLink color="#fff" to={`/shop/${name}/write`}>
-                    <button className="ui primary button">글쓰기</button>
-                  </NavLink>
-                )}
-      </div>
+      {/* className : className이름 설정 */}
       <div className={styled.map_box}>
+                {/* className : className이름 설정 */}
                 <div className={styled.citygudong}>
+                  {/* 시군구동 검색을 위한 Select 컴포넌트를 렌더링합니다. */}
+                  {/* searchAddress : 검색 버튼을 클릭 시에 호출 될 함수입니다.*/}
          <Select searchAddress={searchAddress}/>
                 </div>
+                {/* className : className이름 설정 */}
+                {/* 카카오지도 API가 렌더링 될 컴포넌트 입니다. */}
                 <div className={styled.mapContainer} id="map"></div>
+                {/* className : className이름 설정 */}
                 <div className={styled.map_list}>
+                  {/* 검색 된 업체의 리스트를 슬라이드 하는 컴포넌트 입니다. */}
+                  {/* spaceBetween: 리스트 사이 간격 */}
+                  {/* slidesPerView: 한페이지에 보여줄 숫자입니다. */}
+                  {/* breakpoints : 화면 해상도에 따라 달리 보여줄 옵션을 설정합니다. */}
+              
                   <Swiper
                     spaceBetween={50}
                     slidesPerView={4}
                     breakpoints={{
+                      // 해상도가 640 이상일때 적용 됩니다.
+                      // slidesPerView : 한 화면에 보여줄 개수는 2입니다.
                       640: {
                         slidesPerView: 2
                       },
+                      // 해상도가 450 이상일때 적용 됩니다.
+                      // slidesPerView : 한 화면에 보여줄 개수는 1입니다.
                       450: {
                         slidesPerView: 1
                       },
+                      // 해상도가 1200 이상일때 적용 됩니다.
+                      // slidesPerView : 한 화면에 보여줄 개수는 4입니다.                      
                       1200: {
                         slidesPerView: 4
                       },
                     }}
                   >
             {
+              // 업체리스트가 존재한다면 아래의 컴포넌트를 렌더링합니다.
+              // mapList : 조회된 업체 리스트
               mapList.length && mapList.map((map) => (
+                      // 슬라이될 아이템을 렌더링해주는 컴포넌트입니다.
+                      // key : 각 슬라이드 아이템을 구별하기 위한 키입니다.
                       <SwiperSlide key={map.id}>
+                        {/* 아이템 클릭 시 상세보기 페이지로 이동합니다. */}
                         <NavLink to={`/shop/${name}/detail/${map.id}?name=${encodeURIComponent(map.name)}`}>
+                          {/* 업체 이름을 렌더링합니다. */}
                           <h2>{map.name}</h2>
+                          {/* 업체 주소를 렌더링합니다. */}
                           <p>{map.address}</p>
+                          {/* 업체 연락처 렌더링합니다. */}
                           <p>{map.phone}</p>
                         </NavLink>
+                        {/* 업체에 할당 된 링크가 존재한다면 업체 사이트로 이동합니다. */}
                         <p><a target="_blank" href={map.link}>{map.link}</a></p>
                       </SwiperSlide>
               ))

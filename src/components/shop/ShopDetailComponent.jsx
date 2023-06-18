@@ -12,73 +12,98 @@ import { useEffect, useState } from "react";
 
 
 const ShopDetailComponent = ({ name }) => {
+  /* URL에 포함된 파리미터의 정보를 추출하기 위한 훅입니다. */
   const param = useParams();
-  const auth = useAuth();
-  const [loading, setLoading] = useState(true);
+
+  // 업체의 상세 정보를 저장하는 상태입니다.
   const [storeInfo, setStoreInfo] = useState(null);
+
+  // 업체에 해당하는 리뷰에 대한 정보를 저장하는 상태입니다.
   const [reviewInfo, setReviewInfo] = useState(null);
+
+  // 완료 시 메시지를 출력하는 상태를 저장합니다.
   const [message, setMessage] = useRecoilState(messageState);
+
+  // 파라미터로 전달받은 데이터를 가져오기 위해서 사용합니다.
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+
+  // 쿼리 스트링으로 전달받은 name값을 저장합니다.
   const encodedName = queryParams.get('name');
+
+  // 인고딩 된 데이터를 디코딩합니다.
   const storeName = decodeURIComponent(encodedName);
 
   useEffect(() => {
     const fetchStoreInfo = async () => {
       try {
-        // 데이터 요청 시작 시 "데이터 받는 중" 표시
-        setLoading(true);
+        // 패스에 포함되어 있는 아이디 값을 가져옵니다. 이 값은 업체의 아이디 입니다.
         const storeId = param.id;
-        // 스토어 정보 요청
+
+        // 업체 아이디와 이름을 서버로 전달하여 업체의 상세정보를 가져옵니다.
         const response =  await  storeApi.getStoreInfo({ name: name, storeId: storeId, storeName: decodeURIComponent(storeName)  });
 
-        // 스토어 정보 설정 및 "데이터 받는 중" 표시 종료
+        // 업체 정보를 받아서 저장합니다.
         setStoreInfo(response.data.stores);
+
+        // 업체의 리뷰 게시판 정보를 저장합니다.
         setReviewInfo(response.data.reviews)
-        setLoading(false);
       } catch (error) {
-        //에러 콘솔 
+        // 서버 에러 발생 시 콘솔을 출력하니다.
         console.error('Failed to fetch store info:', error);
-        setLoading(false);
       }
     };
 
+    // 서버로 업체 정보를 가져오는 함수를 호출합니다.
     fetchStoreInfo();
   }, []);
 
-  const deleteBoard = async (id) => {
-    await board.deleteBoard(id);
-    setMessage({
-      visible: true,
-      message: "삭제되었습니다.",
-    });
-  };
   return (
     <>
-
+      {/* className : className이름 설정 */}
       <Segment className={styled.segment}>
+        {/* className : className이름 설정 */}
         <h2 className={styled.detail_subject}>
+          {/* 업체 이름을 렌더링합니다. */}
           <span>{storeName}</span>
+          {/* className : className이름 설정 */}
           <div className={styled.phone}>
+            {/* className : className이름 설정 */}
+            {/* 업체의 전화번호를 렌더링합니다. */}
             <span className={styled.time}>전화번호 : {storeInfo && storeInfo.phone}</span>
+            {/* className : className이름 설정 */}
+            {/* 업체의 영업시간을 렌더링합니다. */}
             <span className={styled.time}>영업시간 : {storeInfo && storeInfo.time}</span>
+            {/* 업체의 좋아요 여부를 표현하는 컴포넌트를 렌더링합니다. */}
+            {/* storeId : 업체 아이디 */}
+            {/* isLiked : 좋아요 여부 */}
             <LikeButton storeId={param.id} isLiked={storeInfo && storeInfo.like} />
           </div>    
         </h2>
         <Divider />
+        {/* className : className이름 설정 */}
         <div className={styled.detail_content}>
+          {/* 업체의 카테고리 이름을 렌더링합니다. */}
           <div>카테고리 : {storeInfo && storeInfo.category_name}</div>
           <br/>
+          {/* 업체의 주소를 렌더링합니다. */}
           <div>주소: {storeInfo && storeInfo.road_address_name}</div>
           <br/>
+          {/* 업체의 사이트 URL 주소를 렌더링합니다. */}
           <div>{storeInfo && storeInfo.place_url}</div>
         </div>
       </Segment>
 
+      {/* 해당 업체에 작성된 리뷰리스트를 렌더링합니다. */}
+      {/* name : 업체 타입 */}
+      {/* storeId : 업체 아이디 */}
+      {/* reviewInfo : 리뷰 정보 */}
       <ReviewList name={name} storeId={param.id} reviewInfo={reviewInfo && reviewInfo} type="" />
 
       <div>
+        {/* 목록 버튼 클릭 시 지도 페이지로 이동합니다. */}
         <NavLink to={`/shop/${name}`}>
+          {/* className : className이름 설정 */}
           <button className="ui button">목록</button>
         </NavLink>
       

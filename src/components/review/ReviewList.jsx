@@ -124,7 +124,7 @@ const ReviewList = ({ name, storeId, reviewInfo }) => {
                 {/* data-label : 라벨 정보를 데이터로 저장 */}
                 <td data-label="기능">
                   {/* 작성자와 로그인 유저가 동일한 경우, 관리자인경우 아래를 렌더링합니다. */}
-                  {(auth?.user.id === board?.user_id || auth?.user?.roles === 'admin') && (
+                  {(auth?.user?.id === board?.user_id || auth?.user?.roles === 'admin') && (
                     <>
                       {/* 삭제 버튼으로 게시글을 삭제합니다. */}
                       {/* onClick : 삭제 버튼 클릭 시 실행될 함수입니다. */}

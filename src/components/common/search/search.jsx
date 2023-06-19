@@ -20,7 +20,7 @@ const Search = ({ searchKeyword }) => {
       {/* value : input에 검색어 상태 할당 */}
       {/* onChange : 사용자가 검색어를 입력하는 경우 호출되는 함수입니다. input의 값이 저장됩니다. */}
       <Input
-        placeholder="업체를 검색하세요..."
+        placeholder="검색하세요..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

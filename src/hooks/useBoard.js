@@ -84,7 +84,7 @@ const useBoard = ({ type, value, name, searchKeyword, address, storeId, level })
   } else if (type === "detail") {
     board = useQuery({
       /* 게시글 리스트를 저장하기 위한 키로 name과 "detail", value를 설정합니다. */
-      queryKey: [name, "detail", value],
+      queryKey: [name, "detail", value, storeId],
       queryFn: async () => {
         /* 서버로부터 게시글 상세정보를 전달답습니다. */
         /* id :게시글 아이디 */

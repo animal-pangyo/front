@@ -41,7 +41,7 @@ const useBoard = ({ type, value, name, searchKeyword, address, storeId, level })
   if (type === "list") {
     board = useQuery({
       /* 게시글 리스트를 저장하기 위한 키로 name과 value를 설정합니다. */
-      queryKey: [name, value],
+      queryKey: [name, value, searchKeyword, address, storeId, name],
 
       /* 데이터를 전달받기 위한 기능을 수행하는 함수입니다. */
       queryFn: async () => {

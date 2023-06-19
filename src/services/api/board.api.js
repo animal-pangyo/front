@@ -33,17 +33,20 @@ export const deleteBoard = ({ id, name }) =>
 
 /* 유저가 작성한 폼을 토대로 게시글을 생성하는 서비스 */
 /* naem : 게시판 이름 */
-export const createBoard = ({ form, name }) =>
-axios.post(`${URL}/${getContext(name)}`, {
-    /* title : 게시글 제목 */
-    /* content : 게시글 내용 */
-    /* user_id : 작성자 아이디 */
-    /* board_type : 게시판 종류 */
-    title: form.subject,
-    content: form.content,
-    user_id,
-    board_type: name,
-  });
+export const createBoard = ({ form, name }) => {
+  /* 로컬 스토리지에 저장된 유저 아이디를 가져옵니다. */
+  const user_id = getUserId();
+  return axios.post(`${URL}/${getContext(name)}`, {
+      /* title : 게시글 제목 */
+      /* content : 게시글 내용 */
+      /* user_id : 작성자 아이디 */
+      /* board_type : 게시판 종류 */
+      title: form.subject,
+      content: form.content,
+      user_id,
+      board_type: name,
+    });
+}
 
 /* 유저가 작성한 폼을 토대로 문의게시판 답변을 생성하는 서비스 */
 /* answer : 답변 내용 */

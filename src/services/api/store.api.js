@@ -83,7 +83,7 @@ export const updateLike = ({ storeId, isLiked }) =>{
     /* user_id : 작성자 아이디 */
     /* storeId : 업체 아이디 */
     /* isLiked : 좋아요 유무 */
-    user_id,
+    userId: user_id,
     storeId: storeId,
     isLike: isLiked
   });

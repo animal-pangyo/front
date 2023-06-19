@@ -5,3 +5,9 @@
     outline: none !important; /* 아웃라인 스타일 없음 (!important를 사용하여 우선순위 부여) */
   }
   
+@media screen and (max-width: 500px) {
+  .like_button {
+    text-align: left; /* 왼쪽 정렬 */ 
+  }
+}
+  

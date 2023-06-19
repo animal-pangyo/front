@@ -445,9 +445,9 @@ const ShopList = ({ name }) => {
                       640: {
                         slidesPerView: 2
                       },
-                      // 해상도가 450 이상일때 적용 됩니다.
+                      // 해상도가 250 이상일때 적용 됩니다.
                       // slidesPerView : 한 화면에 보여줄 개수는 1입니다.
-                      450: {
+                      250: {
                         slidesPerView: 1
                       },
                       // 해상도가 1200 이상일때 적용 됩니다.

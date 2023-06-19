@@ -130,6 +130,17 @@ body, html {
   margin-bottom: 2px; /* 하단 여백 2px */
 }
 
+.swiper-slide {
+  overflow: hidden; /* 범위 초과시 숨김 처리 */
+}
+
+.swiper-slide a * {
+  width: 100%; /* 너비 100% */
+  overflow: hidden; /* 범위 초과시 숨김 처리 */
+  text-overflow: ellipsis; /* 텍스트가 범위 초과시 ...으로 표현 */
+  white-space: nowrap; /* 줄 바꿈 없이 내용을 한 줄에 모두 표시하도록 설정 */
+}
+
 /* 가로 사이즈 1200px 이하인 경우 설정 */
 @media screen and (max-width: 1200px) {
   .boardList .subject {
@@ -155,6 +166,12 @@ body, html {
   :root {
     --title-size: 30px; /* 타이틀 사이즈 30px */
   }
+}
+
+/* input 자동완성 시 box-shadow 제거 */
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0 1000px white inset; /* box-shadow 흰색으로 제거 */
+	box-shadow: 0 0 0 1000px white inset; /* box-shadow 흰색으로 제거 */
 }
 
 /* 가로 사이즈 450px 이하인 경우 설정 */

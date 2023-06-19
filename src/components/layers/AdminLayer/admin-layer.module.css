@@ -6,7 +6,7 @@
 }
 
 .right {
-  width: 100%; /* 너비 100% */
+  flex: 1; /* 남은 공잔 차지 */
   display: flex; /* 플렉스 박스로 표시 */
   flex-direction: column; /* 수직 방향으로 정렬 */
 }

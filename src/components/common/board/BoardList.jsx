@@ -103,8 +103,8 @@ const BoardList = ({ name }) => {
                   {/* board.subject : 게시글 제목 */}
                   {
                     // 관리자 또는 작성자만 QNA 상세 페이지로 이동 가능
-                    (auth?.user?.roles === "admin" ||
-                      (auth?.user?.id ===  board?.author_id)) ? (
+                    (name !== "inquiry" || (auth?.user?.roles === "admin" ||
+                      (auth?.user?.id ===  board?.author_id))) ? (
                         <NavLink to={`/${name}/detail/${board.post_id}`}>
                           {board.subject}
                         </NavLink>

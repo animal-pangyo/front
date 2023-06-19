@@ -51,6 +51,10 @@ form span {
   min-height: 300px; /* 최소 높이 300px */
 }
 
+.detail_content * {
+  word-break: break-all; /* 한줄을 초과하는 경우 줄바꿈하도록 설정 */
+}
+
 .time {
   font-size: 13px; /* 글꼴 크기 13px */
   font-weight: 100; /* 글꼴 두께 100 */
@@ -196,5 +200,23 @@ button.reset {
 @media screen and (max-width: 500px) {
   .address button {
     width: 100%; /* 너비 100% */
+  }
+  .detail_subject {
+    flex-wrap: wrap; /* flex-wrap 속성을 사용하여 내용이 넘칠 경우 여러 줄에 걸쳐 표시되도록 설정합니다. */
+  }
+  
+  .detail_subject .phone {
+    width: 100%; /* 너비를 100%로 설정 */
+    display: flex; /* 요소를 플렉스 컨테이너로 설정하여 자식 요소들을 수평 방향으로 배치합니다. */
+    flex-direction: column; /* 자식 요소들을 수직 방향으로 배치합니다. */
+    gap: 0; /* 자식 요소 사이의 간격을 0으로 설정 */
+  }
+  
+  .time:first-child::after {
+    display: none; /* 첫 번째 .time 요소의 ::after 가상 요소를 표시하지 않도록 합니다. */
+  }
+  
+  .like_button {
+    text-align: left; /* 좋아요 버튼을 왼쪽 정렬합니다. */
   }
 }

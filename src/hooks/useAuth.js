@@ -32,6 +32,11 @@ const useAuth = () => {
       return transformUser(user);
     },
 
+    onError() {
+      // 정상적인 토큰이 아닌 경우 초기화
+      setAuthorization('', '');
+    },
+
     /* 유저 정보 호출 후 새롭게 API 전송까지 걸리는 시간을 설정합니다. 15분입니다. */
     staleTime: 15 * 60 * 1000,
 

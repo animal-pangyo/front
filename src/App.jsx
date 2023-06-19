@@ -29,6 +29,9 @@ function App() {
       setAuthorization(token, userId);
       // 유효하지 않은 상태로 만들어 정보 리로드
       queryClient.invalidateQueries("user");
+    } else {
+      // 토큰은 존재하지 않지만 유저 아이디가 남아있는 경우 모두 제거하기 위해서 초기화합니다.
+      setAuthorization('', '');
     }
   }, []);
 

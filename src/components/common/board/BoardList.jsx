@@ -101,9 +101,18 @@ const BoardList = ({ name }) => {
                 <td className="subject" data-label="제목" width={500}>
                   {/* to : 이동할 페이지 */}
                   {/* board.subject : 게시글 제목 */}
-                  <NavLink to={`/${name}/detail/${board.post_id}`}>
-                    {board.subject}
-                  </NavLink>
+                  {
+                    // 관리자 또는 작성자만 QNA 상세 페이지로 이동 가능
+                    (auth?.user?.roles === "admin" ||
+                      (auth?.user?.id ===  board?.author_id)) ? (
+                        <NavLink to={`/${name}/detail/${board.post_id}`}>
+                          {board.subject}
+                        </NavLink>
+                      ) : (
+                        <>{board.subject}</>
+                      )
+                  }
+                  
                 </td>
                 {/* data-label : 라벨 정보를 데이터로 저장 */}
                 {/* board.created_at : 게시글 생성 날짜 */}

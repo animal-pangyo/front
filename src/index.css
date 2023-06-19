@@ -186,4 +186,8 @@ input:-webkit-autofill {
   :root {
     --title-size: 2rem; /* 타이틀 사이즈 2rem */
   }
+
+  .main_list div {
+    background-size: 50px; /* 배경 사이즈 50px */
+  }
 }

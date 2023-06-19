@@ -14,7 +14,7 @@ import useMessage from "../../hooks/useMessage";
 /* name : 게시판의 이름을 나타냅니다. */
 /* storeId : 업체 아이디를 전달받습니다. */
 /* storeInfo : 업체에 대한 정보를 전달받습니다. */
-const ReviewList = ({ name, storeId, reviewInfo }) => {
+const ReviewList = ({ name, storeId, reviewInfo, onDelete }) => {
   /* URL에서 쿼리스트링으로 전달된 데이터를 추출하기 위한 훅입니다. */
   const { search } = useLocation();
   const searchPrams = new URLSearchParams(search);
@@ -54,11 +54,17 @@ const ReviewList = ({ name, storeId, reviewInfo }) => {
   /* 리뷰 작성 시 업체 아이디를 저장하기 위한 상태입니다. */
   const [_, setState] = useRecoilState(reviewWriteState);
 
+  const handleDelete = (id) => {
+    // 삭제된 게시글의 ID를 부모 컴포넌트로 전달
+    // 부모 컴포넌트에서 해당 ID를 가진 게시글을 상태에서 제거하도록 처리할 수 있습니다.
+    onDelete(id);
+  };
+
   /* 게시판을 삭제하는 함수입니다. */
   const deleteBoard = async (id) => {
      /* id에 대한 정보를 서버로 전송하여 해당 게시글을 삭제합니다. */
     await board.deleteBoard(id);
-
+    handleDelete(id);
     /* 정상적으로 삭제 된 경우 "삭제되었습니다" 메시지를 출력합니다. */
     setMessage({
       visible: true,

@@ -34,6 +34,11 @@ const ShopDetailComponent = ({ name }) => {
   // 인고딩 된 데이터를 디코딩합니다.
   const storeName = decodeURIComponent(encodedName);
 
+  // 삭제된 게시글의 ID를 전달받아 해당 게시글을 상태에서 제거하고 컴포넌트를 재렌더링
+  const handleDelete = (id) => {
+    setReviewInfo((prevReviewInfo) => prevReviewInfo.filter((item) => item.review_id !== id));
+  };
+
   useEffect(() => {
     const fetchStoreInfo = async () => {
       try {
@@ -98,7 +103,7 @@ const ShopDetailComponent = ({ name }) => {
       {/* name : 업체 타입 */}
       {/* storeId : 업체 아이디 */}
       {/* reviewInfo : 리뷰 정보 */}
-      <ReviewList name={name} storeId={param.id} reviewInfo={reviewInfo && reviewInfo} type="" />
+      <ReviewList onDelete={handleDelete} name={name} storeId={param.id} reviewInfo={reviewInfo && reviewInfo} type="" />
 
       <div>
         {/* 목록 버튼 클릭 시 지도 페이지로 이동합니다. */}

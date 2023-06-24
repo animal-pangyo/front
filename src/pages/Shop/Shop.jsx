@@ -9,7 +9,7 @@ export const SHOP_LIST = {
   hotel: "애견호텔",
   academy: "훈련소",
   beauty: "애견미용",
-  funeral: "장례식장",
+  funeral: "애견 장례식장",
   playground: "운동장",
 };
 

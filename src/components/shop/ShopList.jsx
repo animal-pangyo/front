@@ -253,7 +253,7 @@ const ShopList = ({ name }) => {
         position[0] || DEFAULT_POSITION[0],
         position[1] || DEFAULT_POSITION[1]
       ),
-      radius: 10000,
+      radius: name === 'funeral' ? 20000 : 10000,
       useMapCenter: false,
       useMapBounds: false,
       page: 1

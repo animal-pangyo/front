@@ -4,28 +4,7 @@ import axios, { URL } from ".";
 /* postId : 댓글을 가져오려는 게시글 번호 */
 /* page : 현재 페이지 */
 export const fetchComments = ({ postId, page }) => {
-  return Promise.resolve({
-    data: {
-      total: 10,
-      comments: [{
-        commentId: 1,
-        userId: "admin",
-        content: "댓글입니다.댓글입니다.",
-        createdAt: "2023.06.23. 23:00"
-      }, {
-        commentId: 2,
-        userId: "admin",
-        content: "댓글입니다.",
-        createdAt: "2023.06.23. 23:00"
-      }, {
-        commentId: 3,
-        userId: "admin2",
-        content: "댓글입니다.",
-        createdAt: "2023.06.23. 23:00"
-      }]
-    }
-  });
-  // return axios.get(`${URL}/comments/${postId}?page=${page}`);
+  return axios.get(`${URL}/comments/${postId}?page=${page}`);
 };
 
 /* 댓글을 삭제하는 서비스를 호출합니다. */

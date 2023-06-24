@@ -152,7 +152,7 @@ const useAuth = () => {
     onSuccess() {
       /* "user" 변수의 유효하지 않음 처리를 하여 새롭게 유저 정보를 가져올 수 있도록 함수를 호출합니다. */
       /* 유저 정보를 최신화하기 위해 호출합니다. */
-      queryClient.invalidateQueries("user");
+      queryClient.invalidateQueries("users");
     },
   });
 

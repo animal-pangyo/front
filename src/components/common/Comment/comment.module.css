@@ -1,0 +1,80 @@
+/* 댓글 컨테이너 스타일 */
+.comments {
+  background-color: #f5f5f5; /* 배경색 */
+  padding: 20px; /* 내부 여백 20px */
+  margin-bottom: 20px; /* 하단 여백 20px */
+  border-radius: 5px; /* 테두리 반경 5px */
+}
+
+/* 제목 스타일 */
+h4 {
+  font-size: 20px !important; /* 글꼴 크기 20px (!important를 사용하여 우선순위 부여) */
+}
+
+/* 댓글 스타일 */
+.comment:not(:last-child) {
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15); /* 하단 테두리 */
+}
+
+/* 프로필 스타일 */
+.profile {
+  display: flex; /* 플렉스 박스로 표시 */
+  justify-content: space-between; /* 양쪽 정렬 */
+  margin: 20px 0; /* 상단 및 하단 여백 20px */
+}
+
+/* 사용자 스타일 */
+.user {
+  display: flex; /* 플렉스 박스로 표시 */
+  flex-direction: column; /* 수직 방향으로 정렬 */
+  gap: 5px; /* 요소 사이 간격 5px */
+}
+
+.user span:first-child {
+  font-weight: bold; /* 글꼴 두껍게 */
+}
+
+.user span:last-child {
+  color: var(--color); /* 글꼴 색상 */
+}
+
+/* 내용 스타일 */
+.content {
+  padding-bottom: 20px; /* 하단 여백 20px */
+  display: flex; /* 플렉스 박스로 표시 */
+  flex-direction: column; /* 수직 방향으로 정렬 */
+  gap: 10px; /* 요소 사이 간격 10px */
+}
+
+.real_content {
+  flex: 1; /* 남은 공간 차지 */
+}
+
+/* 버튼 스타일 */
+.button {
+  display: flex; /* 플렉스 박스로 표시 */
+  justify-content: flex-end; /* 우측 정렬 */
+  align-items: flex-start; /* 상단 정렬 */
+  padding-left: 20px; /* 좌측 여백 20px */
+  gap: 10px; /* 요소 사이 간격 10px */
+}
+
+.button span {
+  cursor: pointer; /* 커서 스타일 변경 */
+  color: var(--color); /* 글꼴 색상 */
+}
+
+.button span:hover {
+  color: #111; /* 마우스 오버 시 글꼴 색상 */
+}
+
+/* 에러 스타일 */
+.error {
+  color: red; /* 글꼴 색상 */
+}
+
+/* 작성 버튼 스타일 */
+.write_button {
+  display: flex; /* 플렉스 박스로 표시 */
+  justify-content: flex-end; /* 우측 정렬 */
+}

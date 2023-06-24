@@ -141,6 +141,13 @@ body, html {
   white-space: nowrap; /* 줄 바꿈 없이 내용을 한 줄에 모두 표시하도록 설정 */
 }
 
+.div_page {
+  overflow: hidden; /* 범위 초과시 숨김 처리 */
+  display: flex; /* Flexbox 레이아웃 사용 */
+  justify-content: center; /* 가운데 정렬 */
+  margin-bottom: 20px; /* 하단 여백 20px */
+}
+
 /* 가로 사이즈 1200px 이하인 경우 설정 */
 @media screen and (max-width: 1200px) {
   .boardList .subject {

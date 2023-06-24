@@ -6,6 +6,7 @@ import useBoard from "../../../hooks/useBoard";
 import useAuth from "../../../hooks/useAuth";
 import { useRecoilState } from "recoil";
 import { messageState } from "../../../store/message";
+import CommentList from "../Comment/Comment";
 
 /* 게시판의 상세 정보를 렌더링 하기 위한 컴포넌트 입니다. */
 const BoardDetailComponent = ({ name }) => {
@@ -118,6 +119,15 @@ const BoardDetailComponent = ({ name }) => {
           </div>
         )}
       </Segment>
+
+      {
+        /* 자유게시판인 경우 댓글 컴포넌트를 렌더링합니다. */
+        /* postId : 게시글의 아이디를 전달하여 해당하는 댓글을 불러옵니다. */
+        name === 'free' && (
+          <CommentList postId={param.id} />
+        )
+      }
+
       <div>
         {/* to : 이동할 페이지 */}
         {/* 게시판의 리스트 페이지로 이동합니다. */}

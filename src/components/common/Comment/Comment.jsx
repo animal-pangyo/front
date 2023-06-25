@@ -5,10 +5,14 @@ import usePagination from '../../../hooks/usePagination';
 import TablePagination from '../paging/TablePagination';
 import { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
+import { useParams } from 'react-router-dom';
 
 /* 게시글에 작성 된 댓글 리스트를 렌더링하는 컴포넌트입니다. */
 /* postId : 댓글을 가져오려는 게시글의 아이디입니다. */
 const CommentList = ({ postId }) => {
+  /* URL에 포함된 파리미터의 정보를 추출하기 위한 훅입니다. */
+  const param = useParams();
+
   /* user : 유저에 대한 객체 */
   const { user } = useAuth();
 
@@ -95,6 +99,8 @@ const CommentList = ({ postId }) => {
 
     /* 에러를 제거합니다. */
     setError(false);
+    /* 댓글 상태를 초기화합니다. */
+    setContent('');
     /* 댓글을 작성합니다. */
     createComment({ postId: param.id, content, userId: user.id });
   }

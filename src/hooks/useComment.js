@@ -1,13 +1,23 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import * as commentApi from '../services/api/comment.api';
 
+/* 댓글과 관련 된 함수들을 모아놓은 훅입니다. */
+/* postId : 댓글이 작성된 게시글 아이디 */
+/* page : 댓글 리스트 페이지 번호 */
 const useComment = ({ postId, page }) => {
+  /* 리액트 쿼리 스토어에 접근하기 위한 훅입니다. */
+  const queryClient = useQueryClient();
+
+  /* 댓글리스트을 가져오는 쿼리입니다. */
   const comments = useQuery({
     queryKey: ['comment', page, postId],
     async queryFn() {
+      /* 서버로부터 게시글 아이디에 해당하는 댓글 리스트를 가져옵니다. */
       const response = await commentApi.fetchComments({ postId, page });
       return response.data;
-    }
+    },
+    /* page 값이 넘어오는 경우에만 댓글 리스트 조회 */
+    enabled: typeof page === 'number'
   });
 
   /* 댓글을 삭제하는 버튼 클릭 시 호출됩니다. */
@@ -57,9 +67,9 @@ const useComment = ({ postId, page }) => {
 
   return {
     comments: comments?.data || [],
-    deleteComment: deleteComment.mutate,
+    deleteComment: deleteComment.mutateAsync,
     createComment: createComment.mutate,
-    updateComment: updateComment.mutate
+    updateComment: updateComment.mutateAsync
   }
 };
 

@@ -31,9 +31,12 @@ const CommentList = ({ postId }) => {
   const [updateContent, setUpdateContent] = useState('');
 
   /* 게시글 아이디와 페이지 번호를 전달하여 해당하는 댓글 리스트를 가져옵니다. */
-  /* pageId : 게시글아이디 */
+  /* postId : 게시글아이디 */
   /* page : 페이지 번호 */
   /* comment : 댓글 리스트 */
+  /* deleteComment : 댓글 삭제용 함수 */
+  /* createComment : 댓글 생성용 함수 */
+  /* updateComment : 댓글 수정용 함수 */
   const { comments, deleteComment, createComment, updateComment } = useComment({ postId, page });
 
   /* 페이지네이션 컴포넌트를 생성하기 위한 정보를 얻어오는 데 사용하는 훅입니다. */
@@ -65,7 +68,7 @@ const CommentList = ({ postId }) => {
     /* 수정 상태를 초기화합니다. */
     setUpdateId('');
     /* 댓글을 수정합니다. */
-    updateComment({ comment: updateId, content: updateContent, userId: user.id });
+    updateComment({ commentId: updateId, content: updateContent, userId: user.id });
   }
 
   /* 수정 버튼 클릭 시 호출될 함수입니다. */

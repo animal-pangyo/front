@@ -67,3 +67,32 @@ h2 {
   gap: 5px; /* 요소 사이 간격 5px */
   cursor: pointer; /* 커서 스타일 변경 */
 }
+
+.contextMenu{
+  position: absolute;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 8px 8px 2px 8px;
+  border-radius: 6px;
+}
+
+.contextMenuItem{
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+}
+
+.contextMenuItem:hover {
+  background-color: #e0e0e0;
+}
+
+.userId{
+  display: inline-block;
+}

@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import styled from './admin-top.module.css';
 import useAuth from '../../../../hooks/useAuth';
 import JoinModal from '../../../modal/joinModal/JoinModal';
+import ChatModal from '../../../modal/chatModal/chatModal';
 import useMessage from '../../../../hooks/useMessage';
 import PreviewMessage from '../../Preview/previewMessage';
 import { useState } from 'react';
@@ -18,6 +19,9 @@ const AdminTop = () => {
 
   /* 유저 정보 수정하기 위한 팝업을 숨김 처리하기 위한 상태 생성 */
   const [open, setOpen] = useState(false);
+
+  /* 채팅 팝업을 숨김 처리하기 위한 상태 생성 */
+  const [chatOpen, setChatOpen] = useState(false);
 
   /* 화면 상단 메시지를 출력하기 위한 setMessage 함수 */
   const [, setMessage] = useMessage();
@@ -57,10 +61,10 @@ const AdminTop = () => {
             /* 유저 존재 여부에 따라 분기 처리 */
             user ? (
               <>
-                <div className={styled.chat}>
+                <div className={styled.chat}   onClick={() => setChatOpen(true)}>
                   채팅
                   <div className={styled.chatCircle}>
-                    <span className={styled.messageCount}>{messageCount}</span>
+                    {/* <span className={styled.messageCount}>{messageCount}</span> */}
                    </div>
                 </div>
                 {/* className : className이름 설정 */}
@@ -74,12 +78,6 @@ const AdminTop = () => {
               </>
             ) : (
               <>
-                <div className={styled.chat}>
-                  채팅
-                  <div className={styled.chatCircle}>
-                    <span className={styled.messageCount}>0</span>
-                   </div>
-                </div>
                 {/* to : 이동할 페이지 */}
                 {/* 로그인 페이지로 이동 */}
                 <div><NavLink to='/login'>로그인</NavLink></div>
@@ -91,6 +89,7 @@ const AdminTop = () => {
           }
           
         </div>
+        <ChatModal  open={chatOpen} setOpen={setChatOpen}  />
 
         {/* 유저 정보를 수정하기 위해 사용되는 모달 */}
         {/* user : 유저 정보 */}

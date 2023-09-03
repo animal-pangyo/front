@@ -1,0 +1,19 @@
+.settingChatBox{
+    width: 350px; /* 모달의 너비 조정 */
+    height: 400px; /* 모달의 높이 조정 */
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 26px;
+}
+
+.h3{
+    display: flex;
+    justify-content: center;
+
+}
+
+.p{
+    justify-content: center;
+    display: flex;
+}

@@ -198,3 +198,7 @@ input:-webkit-autofill {
     background-size: 50px; /* 배경 사이즈 50px */
   }
 }
+
+.ui .modal{
+  height: 500px; 
+}

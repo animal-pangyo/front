@@ -1,5 +1,29 @@
 import axios, { URL, getUserId } from ".";
 
+
+export const fetchChatList = () => {
+    const userId = getUserId();
+    try {
+      return axios.get(`${URL}/${userId}/chat`, {
+        headers: {
+          Accept: 'application/json', // JSON 응답을 요청합니다.
+        },
+      });; 
+    } catch (error) {
+      throw new Error('Error fetching chat list');
+    }
+};
+
+export  const fetchBlockedChatList = () => {
+    const userId = getUserId();
+    try {
+        return axios.get(`${URL}/block/user/${userId}`)
+      } catch (error) {
+        throw new Error('Error fetching block list');
+      }
+   
+};
+
 /* 채팅 리스트를 불러오는 api */
 export const chat = (target) => {
   const userid = getUserId();
@@ -37,3 +61,4 @@ export const uploadFile = ({ form, chatidx }) => {
     }
   });
 }
+

@@ -1,0 +1,281 @@
+/* 채팅 컨테이너 스타일 */
+.chat {
+  position: fixed; /* 고정 위치 설정 */
+  bottom: 10px; /* 하단 여백 */
+  width: 300px; /* 너비 */
+  height: 400px; /* 높이 */
+  right: 10px; /* 우측 여백 */
+  background: #f0f2f5; /* 배경색 */
+  border: 1px solid #d7dbe1; /* 테두리 */
+  display: flex; /* 플렉스 박스로 표시 */
+  flex-wrap: wrap; /* 여러 줄로 감싸기 */
+  flex-direction: column; /* 수직 방향으로 정렬 */
+  border-radius: 5px; /* 테두리 반경 */
+  box-shadow: 2px 2px 6px rgb(164 161 161 / 72%); /* 그림자 효과 */
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
+}
+
+/* 헤더 스타일 */
+.header {
+  border-bottom: 1px solid #d7dbe1; /* 하단 테두리 */
+  padding: 10px; /* 내부 여백 */
+  height: 40px; /* 높이 */
+  display: flex; /* 플렉스 박스로 표시 */
+  justify-content: space-between; /* 양쪽 정렬 */
+  align-items: center; /* 수직 방향으로 정렬 */
+}
+
+/* 채팅 박스 스타일 */
+.chatbox {
+  flex: 1; /* 남은 공간 차지 */
+  overflow-y: auto; /* 수직 스크롤바 표시 */
+}
+
+/* 채팅 목록 스타일 */
+.chatlist {
+  display: flex; /* 플렉스 박스로 표시 */
+  flex-direction: column; /* 수직 방향으로 정렬 */
+  gap: 20px; /* 요소 사이 간격 */
+  list-style: none; /* 목록 스타일 제거 */
+  padding: 10px; /* 내부 여백 */
+}
+
+/* 빈 채팅 스타일 */
+.empty {
+  display: flex; /* 플렉스 박스로 표시 */
+  align-items: center; /* 수직 방향으로 정렬 */
+  justify-content: center; /* 가로 방향으로 정렬 */
+  flex: 1; /* 남은 공간 차지 */
+}
+
+/* 채팅 목록 내용 스타일 */
+.chatlist li span:not(.time) {
+  padding: 10px; /* 내부 여백 */
+  background: #fff; /* 배경색 */
+  display: inline-flex; /* 인라인 플렉스 박스로 표시 */
+  border: 1px solid #dfdfdf; /* 테두리 */
+  max-width: 150px; /* 최대 너비 */
+  border-radius: 8px; /* 테두리 반경 */
+  align-items: center; /* 수직 방향으로 정렬 */
+  line-height: 1.4; /* 줄 간격 */
+}
+
+/* 시간 스타일 */
+.time {
+  display: flex; /* 플렉스 박스로 표시 */
+  align-items: end; /* 하단 정렬 */
+  font-size: 10px; /* 글꼴 크기 */
+}
+
+/* 채팅 목록 내용 스타일 */
+.chatlist li {
+  display: flex; /* 플렉스 박스로 표시 */
+  gap: 5px; /* 요소 사이 간격 */
+}
+
+/* 채팅 목록 내용 이미지 스타일 */
+.chatlist li img {
+  max-width: 150px; /* 최대 너비 */
+  width: 100%; /* 너비 100% */
+  display: block; /* 블록 요소로 표시 */
+}
+
+/* 오른쪽에 위치한 채팅 목록 스타일 */
+.chatlist .right_on {
+  justify-content: end; /* 우측 정렬 */
+  flex-direction: row-reverse; /* 방향을 반대로 정렬 */
+}
+
+/* 입력창 스타일 */
+.input {
+  background: #fff; /* 배경색 */
+  border-top: 1px solid #d7dbe1; /* 상단 테두리 */
+  height: 40px; /* 높이 */
+  width: 100%; /* 너비 */
+  display: flex; /* 플렉스 박스로 표시 */
+}
+
+/* 입력창 내부 요소 스타일 */
+.input div {
+  width: 56px; /* 너비 */
+  height: 100%; /* 높이 100% */
+  position: relative; /* 위치 설정 */
+  border-right: 1px solid #d3d5d9; /* 우측 테두리 */
+  cursor: pointer; /* 커서 스타일 변경 */
+}
+
+/* 입력창 내부 아이콘 스타일 */
+.input div span {
+  background: #7c7e82; /* 배경색 */
+  display: block; /* 블록 요소로 표시 */
+  position: absolute; /* 위치 설정 */
+  top: 50%; /* 상단 여백 50% */
+  left: 50%; /* 좌측 여백 50% */
+  transform: translate(-50%, -50%); /* 좌측 및 상단 정렬 */
+}
+
+/* 입력창 내부 첫 번째 아이콘 스타일 */
+.input div span:first-child {
+  width: 15px; /* 너비 */
+  height: 2px; /* 높이 */
+}
+
+/* 입력창 내부 두 번째 아이콘 스타일 */
+.input div span + span {
+  width: 2px; /* 너비 */
+  height: 15px; /* 높이 */
+}
+
+/* 입력창 버튼 스타일 */
+.input button {
+  border-radius: 0; /* 테두리 반경 제거 */
+  padding-inline: 0; /* 인라인 패딩 제거 */
+  width: 70px; /* 너비 */
+}
+
+/* 입력창 텍스트영역 스타일 */
+.input textarea {
+  border: none; /* 테두리 제거 */
+  width: 100%; /* 너비 100% */
+  outline: none; /* 아웃라인 제거 */
+  height: 100%; /* 높이 100% */
+  box-sizing: border-box; /* 상자 크기 설정 */
+  min-height: auto; /* 최소 높이 자동 설정 */
+  padding: 7px; /* 내부 여백 */
+  line-height: 1.4; /* 줄 간격 */
+  resize: none; /* 크기 조정 불가능 */
+}
+
+/* 메뉴 스타일 */
+.menu {
+  display: flex; /* 플렉스 박스로 표시 */
+}
+
+/* 메뉴 닫기 버튼 아이콘 스타일 */
+.menu .close:after {
+  position: relative; /* 위치 설정 */
+  right: 0; /* 우측 위치 */
+  top: -3.5px; /* 상단 위치 */
+  height: 16px; /* 높이 */
+  display: flex; /* 플렉스 박스로 표시 */
+  align-items: center; /* 수직 방향으로 정렬 */
+  color: #000; /* 글자색 */
+  font-size: 27px; /* 글꼴 크기 */
+}
+
+/* 메뉴 닫기 버튼 스타일 */
+.menu .close {
+  height: 16px; /* 높이 */
+  border-bottom: none; /* 하단 테두리 제거 */
+  margin-left: 10px; /* 좌측 여백 */
+}
+
+/* 햄버거 메뉴 아이콘 스타일 */
+.hamburger {
+  width: 20px; /* 너비 */
+  display: flex; /* 플렉스 박스로 표시 */
+  flex-direction: column; /* 수직 방향으로 정렬 */
+  gap: 5px; /* 요소 사이 간격 */
+  cursor: pointer; /* 커서 스타일 변경 */
+}
+
+/* 햄버거 메뉴 아이콘 라인 스타일 */
+.hamburger span {
+  width: 100%; /* 너비 100% */
+  height: 2px; /* 높이 */
+  background: #47484a; /* 배경색 */
+  display: block; /* 블록 요소로 표시 */
+}
+
+/* 가리개 스타일 */
+.cover.on {
+  width: 100%; /* 너비 100% */
+  height: 100%; /* 높이 100% */
+  position: absolute; /* 위치 설정 */
+  background: rgba(0, 0, 0, 0.5); /* 배경색과 투명도 설정 */
+}
+
+/* 오른쪽 메뉴 스타일 */
+.right {
+  position: absolute; /* 위치 설정 */
+  right: 0; /* 우측 위치 */
+  background: rgba(0, 0, 0, 0.5); /* 배경색과 투명도 설정 */
+  height: 100%; /* 높이 100% */
+  width: 240px; /* 너비 */
+  transform: translateX(100%); /* 시작 위치 설정 */
+  transition: transform 0.3s ease; /* 변화 애니메이션 효과 */
+  border-left: 1px solid #d7dbe1; /* 좌측 테두리 */
+}
+
+/* 오른쪽 메뉴 열림 상태 스타일 */
+.right.on {
+  transform: translateX(0); /* 우측으로 이동하여 열림 */
+}
+
+/* 오른쪽 메뉴 내용 스타일 */
+.right > div {
+  position: absolute; /* 위치 설정 */
+  right: 0; /* 우측 위치 */
+  background: #fff; /* 배경색 */
+  width: 240px; /* 너비 */
+  height: 100%; /* 높이 100% */
+  display: flex; /* 플렉스 박스로 표시 */
+  flex-direction: column; /* 수직 방향으로 정렬 */
+}
+
+/* 메뉴 닫기 버튼 스타일 */
+.close {
+  height: 30px; /* 높이 */
+  border-bottom: 1px solid #d7dbe1; /* 하단 테두리 */
+  position: relative; /* 위치 설정 */
+}
+
+/* 메뉴 닫기 버튼 아이콘 스타일 */
+.close:after {
+  position: absolute; /* 위치 설정 */
+  content: 'x'; /* 내용 */
+  right: 6px; /* 우측 위치 */
+  font-size: 21px; /* 글꼴 크기 */
+  top: 1px; /* 상단 위치 */
+  cursor: pointer; /* 커서 스타일 변경 */
+  color: #7b7d80; /* 글자색 */
+}
+
+/* 사용자 목록 스타일 */
+.users {
+  flex: 1; /* 남은 공간 차지 */
+  border-bottom: 1px solid #d7dbe1; /* 하단 테두리 */
+}
+
+/* 프로필 스타일 */
+.profile {
+  height: 100px; /* 높이 */
+  display: flex; /* 플렉스 박스로 표시 */
+  justify-content: center; /* 가로 방향으로 중앙 정렬 */
+  align-items: center; /* 수직 방향으로 정렬 */
+  font-size: 20px; /* 글꼴 크기 */
+  font-weight: 500; /* 글꼴 두께 */
+  border-bottom: 2px solid #979aa0; /* 하단 테두리 */
+  color: #6e6a6a; /* 글자색 */
+}
+
+/* 블록 스타일 */
+.block {
+  display: flex; /* 플렉스 박스로 표시 */
+  align-items: center; /* 수직 방향으로 정렬 */
+  justify-content: center; /* 가로 방향으로 중앙 정렬 */
+  flex: 1; /* 남은 공간 차지 */
+  border-bottom: 1px solid #d7dbe1; /* 하단 테두리 */
+}
+
+/* 블록 스팬 스타일 */
+.block span {
+  padding: 20px; /* 내부 여백 */
+  display: block; /* 블록 요소로 표시 */
+  cursor: pointer; /* 커서 스타일 변경 */
+}
+
+/* 블록 스팬 호버 스타일 */
+.block span:hover {
+  text-decoration: underline; /* 밑줄 효과 */
+}

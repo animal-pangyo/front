@@ -1,17 +1,20 @@
 import { Button } from "semantic-ui-react";
 import TablePagination from "../paging/TablePagination";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import useBoard from "../../../hooks/useBoard";
 import usePagination from "../../../hooks/usePagination";
 import Search from "../../common/search/search";
 import useMessage from "../../../hooks/useMessage";
-import styled from './board.module.css'
+import BoardContext from "../context/BoardContext";
+import styled from './boardlist.module.css';
 
 /* 게시판 리스트를 보여주기 위한 함수입니다. */
 /* name : 게시판의 이름을 나타냅니다. */
 const BoardList = ({ name }) => {
+  /* 컨텍스트 메뉴를 보여주기 위한 상태입니다. */
+  const [isContext, setIsContext] = useState(false);
   /* 페이지 이동을 위한 훅입니다. */
   const navigate = useNavigate();
 
@@ -59,56 +62,12 @@ const BoardList = ({ name }) => {
     });
   };
 
-  /* 유저 아이디 클릭 시 버튼 박스를 보여주는 상태 및 함수입니다. */
-  const [showContextMenu, setShowContextMenu] = useState(false);
-  const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
-  const [selectedUserId, setSelectedUserId] = useState(null);
-
-
-  const handleContextMenu = (e, authorId) => {
-    console.log(authorId)
+  /* 컨텍트스 메뉴를 호출하는 함수입니다. */
+  const openContext = (e) => {
     e.preventDefault();
-    //로그인한 유저에게만 컨텍스트 메뉴 보여주기 
-    if (auth?.user?.id) {
-      setSelectedUserId(authorId);
-      setShowContextMenu(true);
-    }
-    // 마우스 우클릭 이벤트를 처리하고 컨텍스트 메뉴를 보이도록 설정합니다.
-    setContextMenuPosition({ x: e.clientX, y: e.clientY });
-
+    /* isContext 상태를 true로 변경해서 컨텍스트 메뉴를 호출합니다 */
+    setIsContext(true);
   };
-
-  const hideContextMenu = () => {
-    // 컨텍스트 메뉴를 숨깁니다.
-    setShowContextMenu(false);
-  };
-
-  useEffect(() => {
-    // window 객체에 클릭 이벤트 핸들러를 추가하여 다른 곳을 클릭할 때 컨텍스트 메뉴를 숨깁니다.
-    const handleWindowClick = () => {
-      if (showContextMenu) {
-        hideContextMenu();
-      }
-    };
-
-    window.addEventListener('click', handleWindowClick);
-
-    return () => {
-      // 컴포넌트가 언마운트될 때 클릭 이벤트 핸들러를 제거합니다.
-      window.removeEventListener('click', handleWindowClick);
-    };
-  }, [showContextMenu]);
-  
-  //click chat
-  const handleChatClick = () => {
-    if (selectedUserId !== null) {
-      console.log('채팅하기', selectedUserId);
-      setSelectedUserId(null); // 작업이 완료되면 상태를 초기화합니다.
-       // 선택한 유저의 author_id를 이용하여 채팅하기 기능을 구현합니다.
-       // 1:1 채팅 모달 열기 
-    }
-  };
-
   return (
     <>
       {/* 게시글을 검색하기 위한 컴포넌트입니다. */}
@@ -145,15 +104,14 @@ const BoardList = ({ name }) => {
                 <td data-label="번호">{board.post_id}</td>
                 {/* data-label : 라벨 정보를 데이터로 저장 */}
                 {/* board.author_id : 작성자 아이디 */}
-                <td data-label="글쓴이">
-                  <div className={styled.userId} onContextMenu={(e) => handleContextMenu(e, board.author_id)}>{board.author_id}</div>
-                  {
-                    showContextMenu && (
-                      <div className={styled.contextMenu}  style={{ top: contextMenuPosition.y, left: contextMenuPosition.x }}>
-                        <div className={styled.contextMenuItem} onClick={handleChatClick}>채팅하기</div>
-                      </div>
-                    )
-                  }
+                {/* className : className이름 설정 */}
+                {/* onContextMenu: 마우스 우측 클릭 시 컨텍스트 메뉴를 호출합니다. */}
+                <td data-label="글쓴이" className={styled.author} onContextMenu={openContext}>
+                  {board.author_id}
+
+                  {/* isContext가 true이면 컨텍스트 메뉴를 화면에 보여줍니다. */}
+                  {/* onClose: 컨텍스트 메뉴를 종료하는 함수입니다. */}
+                  {isContext && <BoardContext onClose={setIsContext} id={board.author_id} />}
                 </td>
                 {/* className : className이름 설정 */}
                 {/* data-label : 라벨 정보를 데이터로 저장 */}

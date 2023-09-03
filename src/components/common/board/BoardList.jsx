@@ -109,16 +109,6 @@ const BoardList = ({ name }) => {
     }
   };
 
-  //click block
-  const handleBlockClick = () => {
-    if (selectedUserId !== null) {
-      console.log('차단하기', selectedUserId);
-      setSelectedUserId(null); // 작업이 완료되면 상태를 초기화합니다.
-      // 선택한 유저의 author_id를 이용하여 차단하기 기능을 구현합니다.
-      // 차단 api 호출 
-    }
-  }
-
   return (
     <>
       {/* 게시글을 검색하기 위한 컴포넌트입니다. */}
@@ -161,7 +151,6 @@ const BoardList = ({ name }) => {
                     showContextMenu && (
                       <div className={styled.contextMenu}  style={{ top: contextMenuPosition.y, left: contextMenuPosition.x }}>
                         <div className={styled.contextMenuItem} onClick={handleChatClick}>채팅하기</div>
-                        <div className={styled.contextMenuItem} onClick={handleBlockClick}>차단하기</div>
                       </div>
                     )
                   }

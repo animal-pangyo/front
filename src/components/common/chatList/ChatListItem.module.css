@@ -1,0 +1,48 @@
+.listBox {
+    width: 310px;
+    height: 70px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 9px;
+    border: 2px solid #c4c4c4;
+    margin: 10px;
+    position: relative;
+}
+
+.listItemBox{
+    display: flex;
+    justify-content: space-between;
+    width: 244px;
+}
+
+.userId {
+   font-weight: bold;
+}
+  
+.msgListItem {
+    margin-top: 5px;
+}
+  
+.chatDate {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #999;
+}
+  
+
+
+.buttonContainer {
+    position: absolute;
+    left: 269px;
+    top: 3px;
+    width: 36px;
+}
+  
+.buttonContainer button {
+    /* background-color: #fff; */
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer;
+}

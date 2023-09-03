@@ -7,10 +7,14 @@ import useBoard from "../../../hooks/useBoard";
 import usePagination from "../../../hooks/usePagination";
 import Search from "../../common/search/search";
 import useMessage from "../../../hooks/useMessage";
+import BoardContext from "../context/BoardContext";
+import styled from './boardlist.module.css';
 
 /* 게시판 리스트를 보여주기 위한 함수입니다. */
 /* name : 게시판의 이름을 나타냅니다. */
 const BoardList = ({ name }) => {
+  /* 컨텍스트 메뉴를 보여주기 위한 상태입니다. */
+  const [isContext, setIsContext] = useState(false);
   /* 페이지 이동을 위한 훅입니다. */
   const navigate = useNavigate();
 
@@ -58,6 +62,12 @@ const BoardList = ({ name }) => {
     });
   };
 
+  /* 컨텍트스 메뉴를 호출하는 함수입니다. */
+  const openContext = (e) => {
+    e.preventDefault();
+    /* isContext 상태를 true로 변경해서 컨텍스트 메뉴를 호출합니다 */
+    setIsContext(true);
+  };
   return (
     <>
       {/* 게시글을 검색하기 위한 컴포넌트입니다. */}
@@ -94,7 +104,15 @@ const BoardList = ({ name }) => {
                 <td data-label="번호">{board.post_id}</td>
                 {/* data-label : 라벨 정보를 데이터로 저장 */}
                 {/* board.author_id : 작성자 아이디 */}
-                <td data-label="글쓴이">{board.author_id}</td>
+                {/* className : className이름 설정 */}
+                {/* onContextMenu: 마우스 우측 클릭 시 컨텍스트 메뉴를 호출합니다. */}
+                <td data-label="글쓴이" className={styled.author} onContextMenu={openContext}>
+                  {board.author_id}
+
+                  {/* isContext가 true이면 컨텍스트 메뉴를 화면에 보여줍니다. */}
+                  {/* onClose: 컨텍스트 메뉴를 종료하는 함수입니다. */}
+                  {isContext && <BoardContext onClose={setIsContext} id={board.author_id} />}
+                </td>
                 {/* className : className이름 설정 */}
                 {/* data-label : 라벨 정보를 데이터로 저장 */}
                 {/* width : 너비 500 */}

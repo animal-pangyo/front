@@ -5,10 +5,12 @@ import { useToggleBlockMutation, useDeleteChatMutation, useUploadFileMutation, u
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { chatWebsocketState, chatingIdState } from '../../store/chat';
 import { useQueryClient } from 'react-query';
+import useAuth from '../../hooks/useAuth';
 
 /* 채팅내용 리스트를 렌더링하는 컴포넌트입니다. */
 /* list: 채팅내용 */
 const ChatList = ({ list }) => {
+  const { user } = useAuth();
   return (
     <div className={styled.chatbox}>
       {/* 리스트가 존재하는 경우 리스트를 렌더링합니다. */}
@@ -16,23 +18,23 @@ const ChatList = ({ list }) => {
         <ul className={styled.chatlist}>
           {
             /* msg: 채팅내용 */
-            /* target: 상대방 아이디 */
-            /* time: 채팅 시간 */
-            /* image: 채팅 이미지 */
+            /* authorId: 상대방 아이디 */
+            /* createdAt: 채팅 시간 */
+            /* img: 채팅 이미지 */
             /* index: 인덱스 */
-            list.map(({ msg, target, time, image }, index) => (
+            list.map(({ msg, createdAt, img, authorId }, index) => (
               /* 상대가 입력한 채팅은 left, 로그인한 대상이 입력한 채팅은 right_on을 classname으로 지정합니다. */
-              <li key={index} className={`${target ? 'left' : styled.right_on}`}>
+              <li key={index} className={`${authorId === user.id ? 'left' : styled.right_on}`}>
                 {/* 채팅이 이미지라면 이미지 컴포넌트를 렌더링합니다. */}
-                {image ? (
-                  <img src={image} />
+                {img ? (
+                  <img src={img} />
                 ) : (
                   /* 채팅이 텍스트라면 텍스트를 렌더링합니다/ */
                   <span>{msg}</span>
                 )}
                 
                 {/* 시간을 렌더링합니다. */}
-                <span className={styled.time}>{time}</span>
+                <span className={styled.time}>{createdAt}</span>
               </li>
             ))
           }
@@ -185,7 +187,7 @@ const Chat = ({ data }) => {
       });
 
       /* 채팅 내용 리스트를 초기화합니다. */
-      queryClient.invalidateQueries(['chat', data.id]);
+      queryClient.invalidateQueries(['chat', data.users.target]);
     } catch {
       alert('문제가 발생하였습니다. 잠시 후 다시 이용해주시기 바랍니다.');
     } finally {

@@ -29,6 +29,7 @@
 .chatbox {
   flex: 1; /* 남은 공간 차지 */
   overflow-y: auto; /* 수직 스크롤바 표시 */
+  display: flex; /* 플렉스 박스로 표시 */
 }
 
 /* 채팅 목록 스타일 */

@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 import styled from './chat.module.css';
 import { useEffect, useRef, useState } from 'react';
-import { useToggleBlockMutation, useDeleteChatMutation, useUploadFileMutation } from '../../hooks/useChat';
+import { useToggleBlockMutation, useDeleteChatMutation, useUploadFileMutation, useChatStartMutation } from '../../hooks/useChat';
 import { useSetRecoilState } from 'recoil';
 import { chatingIdState } from '../../store/chat';
 import { useQueryClient } from 'react-query';
@@ -131,6 +131,7 @@ const Right = ({ users, visible, close }) => {
   chatidx: 채팅룸 아이디
 */
 const Chat = ({ data }) => {
+  const chatStart = useChatStartMutation();
   const queryClient = useQueryClient();
   /* 이미지를 업로드하는 함수입니다. */
   const uploadFile = useUploadFileMutation();
@@ -189,8 +190,11 @@ const Chat = ({ data }) => {
     } finally {
       inputRef.value = '';
     }
-
   };
+
+  useEffect(() => {
+    chatStart.mutate();
+  }, []);
 
   return (
     createPortal((

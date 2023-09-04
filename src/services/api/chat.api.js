@@ -35,9 +35,13 @@ export const chat = (target) => {
 
 /* 해당 유저가 차단되었는지 확인하는 api */
 /* id: 차단하려는 유저 아이디 */
-export const checkBlock = (id) => (
-  axios.post(`${URL}/user/isBlock/${id}`)
-);
+export const checkBlock = (blockId) => {
+  const id = getUserId();
+  return axios.post(`${URL}/user/isBlock`, {
+    id,
+    blockId
+  })
+};
 
 /* 해당 유저의 차단 여부를 토글하는 api */
 /* id: 차단하려는 유저 아이디 */

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { chatWebsocketState } from '../store/chat';
 import * as chatApi from '../services/api/chat.api';
@@ -12,7 +12,7 @@ export const useChatStartMutation = () => {
   return useMutation({
     mutationFn(id) {
       /* 웹소켓을 통해 채팅을 시작합니다. */
-      const websocket = new WebSocket('ws://');
+      const websocket = new WebSocket('ws://localhost:8081');
       
       /* 웹소켓이 오픈되면 기존 웹소켓은 종료하고 새로운 웹소켓을 상태로 저장합니다. */
       websocket.onopen = () => {

@@ -111,7 +111,7 @@ const BoardList = ({ name }) => {
 
                   {/* isContext가 true이면 컨텍스트 메뉴를 화면에 보여줍니다. */}
                   {/* onClose: 컨텍스트 메뉴를 종료하는 함수입니다. */}
-                  {isContext && <BoardContext onClose={setIsContext} id={board.author_id} />}
+                  {(isContext && board.author_id !== auth?.user?.id) && <BoardContext onClose={setIsContext} id={board.author_id} />}
                 </td>
                 {/* className : className이름 설정 */}
                 {/* data-label : 라벨 정보를 데이터로 저장 */}

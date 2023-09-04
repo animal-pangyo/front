@@ -15,12 +15,12 @@ const ChatList = ({ list }) => {
       {list.length ? (
         <ul className={styled.chatlist}>
           {
-            /* text: 채팅내용 */
+            /* msg: 채팅내용 */
             /* target: 상대방 아이디 */
             /* time: 채팅 시간 */
             /* image: 채팅 이미지 */
             /* index: 인덱스 */
-            list.map(({ text, target, time, image }, index) => (
+            list.map(({ msg, target, time, image }, index) => (
               /* 상대가 입력한 채팅은 left, 로그인한 대상이 입력한 채팅은 right_on을 classname으로 지정합니다. */
               <li key={index} className={`${target ? 'left' : styled.right_on}`}>
                 {/* 채팅이 이미지라면 이미지 컴포넌트를 렌더링합니다. */}
@@ -28,7 +28,7 @@ const ChatList = ({ list }) => {
                   <img src={image} />
                 ) : (
                   /* 채팅이 텍스트라면 텍스트를 렌더링합니다/ */
-                  <span>{text}</span>
+                  <span>{msg}</span>
                 )}
                 
                 {/* 시간을 렌더링합니다. */}

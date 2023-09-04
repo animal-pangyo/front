@@ -25,7 +25,6 @@ export const useChatStartMutation = () => {
 
       /* 메시지를 전달받으면 서버로 채팅내용을 전달받습니다. */
       websocket.onmessage = (e) => {
-        console.log(e);
         queryClient.invalidateQueries(['chat', id]);
       };
     }

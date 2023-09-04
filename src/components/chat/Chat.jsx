@@ -193,16 +193,20 @@ const Chat = ({ data }) => {
     }
   };
 
+  // 서버로 채팅 내용을 전달합니다/
   const submit = () => {
+    // 내용을 입력하지 않으면 종료합니다.
     if (!text) {
       alert('내용을 입력해주세요.');
       return;
     }
 
+    // 웹소켓이 존재하지 않으면 종료합니다.
     if (!chatWebsocketValue) {
       return;
     }
 
+    // 전송 버튼 클릭 시 채팅 내용을 서버로 전달
     chatWebsocketValue.send(JSON.stringify({
       event: '/chat/sendMsg',
       data: text,

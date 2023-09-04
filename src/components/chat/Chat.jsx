@@ -211,7 +211,11 @@ const Chat = ({ data }) => {
     // 전송 버튼 클릭 시 채팅 내용을 서버로 전달
     chatWebsocketValue.send(JSON.stringify({
       event: '/chat/sendMsg',
-      data: text,
+      data: {
+        text,
+        id: data.users.user,
+        target: data.users.target
+      },
     }));
   };
 

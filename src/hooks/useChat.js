@@ -12,8 +12,8 @@ export const useChatStartMutation = () => {
   return useMutation({
     mutationFn(id) {
       /* 웹소켓을 통해 채팅을 시작합니다. */
-      const websocket = new WebSocket('ws://localhost:8081');
-      
+      const websocket = new WebSocket('ws://localhost:9002');
+
       /* 웹소켓이 오픈되면 기존 웹소켓은 종료하고 새로운 웹소켓을 상태로 저장합니다. */
       websocket.onopen = () => {
         if (chatWebsocketValue && !chatWebsocketValue.CLOSED) {
@@ -24,7 +24,8 @@ export const useChatStartMutation = () => {
       };
 
       /* 메시지를 전달받으면 서버로 채팅내용을 전달받습니다. */
-      websocket.onmessage = () => {
+      websocket.onmessage = (e) => {
+        console.log(e);
         queryClient.invalidateQueries(['chat', id]);
       };
     }

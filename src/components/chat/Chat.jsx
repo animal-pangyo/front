@@ -2,8 +2,8 @@ import { createPortal } from 'react-dom';
 import styled from './chat.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { useToggleBlockMutation, useDeleteChatMutation, useUploadFileMutation, useChatStartMutation } from '../../hooks/useChat';
-import { useSetRecoilState } from 'recoil';
-import { chatingIdState } from '../../store/chat';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { chatWebsocketState, chatingIdState } from '../../store/chat';
 import { useQueryClient } from 'react-query';
 
 /* 채팅내용 리스트를 렌더링하는 컴포넌트입니다. */
@@ -131,6 +131,7 @@ const Right = ({ users, visible, close }) => {
   chatidx: 채팅룸 아이디
 */
 const Chat = ({ data }) => {
+  const chatWebsocketValue = useRecoilValue(chatWebsocketState);
   const chatStart = useChatStartMutation();
   const queryClient = useQueryClient();
   /* 이미지를 업로드하는 함수입니다. */
@@ -192,6 +193,22 @@ const Chat = ({ data }) => {
     }
   };
 
+  const submit = () => {
+    if (!text) {
+      alert('내용을 입력해주세요.');
+      return;
+    }
+
+    if (!chatWebsocketValue) {
+      return;
+    }
+
+    chatWebsocketValue.send(JSON.stringify({
+      event: '/chat/sendMsg',
+      data: text,
+    }));
+  };
+
   useEffect(() => {
     chatStart.mutate();
   }, []);
@@ -230,7 +247,7 @@ const Chat = ({ data }) => {
           </div>
           {/* 채팅 내용을 입력할 수 있습니다. */}
           <textarea value={text} onChange={handleChange} />
-          <button>전송</button>
+          <button type='button' onClick={submit}>전송</button>
         </div>
         {/* 채팅설정 컴포넌트를 렌더링합니다. */}
         {/* visible: 채팅설정을 보여줄지 여부를 결정합니다. */}

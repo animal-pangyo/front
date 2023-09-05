@@ -4,7 +4,7 @@ import { Icon } from 'semantic-ui-react';
 import { useToggleBlockMutation, useDeleteChatMutation } from '../../../hooks/useChat';
 
 function ChatListItem({ msgListItem }) {
-
+  const setChatingIdState = useSetRecoilState(chatingIdState); 
 
   const [isButtonVisible, setButtonVisible] = useState(false);
   const [isExitButton, setIsExitButton] = useState(false);
@@ -42,6 +42,7 @@ function ChatListItem({ msgListItem }) {
   const openChat = (userId) => {
     if (!isExitButton) {
       console.log('Open 1:1 Chat', userId);
+      setChatingIdState(userId);
     }
   };
 

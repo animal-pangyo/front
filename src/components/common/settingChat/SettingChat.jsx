@@ -16,8 +16,8 @@ const SettingChat = () => {
   const toggleBlock = useToggleBlockMutation();
   
     /* 유저 차단을 토글하는 함수입니다. */
-  const handleBlock = async () => {
-    await toggleBlock.mutateAsync();
+  const handleBlock = async (block_user) => {
+    await toggleBlock.mutateAsync(block_user);
     alert('처리되었습니다');
   };
     
@@ -30,10 +30,10 @@ const SettingChat = () => {
             : 
             (
             <ul className={styled.ul}>
-                {blockedChatLists.map((user) => (
+                {blockedChatList.map((user) => (
                     <div className={styled.listBox}>
-                        <li key={user.id}>{user.block_user}</li>
-                        <button className={styled.blockBtn} onClick={handleBlock}>차단해제</button>
+                        <li key={user.idx}>{user.block_user}</li>
+                        <button className={styled.blockBtn} onClick={() => handleBlock(user.block_user)}>차단해제</button>
                     </div>
 
                 ))}

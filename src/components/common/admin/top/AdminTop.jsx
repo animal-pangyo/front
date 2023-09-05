@@ -11,7 +11,7 @@ import useWebSocket from '../../../../hooks/useWebSocket';
 /* 상단 유저와 관련 된 정보를 보여주기 위한 컴포넌트입니다 */
 const AdminTop = () => {
   /* websocket */
-  //const { latestMessage, messageCount } = useWebSocket('');
+  const { latestMessage, messageCount } = useWebSocket('ws://localhost:9002');
   
   /* user : 유저에 대한 객체 */
   /* logout : 로그아웃 기능을 하기 위함 함수 */
@@ -63,9 +63,11 @@ const AdminTop = () => {
               <>
                 <div className={styled.chat}   onClick={() => setChatOpen(true)}>
                   채팅
-                  <div className={styled.chatCircle}>
-                    {/* <span className={styled.messageCount}>{messageCount}</span> */}
-                   </div>
+                  {messageCount > 0 && (
+                    <div className={styled.chatCircle}>
+                      <span className={styled.messageCount}>{messageCount}</span>
+                    </div>
+                  )}
                 </div>
                 {/* className : className이름 설정 */}
                 <div className={styled.user}>

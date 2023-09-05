@@ -111,7 +111,7 @@ const Right = ({ users, visible, close, chatidx }) => {
           {/* 모달 종료버튼입니다. */}
           <div className={styled.close} onClick={() => close(false)}><span>대화설정</span></div>
           {/* 로그인한 유저의 프로필을 보여줍니다. */}
-          <div className={styled.profile}>{users.userid}</div>
+          <div className={styled.profile}>{users.user}</div>
           <div className={styled.block}>
             {/* 채팅 중인 상대를 차단합니다. */}
             <span onClick={handleBlock}>대화차단</span>

@@ -1,12 +1,15 @@
 import styled from "./Chat.module.css";
 import ChatListItem from "../chatList/ChatListItem";
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { fetchChatList } from "../../../services/api/chat.api";
 
 const Chat = () => {
 
-    const { data: chatList, isLoading, isError } = useQuery('chatList', fetchChatList);
-    console.log("chafgs", chatList)
+
+    const { data: resData , isLoading, isError } = useQuery('chatList', fetchChatList);
+    const chatList = resData?.data.data;
+    // console.log("chafgs", chatList)
     // if (isLoading) {
     //     return <div>Loading...</div>;
     // }
@@ -16,7 +19,7 @@ const Chat = () => {
     // }
 
     // const chatList = [ {userId:"dsfsf", content:"아녀아나하우ㅏㅇ니안", date:"2023-02-22"}, {userId:"dsfsf", content:"아녀아나하우ㅏㅇ니안", date:"2023-02-22"}, {userId:"dsfsf", content:"아녀아나하우ㅏㅇ니안", date:"2023-02-22"}, 
-    // {userId:"qwdaz2222", content:"누ㅏㅣ뉘sdfdsㅏㅇ룬"¬¬, date:"2023-02-22"},
+    // {userId:"qwdaz2222", content:"누ㅏㅣ뉘sdfdsㅏㅇ룬", date:"2023-02-22"},
     // {userId:"qweq", content:"가나아다루ㅏ니이나", date:"2023-02-22"}, {userId:"qweq", content:"가나아다루ㅏ니이나", date:"2023-02-22"}, {userId:"qweq", content:"가나아다루ㅏ니이나", date:"2023-02-22"}]
        
     return (
@@ -32,8 +35,8 @@ const Chat = () => {
             : 
                 /* 채팅 리스트 아이템을 매핑하여 출력 */
                 <div className={styled.chatList}>
-                    {chatList && chatList.map((msgListItem) => (
-                        <ChatListItem key={msgListItem.id} msgListItem={msgListItem} />
+                    {chatList && chatList.map((msgListItem, idx) => (
+                        <ChatListItem key={idx} msgListItem={msgListItem} />
                     ))}
                 </div>
 

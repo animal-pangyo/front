@@ -1,10 +1,10 @@
 import axios, { URL, getUserId } from ".";
 
-
+/* main page 채팅 클릭 시 유저가 대화중인 채팅 리스트를 불러오는 api */
 export const fetchChatList = () => {
     const userId = getUserId();
     try {
-      return axios.get(`${URL}/${userId}/chat`, {
+      return axios.get(`${URL}/user/chat/${userId}`, {
         headers: {
           Accept: 'application/json', // JSON 응답을 요청합니다.
         },
@@ -14,14 +14,14 @@ export const fetchChatList = () => {
     }
 };
 
+/* 유저가 차단한 리스트를 불러오는 api */
 export  const fetchBlockedChatList = () => {
     const userId = getUserId();
     try {
-        return axios.get(`${URL}/block/user/${userId}`)
+        return axios.get(`${URL}/user/block/${userId}`)
       } catch (error) {
         throw new Error('Error fetching block list');
       }
-   
 };
 
 /* 채팅 리스트를 불러오는 api */

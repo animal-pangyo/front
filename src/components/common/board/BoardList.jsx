@@ -14,7 +14,7 @@ import styled from './boardlist.module.css';
 /* name : 게시판의 이름을 나타냅니다. */
 const BoardList = ({ name }) => {
   /* 컨텍스트 메뉴를 보여주기 위한 상태입니다. */
-  const [isContext, setIsContext] = useState(false);
+  const [isContext, setIsContext] = useState('');
   /* 페이지 이동을 위한 훅입니다. */
   const navigate = useNavigate();
 
@@ -63,10 +63,10 @@ const BoardList = ({ name }) => {
   };
 
   /* 컨텍트스 메뉴를 호출하는 함수입니다. */
-  const openContext = (e) => {
+  const openContext = (e, author_id) => {
     e.preventDefault();
     /* isContext 상태를 true로 변경해서 컨텍스트 메뉴를 호출합니다 */
-    setIsContext(true);
+    setIsContext(author_id);
   };
   return (
     <>
@@ -106,12 +106,14 @@ const BoardList = ({ name }) => {
                 {/* board.author_id : 작성자 아이디 */}
                 {/* className : className이름 설정 */}
                 {/* onContextMenu: 마우스 우측 클릭 시 컨텍스트 메뉴를 호출합니다. */}
-                <td data-label="글쓴이" className={styled.author} onContextMenu={openContext}>
+                <td data-label="글쓴이" className={styled.author} onContextMenu={(e) => openContext(e, board.author_id)}>
                   {board.author_id}
 
                   {/* isContext가 true이면 컨텍스트 메뉴를 화면에 보여줍니다. */}
                   {/* onClose: 컨텍스트 메뉴를 종료하는 함수입니다. */}
-                  {(isContext && board.author_id !== auth?.user?.id) && <BoardContext onClose={setIsContext} id={board.author_id} />}
+                  {(isContext 
+                    && board.author_id !== auth?.user?.id
+                    && board.author_id === isContext) && <BoardContext onClose={setIsContext} id={board.author_id} />}
                 </td>
                 {/* className : className이름 설정 */}
                 {/* data-label : 라벨 정보를 데이터로 저장 */}

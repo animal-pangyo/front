@@ -50,9 +50,9 @@ export const toggleBlock = (id) => (
 )
 
 /* 해당 유저와의 채팅룸 삭제하는 api */
-/* id: 삭제하려는 유저 아이디 */
-export const deleteChat = (id) => (
-  axios.delete(`${URL}/user/chat/${id}`)
+/* chatidx: 삭제하려는 채팅룸 번호 */
+export const deleteChat = (chatidx) => (
+  axios.delete(`${URL}/chat/${chatidx}`)
 )
 
 /* 채팅에 이미지를 업로드할때 사용하는 api */

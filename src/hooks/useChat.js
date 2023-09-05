@@ -70,9 +70,9 @@ export const useToggleBlockMutation = () => (
 /* 해당 유저와의 채팅룸을 완전히 삭제하는 API입니다. */
 export const useDeleteChatMutation = () => (
   useMutation({
-    mutationFn(id) {
+    mutationFn(chatidx) {
       /* 해당 유저와의 채팅룸을 완전히 삭제하는 API입니다. */
-      return chatApi.deleteChat(id);
+      return chatApi.deleteChat(chatidx);
     }
   })
 );

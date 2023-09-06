@@ -49,12 +49,13 @@ const ChatList = ({ list }) => {
 /* users: 채팅중인 유저 */
 /* visible: 채팅 설정을 보여줄지 여부를 결정 */
 /* close: 채팅 설정을 종료하는 함수 */
-const Right = ({ users, visible, close }) => {
+const Right = ({ users, visible, close, chatidx }) => {
   /* 유저 차단을 시키는 함수 */
   const toggleBlock = useToggleBlockMutation();
   /* 채팅룸을 제거하는 함수 */
   const deleteChat = useDeleteChatMutation();
   const [isUser, setIsUser] = useState(false);
+  const setChatingIdState = useSetRecoilState(chatingIdState);
 
   /* 채팅룸 나가기 버튼 클릭시 호출되는 함수입니다. */
   const exit = async () => {
@@ -63,8 +64,9 @@ const Right = ({ users, visible, close }) => {
     }
 
     /* 채팅룸 나가기 확인 후 채팅룸을 제거합니다/ */
-    await deleteChat.mutate(id);
+    await deleteChat.mutateAsync(chatidx);
     alert('처리되었습니다');
+    setChatingIdState('');
   };
 
   /* 컴포넌트레 렌더링 되면 유저모드를 false로 초기화합니다. */
@@ -74,7 +76,7 @@ const Right = ({ users, visible, close }) => {
 
   /* 유저 차단을 토글하는 함수입니다. */
   const handleBlock = async () => {
-    await toggleBlock.mutateAsync();
+    await toggleBlock.mutateAsync(users.target);
     alert('처리되었습니다');
   };
 
@@ -109,7 +111,7 @@ const Right = ({ users, visible, close }) => {
           {/* 모달 종료버튼입니다. */}
           <div className={styled.close} onClick={() => close(false)}><span>대화설정</span></div>
           {/* 로그인한 유저의 프로필을 보여줍니다. */}
-          <div className={styled.profile}>{users.userid}</div>
+          <div className={styled.profile}>{users.user}</div>
           <div className={styled.block}>
             {/* 채팅 중인 상대를 차단합니다. */}
             <span onClick={handleBlock}>대화차단</span>
@@ -178,7 +180,7 @@ const Chat = ({ data }) => {
     /* 이미지 바이너리 데이터입니다. */
     form.append('image', file, filename.name);
     /* 로그인한 유저입니다. */
-    form.append('userid', data.users.userid);
+    form.append('userid', data.users.user);
 
     try {
       await uploadFile.mutateAsync({
@@ -262,7 +264,7 @@ const Chat = ({ data }) => {
         {/* 채팅설정 컴포넌트를 렌더링합니다. */}
         {/* visible: 채팅설정을 보여줄지 여부를 결정합니다. */}
         {/* close: 채팅설정을 종료합니다. */}
-        <Right users={data.users} visible={isOpen} close={setIsOpen} />
+        <Right users={data.users} visible={isOpen} chatidx={data.chatidx} close={setIsOpen} />
       </div>
     ), document.querySelector('body'))
   )

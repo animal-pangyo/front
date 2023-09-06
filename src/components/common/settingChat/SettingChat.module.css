@@ -12,6 +12,7 @@
   justify-content: center;
 }
 
+<<<<<<< HEAD
 .p {
   justify-content: center;
   display: flex;
@@ -44,3 +45,37 @@
   height: 33px;
   transition: border-color 0.25s;
 }
+=======
+.p{
+    justify-content: center;
+    display: flex;
+}
+
+.ul {
+    overflow: auto;
+}
+
+.li{
+    list-style: none;
+}
+
+.listBox{
+    display: flex;
+    width: 280px;
+    justify-content: space-between;
+    margin: 10px;
+    align-items: center;
+}
+
+.blockBtn{
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 1em;
+    font-weight: 100;
+    background-color: #1d4461;
+    color: #fff;
+    cursor: pointer;
+    height: 33px;
+    transition: border-color 0.25s;
+}
+>>>>>>> fe1cda15fc518152ebdbf382a124befcbb491e0d

@@ -4,7 +4,7 @@ import axios, { URL, getUserId } from ".";
 export const fetchChatList = () => {
   const userId = getUserId();
   try {
-    return axios.get(`${URL}/user/chat/${userId}`, {
+    return axios.get(`${URL}/${userId}/chat`, {
       headers: {
         Accept: "application/json", // JSON 응답을 요청합니다.
       },
@@ -14,11 +14,10 @@ export const fetchChatList = () => {
   }
 };
 
-/* 유저가 차단한 리스트를 불러오는 api */
 export const fetchBlockedChatList = () => {
   const userId = getUserId();
   try {
-    return axios.get(`${URL}/user/block/${userId}`);
+    return axios.get(`${URL}/block/user/${userId}`);
   } catch (error) {
     throw new Error("Error fetching block list");
   }

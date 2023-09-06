@@ -15,3 +15,13 @@ export const chatWebsocketState = atom({
   /* default : 기본값으로 false 이며 웹소켓을 저장합니다. */
   default: null
 });
+
+export const msgCntState = atom({
+  key: 'msgCntState',
+  default: 0
+});
+
+export const latestMessageState = atom({
+  key: 'latestMessage',
+  default: null
+})

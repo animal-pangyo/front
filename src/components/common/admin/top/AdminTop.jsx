@@ -7,11 +7,16 @@ import useMessage from '../../../../hooks/useMessage';
 import PreviewMessage from '../../Preview/previewMessage';
 import { useState } from 'react';
 import useWebSocket from '../../../../hooks/useWebSocket';
+import { useRecoilValue } from 'recoil';
+import { msgCntState, latestMessage } from '../../../../store/chat';
 
 /* 상단 유저와 관련 된 정보를 보여주기 위한 컴포넌트입니다 */
 const AdminTop = () => {
+  const msgCount = useRecoilValue(msgCntState);
+  const latestMessage = useRecoilValue(latestMessage);
+
   /* websocket */
-  const { latestMessage, messageCount } = useWebSocket('ws://localhost:9002');
+ // const { latestMessage, messageCount } = useWebSocket('ws://localhost:9002');
   
   /* user : 유저에 대한 객체 */
   /* logout : 로그아웃 기능을 하기 위함 함수 */

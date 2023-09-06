@@ -4,7 +4,7 @@ import axios, { URL, getUserId } from ".";
 export const fetchChatList = () => {
   const userId = getUserId();
   try {
-    return axios.get(`${URL}/${userId}/chat`, {
+    return axios.get(`${URL}/user/chat/${userId}`, {
       headers: {
         Accept: "application/json", // JSON 응답을 요청합니다.
       },
@@ -17,7 +17,7 @@ export const fetchChatList = () => {
 export const fetchBlockedChatList = () => {
   const userId = getUserId();
   try {
-    return axios.get(`${URL}/block/user/${userId}`);
+    return axios.get(`${URL}/user/block/${userId}`);
   } catch (error) {
     throw new Error("Error fetching block list");
   }

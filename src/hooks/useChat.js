@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { chatWebsocketState, msgCntState, latestMessageState } from '../store/chat';
 import * as chatApi from '../services/api/chat.api';
+import { getUserId } from '../services/api';
 
 /* 채팅 시작하기 위한 훅입니다 */
 export const useChatStartMutation = () => {
@@ -22,7 +23,11 @@ export const useChatStartMutation = () => {
         if (chatWebsocketValue && !chatWebsocketValue.CLOSED) {
           chatWebsocketValue.close();
         }
-
+        const userId = getUserId();
+        websocket.send(JSON.stringify({
+          event: '/chat/open',
+          data: userId,
+        }));
         setChatWebsocket(websocket);
       };
 

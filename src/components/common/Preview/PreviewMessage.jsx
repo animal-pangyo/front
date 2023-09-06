@@ -10,7 +10,7 @@ const PreviewMessage = ({latestMessage}) => {
    
           <div className={styled.previewMsg}>
           안녕하세요아ㅣ 지금 은 토요아ㅣㅊㄹ 입니데요
-          {/* {latestMessage} */}
+      
           </div>
 
       </div>

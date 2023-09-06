@@ -12,7 +12,7 @@ import { msgCntState, latestMessage } from '../../../../store/chat';
 
 /* 상단 유저와 관련 된 정보를 보여주기 위한 컴포넌트입니다 */
 const AdminTop = () => {
-  const msgCount = useRecoilValue(msgCntState);
+  const messageCount = useRecoilValue(msgCntState);
   const latestMessage = useRecoilValue(latestMessage);
 
   /* websocket */
@@ -104,7 +104,7 @@ const AdminTop = () => {
         {/* setOpen : open 상태를 변경하기 위한 함수 */}
         {/* onSubmit : 유저 정보 수정 완료 후 호출될 함수 */}
         <JoinModal user={user} open={open} setOpen={setOpen} onSubmit={onSubmit} />
-        {/* <PreviewMessage latestMessage={latestMessage}/> */}
+        <PreviewMessage latestMessage={latestMessage}/>
       </div>
 
     </>

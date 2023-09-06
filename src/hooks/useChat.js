@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useRecoilState } from 'recoil';
-import { chatWebsocketState } from '../store/chat';
+import { chatWebsocketState, msgCntState, latestMessageState } from '../store/chat';
 import * as chatApi from '../services/api/chat.api';
+import { getUserId } from '../services/api';
 
 /* 채팅 시작하기 위한 훅입니다 */
 export const useChatStartMutation = () => {
@@ -9,6 +10,9 @@ export const useChatStartMutation = () => {
   const queryClient = useQueryClient();
   /* 현재 채팅중인 아이디를 저장하고 있는 상태입니다. */
   const [chatWebsocketValue, setChatWebsocket] = useRecoilState(chatWebsocketState);
+  const [msgCntValue, setMsgCntValue] = useRecoilState(msgCntState);
+  const [latestMsgValue, setLatestMsgValue] = useRecoilState(latestMessageState);
+
   return useMutation({
     mutationFn(id) {
       /* 웹소켓을 통해 채팅을 시작합니다. */
@@ -19,13 +23,21 @@ export const useChatStartMutation = () => {
         if (chatWebsocketValue && !chatWebsocketValue.CLOSED) {
           chatWebsocketValue.close();
         }
-
+        const userId = getUserId();
+        websocket.send(JSON.stringify({
+          event: '/chat/open',
+          data: userId,
+        }));
         setChatWebsocket(websocket);
       };
 
       /* 메시지를 전달받으면 서버로 채팅내용을 전달받습니다. */
       websocket.onmessage = (e) => {
         queryClient.invalidateQueries(['chat', id]);
+        //setMsgCntValue(e.data)
+        //setLatestMsgValue(e.data)
+
+
       };
     }
   });

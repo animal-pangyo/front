@@ -7,11 +7,16 @@ import useMessage from '../../../../hooks/useMessage';
 import PreviewMessage from '../../Preview/previewMessage';
 import { useState } from 'react';
 import useWebSocket from '../../../../hooks/useWebSocket';
+import { useRecoilValue } from 'recoil';
+import { msgCntState, latestMessage } from '../../../../store/chat';
 
 /* 상단 유저와 관련 된 정보를 보여주기 위한 컴포넌트입니다 */
 const AdminTop = () => {
+  const messageCount = useRecoilValue(msgCntState);
+  const latestMessage = useRecoilValue(latestMessage);
+
   /* websocket */
-  const { latestMessage, messageCount } = useWebSocket('ws://localhost:9002');
+ // const { latestMessage, messageCount } = useWebSocket('ws://localhost:9002');
   
   /* user : 유저에 대한 객체 */
   /* logout : 로그아웃 기능을 하기 위함 함수 */
@@ -99,7 +104,7 @@ const AdminTop = () => {
         {/* setOpen : open 상태를 변경하기 위한 함수 */}
         {/* onSubmit : 유저 정보 수정 완료 후 호출될 함수 */}
         <JoinModal user={user} open={open} setOpen={setOpen} onSubmit={onSubmit} />
-        {/* <PreviewMessage latestMessage={latestMessage}/> */}
+        <PreviewMessage latestMessage={latestMessage}/>
       </div>
 
     </>

@@ -9,50 +9,6 @@ import * as chatApi from "../services/api/chat.api";
 import { getUserId } from "../services/api";
 import { io } from "socket.io-client";
 
-/* 채팅 시작하기 위한 훅입니다 */
-export const useChatStartMutation = () => {
-  /* 리액트 쿼리 스토어에 접근하기 위한 훅입니다. */
-  const queryClient = useQueryClient();
-  /* 현재 채팅중인 아이디를 저장하고 있는 상태입니다. */
-  const [chatWebsocketValue, setChatWebsocket] =
-    useRecoilState(chatWebsocketState);
-  const [msgCntValue, setMsgCntValue] = useRecoilState(msgCntState);
-  const [latestMsgValue, setLatestMsgValue] =
-    useRecoilState(latestMessageState);
-
-  return useMutation({
-    mutationFn(id) {
-      if (chatWebsocketValue || !getUserId()) return;
-      /* 웹소켓을 통해 채팅을 시작합니다. */
-      const websocket = io("http://localhost:9002");
-
-      websocket.on("error", (error) => {
-        console.error("웹소켓 연결 오류:", error);
-      });
-
-      websocket.on("disconnect", (reason) => {
-        console.log("웹소켓 연결 끊김:", reason);
-      });
-      /* 웹소켓이 오픈되면 기존 웹소켓은 종료하고 새로운 웹소켓을 상태로 저장합니다. */
-      websocket.on("connect", (socket) => {
-        console.log("dddd");
-        setChatWebsocket(websocket);
-        websocket.emit("sendMessage", {
-          userId: "123",
-          target: "455",
-        });
-      });
-
-      /* 메시지를 전달받으면 서버로 채팅내용을 전달받습니다. */
-      websocket.on("message", (e) => {
-        queryClient.invalidateQueries(["chat", id]);
-        setMsgCntValue(e.data);
-        setLatestMsgValue(e.data);
-      });
-    },
-  });
-};
-
 /* 채팅룸에 해당하는 채팅내용을 가져옵니다. */
 /* id: 채팅룸 아이디 */
 export const useChatQuery = (id) =>

@@ -5,7 +5,6 @@ import {
   useToggleBlockMutation,
   useDeleteChatMutation,
   useUploadFileMutation,
-  useChatStartMutation,
 } from "../../hooks/useChat";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { chatWebsocketState, chatingIdState } from "../../store/chat";
@@ -152,7 +151,6 @@ const Right = ({ users, visible, close, chatidx }) => {
 */
 const Chat = ({ data }) => {
   const chatWebsocketValue = useRecoilValue(chatWebsocketState);
-  const chatStart = useChatStartMutation();
   const queryClient = useQueryClient();
   /* 이미지를 업로드하는 함수입니다. */
   const uploadFile = useUploadFileMutation();
@@ -233,10 +231,6 @@ const Chat = ({ data }) => {
       target: data.users.target,
     });
   };
-
-  useEffect(() => {
-    chatStart.mutate();
-  }, []);
 
   return createPortal(
     <div className={styled.chat}>

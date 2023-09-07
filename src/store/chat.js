@@ -14,6 +14,6 @@ export const msgCntState = atom({
 });
 
 export const latestMessageState = atom({
-  key: 'latestMessage',
+  key: 'latestMessageState',
   default: null
 })

@@ -3,9 +3,12 @@ import * as authApi from "../services/api/auth.api";
 import { setAuthorization } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { transformUser } from "../services/api/user.api";
+import { useContext } from "react";
+import { SocketContext } from "../context/socket";
 
 /* 유저와 관련 된 기능을 담당하는 훅입니다. */
 const useAuth = () => {
+  const socket = useContext(SocketContext);
   /* 페이지 이동을 위한 훅입니다. */
   const navigate = useNavigate();
 
@@ -66,6 +69,9 @@ const useAuth = () => {
 
       /* 로그인 처리가 완료 된 후 메인 페이지로 이동합니다. */
       navigate("/");
+
+      // 로그인 하는 경우 소켓을 연결합니다.
+      socket.connectSocket();
     },
   });
 

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import styled from "./board-context.module.css";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { chatingIdState } from "../../../store/chat";
 import {
   useCheckBlockQuery,
@@ -8,7 +8,6 @@ import {
 } from "../../../hooks/useChat";
 import { useQueryClient } from "react-query";
 import { getUserId } from "../../../services/api";
-import { useContext } from 'react';
 import { SocketContext } from "../../../context/socket";
 
 /* onClose: 컨텍스트 메뉴를 종료하는 함수입니다. */
@@ -46,7 +45,8 @@ const BoardContext = ({ onClose, id }) => {
   const open = async () => {
     setChatingIdState(id);
 
-    socket.emit("sendMessage", {
+    /* 채팅 입장 시 채팅룸 생성을 위해 서버로 요청합니다. */
+    socket.socket.emit("joinRoom", {
       userId: getUserId(),
       target: id,
     });

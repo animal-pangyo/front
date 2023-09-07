@@ -8,12 +8,10 @@ import { useChatQuery } from "../../../hooks/useChat";
 import Chat from "../../chat/Chat";
 import { SocketContext } from "../../../context/socket";
 import { getUserId } from "../../../services/api";
-import { useQueryClient } from "react-query";
 
 /* 로그인, 회원가입, 아이디찾기, 비밀번호 찾기 페이지를 제외한 공통적으로 사용하는 레이어 컴포넌트입니다. */
 /* children : 해당 레이어에 렌더링한 컴포넌트를 전달받습니다. */
 const AuthLayer = ({ children }) => {
-  const queryClient = useQueryClient();
   /* 현재 채팅중인지 여부를 가져오는 상태입니다. */
   const chatingId = useRecoilValue(chatingIdState);
   /* 채팅중인 경우 해당 채팅 내용을 가져오게 됩니다. */
@@ -21,19 +19,12 @@ const AuthLayer = ({ children }) => {
   /* 소켓 상태를 가져옵니다. */
   const socket = useContext(SocketContext);
 
+  /* 어플리케이션에 접속 후 로그인 상태라면 소켓을 연결합니다. */
   useEffect(() => {
     if (getUserId()) {
       socket.connectSocket();
     }
   }, []);
-
-  useEffect(() => {
-    if (socket.chatting) {
-      console.log(1);
-      queryClient.invalidateQueries(["chat", id]);
-      socket.chatting = false;
-    }
-  }, [socket.chatting]);
 
   return (
     /* className : className이름 설정 */

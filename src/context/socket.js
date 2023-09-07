@@ -6,6 +6,7 @@ export const socketValue = {
   socket: null,
   msgCnt: 0,
   latestMsg: '',
+  chatting: false,
   connectSocket() {
     if (this.socket) {
       this.socket.close();  
@@ -34,8 +35,7 @@ export const socketValue = {
 
     /* 메시지를 전달받으면 서버로 채팅내용을 전달받습니다. */
     this.socket.on("message", (e) => {
-      console.log(e);
-      queryClient.invalidateQueries(["chat", id]);
+      this.chatting = true;
     });
   }
 };

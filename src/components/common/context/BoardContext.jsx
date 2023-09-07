@@ -45,7 +45,8 @@ const BoardContext = ({ onClose, id }) => {
   const open = async () => {
     setChatingIdState(id);
 
-    socket.emit("joinRoom", {
+    /* 채팅 입장 시 채팅룸 생성을 위해 서버로 요청합니다. */
+    socket.socket.emit("joinRoom", {
       userId: getUserId(),
       target: id,
     });

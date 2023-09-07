@@ -1,13 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useRecoilState } from "recoil";
-import {
-  chatWebsocketState,
-  msgCntState,
-  latestMessageState,
-} from "../store/chat";
 import * as chatApi from "../services/api/chat.api";
-import { getUserId } from "../services/api";
-import { io } from "socket.io-client";
 
 /* 채팅룸에 해당하는 채팅내용을 가져옵니다. */
 /* id: 채팅룸 아이디 */

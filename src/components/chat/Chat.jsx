@@ -6,8 +6,8 @@ import {
   useDeleteChatMutation,
   useUploadFileMutation,
 } from "../../hooks/useChat";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { chatWebsocketState, chatingIdState } from "../../store/chat";
+import { useSetRecoilState } from "recoil";
+import { chatingIdState } from "../../store/chat";
 import { useQueryClient } from "react-query";
 import useAuth from "../../hooks/useAuth";
 
@@ -150,7 +150,6 @@ const Right = ({ users, visible, close, chatidx }) => {
   chatidx: 채팅룸 아이디
 */
 const Chat = ({ data }) => {
-  const chatWebsocketValue = useRecoilValue(chatWebsocketState);
   const queryClient = useQueryClient();
   /* 이미지를 업로드하는 함수입니다. */
   const uploadFile = useUploadFileMutation();

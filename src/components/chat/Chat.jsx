@@ -11,6 +11,7 @@ import { chatingIdState } from "../../store/chat";
 import { useQueryClient } from "react-query";
 import useAuth from "../../hooks/useAuth";
 import { SocketContext } from "../../context/socket";
+import { getUserId } from "../../services/api";
 
 /* 채팅내용 리스트를 렌더링하는 컴포넌트입니다. */
 /* list: 채팅내용 */
@@ -161,6 +162,7 @@ const Chat = ({ data }) => {
   const [text, setText] = useState("");
   const inputRef = useRef(null);
   const socket = useContext(SocketContext);
+  const userId = getUserId();
 
   /* 채팅 텍스트 입력 시 웹소켓으로 전달합니다. */
   const handleChange = (e) => {
@@ -228,7 +230,7 @@ const Chat = ({ data }) => {
     // 전송 버튼 클릭 시 채팅 내용을 서버로 전달
     socket.socket.emit("sendMessage", {
       text,
-      id: data.users.user,
+      id: userId,
       target: data.users.target,
     });
   };

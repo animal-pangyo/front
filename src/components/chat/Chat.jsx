@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import styled from "./chat.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   useToggleBlockMutation,
   useDeleteChatMutation,
@@ -10,6 +10,7 @@ import { useSetRecoilState } from "recoil";
 import { chatingIdState } from "../../store/chat";
 import { useQueryClient } from "react-query";
 import useAuth from "../../hooks/useAuth";
+import { SocketContext } from "../../context/socket";
 
 /* 채팅내용 리스트를 렌더링하는 컴포넌트입니다. */
 /* list: 채팅내용 */
@@ -159,6 +160,7 @@ const Chat = ({ data }) => {
   /* 채팅입력을 저장하는 상태입니다. */
   const [text, setText] = useState("");
   const inputRef = useRef(null);
+  const socket = useContext(SocketContext);
 
   /* 채팅 텍스트 입력 시 웹소켓으로 전달합니다. */
   const handleChange = (e) => {
@@ -219,12 +221,12 @@ const Chat = ({ data }) => {
     }
 
     // 웹소켓이 존재하지 않으면 종료합니다.
-    if (!chatWebsocketValue) {
+    if (!socket.socket) {
       return;
     }
 
     // 전송 버튼 클릭 시 채팅 내용을 서버로 전달
-    chatWebsocketValue.emit("sednMessage", {
+    socket.socket.emit("sendMessage", {
       text,
       id: data.users.user,
       target: data.users.target,

@@ -5,9 +5,10 @@ import useMessage from "./hooks/useMessage";
 import routes from "./routes";
 import { useEffect } from "react";
 import { getAuthorization, getUserId, setAuthorization } from "./services/api";
-import { SocketContext, socketValue } from "./context/socket";
+import { SocketContext, useSocket } from "./context/socket";
 
 function App() {
+  const socket = useSocket();
   // 화면 상단에 메시지를 표시하기 위해서 사용합니다.
   const [message] = useMessage();
 
@@ -49,7 +50,7 @@ function App() {
       </div>
 
       {/* 라우터를 토대로 URL에 따라 페이지를 렌더링하게 됩니다. */}
-      <SocketContext.Provider value={socketValue}>
+      <SocketContext.Provider value={socket}>
         <RouterProvider router={router} />
       </SocketContext.Provider>
     </>

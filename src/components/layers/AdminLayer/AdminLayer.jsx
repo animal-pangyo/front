@@ -16,8 +16,10 @@ const AuthLayer = ({ children }) => {
   const chatingId = useRecoilValue(chatingIdState);
   /* 채팅중인 경우 해당 채팅 내용을 가져오게 됩니다. */
   const list = useChatQuery(chatingId);
+  /* 소켓 상태를 가져옵니다. */
   const socket = useContext(SocketContext);
 
+  /* 어플리케이션에 접속 후 로그인 상태라면 소켓을 연결합니다. */
   useEffect(() => {
     if (getUserId()) {
       socket.connectSocket();

@@ -17,7 +17,7 @@ import { SocketContext } from "../../context/socket";
 const ChatList = ({ list }) => {
   const { user } = useAuth();
   return (
-    <div className={styled.chatbox}>
+    <div className={`${styled.chatbox} chatbox`}>
       {/* 리스트가 존재하는 경우 리스트를 렌더링합니다. */}
       {list.length ? (
         <ul className={styled.chatlist}>
@@ -232,6 +232,14 @@ const Chat = ({ data }) => {
       target: data.users.target,
     });
   };
+
+  useEffect(() => {
+    const chatbox = document.querySelector('.chatbox');
+    document.querySelector('.chatbox').scrollTo({
+      top: chatbox.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [data.list]);
 
   return createPortal(
     <div className={styled.chat}>

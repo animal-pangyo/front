@@ -8,14 +8,6 @@ export const chatingIdState = atom({
   default: null,
 });
 
-/* 현재 진행중인 채팅 웹소켓을 저장하기 위한 상태입니다. */
-export const chatWebsocketState = atom({
-  /* key : 상태를 구분하기 위한 키 */
-  key: 'chatWebsocketState',
-  /* default : 기본값으로 false 이며 웹소켓을 저장합니다. */
-  default: null
-});
-
 export const msgCntState = atom({
   key: 'msgCntState',
   default: 0

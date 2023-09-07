@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styled from "./board-context.module.css";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { chatingIdState, chatWebsocketState } from "../../../store/chat";
+import { chatingIdState } from "../../../store/chat";
 import {
   useCheckBlockQuery,
   useToggleBlockMutation,
@@ -15,7 +15,6 @@ const BoardContext = ({ onClose, id }) => {
   const queryClient = useQueryClient();
   const checkBlock = useCheckBlockQuery(id);
   const toggleBlock = useToggleBlockMutation();
-  const chatWebsocketValue = useRecoilValue(chatWebsocketState);
   const setChatingIdState = useSetRecoilState(chatingIdState);
 
   useEffect(() => {

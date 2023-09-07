@@ -25,9 +25,10 @@ export const fetchBlockedChatList = () => {
 
 /* 채팅 리스트를 불러오는 api */
 export const chat = (target) => {
-  const userid = getUserId();
+  const userId = getUserId();
+  console.log("fortnt userID", userId)
   return axios.post(`${URL}/chat`, {
-    userid,
+    userId,
     target,
   });
 };

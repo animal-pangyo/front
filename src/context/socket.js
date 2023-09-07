@@ -18,7 +18,8 @@ socket.on("disconnect", (reason) => {
 /* 웹소켓이 오픈되면 기존 웹소켓은 종료하고 새로운 웹소켓을 상태로 저장합니다. */
 socket.on("connect", () => {
   /* 웹소켓 연결 완료 시 서버에 아이디를 등록합니다. */
-  socket.emit("/chat/open", getUserId());
+  const userId = getUserId();
+  socket.emit("/chat/open", userId);
 });
 
 /* 메시지를 전달받으면 서버로 채팅내용을 전달받습니다. */

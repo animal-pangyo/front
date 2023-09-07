@@ -8,6 +8,8 @@ import {
 } from "../../../hooks/useChat";
 import { useQueryClient } from "react-query";
 import { getUserId } from "../../../services/api";
+import { useContext } from 'react';
+import { SocketContext } from "../../../context/socket";
 
 /* onClose: 컨텍스트 메뉴를 종료하는 함수입니다. */
 /* id: 채팅하려는 상대방 아이디입니다 */
@@ -16,6 +18,7 @@ const BoardContext = ({ onClose, id }) => {
   const checkBlock = useCheckBlockQuery(id);
   const toggleBlock = useToggleBlockMutation();
   const setChatingIdState = useSetRecoilState(chatingIdState);
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
     /* 컨텍스트메뉴 영역 밖을 선택할 시 컨텍스트 메뉴를 종료하는 함수입니다. */
@@ -43,7 +46,7 @@ const BoardContext = ({ onClose, id }) => {
   const open = async () => {
     setChatingIdState(id);
 
-    chatWebsocketValue.emit("sendMessage", {
+    socket.emit("sendMessage", {
       userId: getUserId(),
       target: id,
     });

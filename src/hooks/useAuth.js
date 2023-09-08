@@ -5,9 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { transformUser } from "../services/api/user.api";
 import { useContext } from "react";
 import { SocketContext } from "../context/socket";
+import { useSetRecoilState } from "recoil";
+import { latestMessageState } from "../store/chat";
 
 /* 유저와 관련 된 기능을 담당하는 훅입니다. */
 const useAuth = () => {
+  const setLastestMessage = useSetRecoilState(latestMessageState);
   const socket = useContext(SocketContext);
   /* 페이지 이동을 위한 훅입니다. */
   const navigate = useNavigate();
@@ -100,6 +103,9 @@ const useAuth = () => {
 
       /* 로그아웃 처리가 완료 된 후 메인 페이지로 이동합니다. */
       navigate("/");
+
+      /* 마지막 메시지 삭제 */
+      setLastestMessage();
     },
   });
 

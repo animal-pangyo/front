@@ -67,3 +67,13 @@ export const uploadFile = ({ form, chatidx }) => {
     },
   });
 };
+
+/* 유저가 읽지 않은 채팅의 개수를 가져오는 api */
+/* target: 상대방 아이디 */
+export const getUnreadMessageCount = (target) => {
+  const userId = getUserId();
+  return axios.post(`${URL}/chat/count`, {
+    target,
+    userId
+  });
+}

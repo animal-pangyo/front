@@ -202,7 +202,7 @@ const Chat = ({ data }) => {
     /* 이미지 바이너리 데이터입니다. */
     form.append("image", file, filename.name);
     /* 로그인한 유저입니다. */
-    form.append("userid", data.users.user);
+    form.append("userid", userId);
 
     try {
       await uploadFile.mutateAsync({

@@ -1,18 +1,27 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import * as chatApi from "../services/api/chat.api";
+import { useSetRecoilState } from "recoil";
+import { msgCntState } from "../store/chat";
 
-/* 채팅룸에 해당하는 채팅내용을 가져옵니다. */
-/* id: 채팅룸 아이디 */
-export const useChatQuery = (id) =>
-  useQuery({
+/* 상대방 아이디에 해당하는 채팅내용을 가져옵니다. */
+/* id: 상대방 아이디 */
+export const useChatQuery = (id) => {
+  const setMessageCount = useSetRecoilState(msgCntState);
+  return useQuery({
     queryKey: ["chat", id],
     async queryFn() {
       /* 서버로부터 id에 해당하는 채팅내용을 가져옵니다. */
       const response = await chatApi.chat(id);
       return response.data;
     },
+    async onSuccess({ users }) {
+      const response = await chatApi.getUnreadMessageCount(users.target);
+      setMessageCount(response.data);
+    },
     enabled: !!id,
   });
+}
+  
 
 /* 해당 유저에 대한 차단여부를 가져오는 쿼리입니다. */
 export const useCheckBlockQuery = (id) =>

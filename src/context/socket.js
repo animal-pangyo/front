@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import io from "socket.io-client";
 import { getUserId } from '../services/api';
 import { useQueryClient } from 'react-query';
+import { latestMessageState, msgCntState } from "../store/chat"
+import { useSetRecoilState } from "recoil";
 
 export const useSocket = () => {
   const queryClient = useQueryClient();
   const [socket, setSocket] = useState(null);
-  const [msgCnt, setMsgCnt] = useState(0);
-  const [latestMsg, setLatestMsg] = useState('');
+  const setLatestMessageState = useSetRecoilState(latestMessageState);
+  const setMsgCntState = useSetRecoilState(msgCntState);
   
   const connectSocket = () => {
     if (socket) {
@@ -40,8 +42,14 @@ export const useSocket = () => {
     /* 메시지를 전달받으면 서버로 채팅내용을 전달받습니다. */
     socket.on("message", (e) => {   
       queryClient.invalidateQueries("chat", e.target);
-      setLatestMsg(e.text)
+
     });
+
+    socket.on('alert', (e) =>{
+      console.log(e, "alert", e.msgCnt, e.latestMsg.text)
+      setLatestMessageState(e.latestMsg.text);
+      setMsgCntState(e.msgCnt);
+    })
   };
 
   const close = () => {
@@ -53,8 +61,6 @@ export const useSocket = () => {
 
   return {
     socket,
-    msgCnt,
-    latestMsg,
     connectSocket,
     close
   }

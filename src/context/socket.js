@@ -11,7 +11,7 @@ export const useSocket = () => {
   
   const connectSocket = () => {
     if (socket) {
-      socket.close();  
+      socket.disconnect();  
     }
 
     /* 서버와의 웹소켓 연결을 시작합니다 */
@@ -44,11 +44,19 @@ export const useSocket = () => {
     });
   };
 
+  const close = () => {
+    if (!socket) return;
+
+    socket.disconnect();
+    setSocket(null);
+  }
+
   return {
     socket,
     msgCnt,
     latestMsg,
-    connectSocket
+    connectSocket,
+    close
   }
 };
 

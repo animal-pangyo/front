@@ -50,6 +50,9 @@ const BoardContext = ({ onClose, id }) => {
       userId: getUserId(),
       target: id,
     });
+
+    // 컨텍스트 종료
+    onClose(false);
   };
 
   /* 상대가 차단되어 있는 경우 차단해제하는 함수입니다. */
@@ -64,11 +67,11 @@ const BoardContext = ({ onClose, id }) => {
   return (
     <div className={`board-context ${styled.context}`}>
       {checkBlock.data ? (
-        /* 상대가 차단되어 있지 않은 경우 채팅을 렌더링합니다. */
-        <div onClick={open}>채팅</div>
-      ) : (
         /* 상대가 차단되어 있는 경우 차단해제를 렌더링합니다.*/
         <div onClick={handleCancelBlock}>차단해제</div>
+        ) : (
+        /* 상대가 차단되어 있지 않은 경우 채팅을 렌더링합니다. */
+        <div onClick={open}>채팅</div>
       )}
     </div>
   );

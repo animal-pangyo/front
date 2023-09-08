@@ -50,6 +50,9 @@ const BoardContext = ({ onClose, id }) => {
       userId: getUserId(),
       target: id,
     });
+
+    // 컨텍스트 종료
+    onClose(false);
   };
 
   /* 상대가 차단되어 있는 경우 차단해제하는 함수입니다. */

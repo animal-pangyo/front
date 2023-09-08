@@ -5,6 +5,7 @@ import {
   useToggleBlockMutation,
   useDeleteChatMutation,
   useUploadFileMutation,
+  useCheckBlockQuery,
 } from "../../hooks/useChat";
 import { useSetRecoilState } from "recoil";
 import { chatingIdState } from "../../store/chat";
@@ -61,6 +62,7 @@ const ChatList = ({ list }) => {
 /* visible: 채팅 설정을 보여줄지 여부를 결정 */
 /* close: 채팅 설정을 종료하는 함수 */
 const Right = ({ users, visible, close, chatidx }) => {
+  const checkBlock = useCheckBlockQuery(users.target);
   /* 유저 차단을 시키는 함수 */
   const toggleBlock = useToggleBlockMutation();
   /* 채팅룸을 제거하는 함수 */
@@ -91,8 +93,15 @@ const Right = ({ users, visible, close, chatidx }) => {
 
   /* 유저 차단을 토글하는 함수입니다. */
   const handleBlock = async () => {
+    if (checkBlock.data) {
+      if (!window.confirm('차단 시 모든 대화가 삭제됩니다. 차단하시겠습니까?')) return;
+      await deleteChat.mutateAsync(chatidx);
+      setChatingIdState("");
+    }
+    
     await toggleBlock.mutateAsync(users.target);
     alert("처리되었습니다");
+    setChatingIdState("");
   };
 
   return (
@@ -130,8 +139,10 @@ const Right = ({ users, visible, close, chatidx }) => {
           {/* 로그인한 유저의 프로필을 보여줍니다. */}
           <div className={styled.profile}>{users.user}</div>
           <div className={styled.block}>
-            {/* 채팅 중인 상대를 차단합니다. */}
-            <span onClick={handleBlock}>대화차단</span>
+            {/* 채팅 중인 상대를 차단 또는 차단해제합니다. */}
+            <span onClick={handleBlock}>
+              {checkBlock.data ? ('차단해제') :('대화차단')}
+            </span>
           </div>
           <div className={styled.buttons}>
             {/* 채팅 설정의 이전 화면으로 돌아갑니다. */}
@@ -152,6 +163,7 @@ const Right = ({ users, visible, close, chatidx }) => {
   chatidx: 채팅룸 아이디
 */
 const Chat = ({ data }) => {
+  const checkBlock = useCheckBlockQuery(data.users.target);
   const queryClient = useQueryClient();
   /* 이미지를 업로드하는 함수입니다. */
   const uploadFile = useUploadFileMutation();
@@ -233,6 +245,9 @@ const Chat = ({ data }) => {
       id: userId,
       target: data.users.target,
     });
+
+    // 전송 후 텍스트 초기화
+    setText('');
   };
 
   useEffect(() => {
@@ -287,7 +302,7 @@ const Chat = ({ data }) => {
           />
         </div>
         {/* 채팅 내용을 입력할 수 있습니다. */}
-        <textarea value={text} onChange={handleChange} />
+        <textarea value={text} onChange={handleChange} disabled={checkBlock.data} />
         <button type="button" onClick={submit}>
           전송
         </button>

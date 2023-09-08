@@ -254,7 +254,6 @@ const Chat = ({ data }) => {
     const chatbox = document.querySelector('.chatbox');
     document.querySelector('.chatbox').scrollTo({
       top: chatbox.scrollHeight,
-      behavior: "smooth",
     });
   }, [data.list]);
 

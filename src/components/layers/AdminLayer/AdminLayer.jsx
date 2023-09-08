@@ -24,6 +24,12 @@ const AuthLayer = ({ children }) => {
     if (getUserId()) {
       socket.connectSocket();
     }
+
+    return () => {
+      if (socket.socket) {
+        socket.close();
+      }
+    }
   }, []);
 
   return (

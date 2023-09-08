@@ -38,7 +38,7 @@ const ChatList = ({ list }) => {
               >
                 {/* 채팅이 이미지라면 이미지 컴포넌트를 렌더링합니다. */}
                 {img ? (
-                  <img src={img} />
+                  <img src={`uploads/${img}`} />
                 ) : (
                   /* 채팅이 텍스트라면 텍스트를 렌더링합니다/ */
                   <span>{msg}</span>

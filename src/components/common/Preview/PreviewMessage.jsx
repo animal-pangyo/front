@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "./previewMessage.module.css";
 
 const PreviewMessage = ({latestMessage}) => {
+  if(!latestMessage) return;
+
   // latestMessage를 상태로 관리
   const [message, setMessage] = useState(latestMessage);
   const [showMessage, setShowMessage] = useState(true);
@@ -23,7 +25,6 @@ const PreviewMessage = ({latestMessage}) => {
   }, [latestMessage]);
 
   const messageClassName = showMessage ? `${styled.previewMsg}` : `${styled.previewMsgs}`;
-  console.log(messageClassName, showMessage)
     return (
       <div className={styled.previewMsgBox}>
         <div className={messageClassName}>         

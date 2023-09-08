@@ -6,6 +6,7 @@ import {
   useDeleteChatMutation,
   useUploadFileMutation,
   useCheckBlockQuery,
+  useCheckBlockToMeQuery,
 } from "../../hooks/useChat";
 import { useSetRecoilState } from "recoil";
 import { chatingIdState } from "../../store/chat";
@@ -62,6 +63,7 @@ const ChatList = ({ list }) => {
 /* visible: 채팅 설정을 보여줄지 여부를 결정 */
 /* close: 채팅 설정을 종료하는 함수 */
 const Right = ({ users, visible, close, chatidx }) => {
+  const user = getUserId();
   const checkBlock = useCheckBlockQuery(users.target);
   /* 유저 차단을 시키는 함수 */
   const toggleBlock = useToggleBlockMutation();
@@ -110,7 +112,7 @@ const Right = ({ users, visible, close, chatidx }) => {
             </div>
             {/* 현재 채팅중인 유저를 렌더링합니다. */}
             <div className={styled.userlist}>
-              <div>{users.userid}</div>
+              <div>{user}</div>
               <div>{users.target}</div>
             </div>
           </div>
@@ -130,7 +132,7 @@ const Right = ({ users, visible, close, chatidx }) => {
             <span>대화설정</span>
           </div>
           {/* 로그인한 유저의 프로필을 보여줍니다. */}
-          <div className={styled.profile}>{users.user}</div>
+          <div className={styled.profile}>{user}</div>
           <div className={styled.block}>
             {/* 채팅 중인 상대를 차단 또는 차단해제합니다. */}
             <span onClick={handleBlock}>
@@ -157,6 +159,7 @@ const Right = ({ users, visible, close, chatidx }) => {
 */
 const Chat = ({ data }) => {
   const checkBlock = useCheckBlockQuery(data.users.target);
+  const checkBlockToMe = useCheckBlockToMeQuery(data.users.target);
   const queryClient = useQueryClient();
   /* 이미지를 업로드하는 함수입니다. */
   const uploadFile = useUploadFileMutation();
@@ -166,6 +169,7 @@ const Chat = ({ data }) => {
   /* 채팅입력을 저장하는 상태입니다. */
   const [text, setText] = useState("");
   const inputRef = useRef(null);
+  const textareaRef = useRef(null);
   const socket = useContext(SocketContext);
   const userId = getUserId();
 
@@ -221,7 +225,6 @@ const Chat = ({ data }) => {
 
   // 서버로 채팅 내용을 전달합니다/
   const submit = () => {
-    console.log("왜 전송 2번됨?")
     // 내용을 입력하지 않으면 종료합니다.
     if (!text) {
       alert("내용을 입력해주세요.");
@@ -250,6 +253,21 @@ const Chat = ({ data }) => {
       top: chatbox.scrollHeight,
     });
   }, [data.list]);
+
+  // textarea에서 엔터키를 입력했을 때 전송되는 기능
+  const handleKeyup = (e) => {
+    e.preventDefault();
+
+    /* 쉬프트와 엔터를 동시에 입력하면 개항만 가능 */
+    if (e.code === 'Enter' && e.shiftKey) {
+      return;
+    }
+
+    /* 엔터 입력 시 전송 */
+    if (e.code === 'Enter') {
+      submit();
+    }
+  };
 
   return createPortal(
     <div className={styled.chat}>
@@ -295,8 +313,18 @@ const Chat = ({ data }) => {
           />
         </div>
         {/* 채팅 내용을 입력할 수 있습니다. */}
-        <textarea value={text} onChange={handleChange} disabled={checkBlock.data} placeholder={checkBlock.data ? '차단되었습니다.' : ''} />
-        <button type="button" onClick={submit}>
+        {/* disabled: 차단 여부에 따라 활성화 여부를 결정 */}
+        <textarea 
+          ref={textareaRef}
+          value={text} 
+          onChange={handleChange} 
+          disabled={checkBlock.data || checkBlockToMe.data} 
+          placeholder={(checkBlock.data || checkBlockToMe.data) ? '차단되었습니다.' : ''}
+          onKeyUp={handleKeyup}
+        />
+        {/* 버튼 클릭 시 메시지 전송 */}
+        {/* disabled: 차단 여부에 따라 활성화 여부를 결정 */}
+        <button type="button" onClick={submit} disabled={checkBlock.data || checkBlockToMe.data} >
           전송
         </button>
       </div>

@@ -34,6 +34,17 @@ export const useCheckBlockQuery = (id) =>
     },
   });
 
+/* 상대방이 나에 대한 차단여부를 가져오는 쿼리입니다. */
+export const useCheckBlockToMeQuery = (id) =>
+  useQuery({
+    queryKey: ["chat", "block", 'me', id],
+    async queryFn() {
+      /* 해당 유저에 대한 차단여부를 가져오는 쿼리입니다. */
+      const response = await chatApi.checkBlockToMe(id);
+      return response.data;
+    },
+  });
+
 /* 해당 유저에 대한 차단을 토글하는 API입니다. */
 export const useToggleBlockMutation = () =>
   useMutation({

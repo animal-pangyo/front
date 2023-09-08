@@ -43,6 +43,16 @@ export const checkBlock = (blockId) => {
   });
 };
 
+/* 상대방이 나를 차단했는지 확인하는 api */
+/* id: 차단하려는 유저 아이디 */
+export const checkBlockToMe = (target) => {
+  const userId = getUserId();
+  return axios.post(`${URL}/user/target/block`, {
+    userId,
+    target,
+  });
+};
+
 /* 해당 유저의 차단 여부를 토글하는 api */
 /* id: 차단하려는 유저 아이디 */
 export const toggleBlock = (blockId) => {

@@ -93,15 +93,8 @@ const Right = ({ users, visible, close, chatidx }) => {
 
   /* 유저 차단을 토글하는 함수입니다. */
   const handleBlock = async () => {
-    if (checkBlock.data) {
-      if (!window.confirm('차단 시 모든 대화가 삭제됩니다. 차단하시겠습니까?')) return;
-      await deleteChat.mutateAsync(chatidx);
-      setChatingIdState("");
-    }
-    
     await toggleBlock.mutateAsync(users.target);
     alert("처리되었습니다");
-    setChatingIdState("");
   };
 
   return (

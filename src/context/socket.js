@@ -17,7 +17,7 @@ export const useSocket = () => {
     }
 
     /* 서버와의 웹소켓 연결을 시작합니다 */
-    const newSocket = io(`http://${location.host}:9002`);
+    const newSocket = io(`http://${location.hostname}:9002`);
     setSocket(newSocket);
     on(newSocket);
   };

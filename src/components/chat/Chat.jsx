@@ -295,7 +295,7 @@ const Chat = ({ data }) => {
           />
         </div>
         {/* 채팅 내용을 입력할 수 있습니다. */}
-        <textarea value={text} onChange={handleChange} disabled={checkBlock.data} />
+        <textarea value={text} onChange={handleChange} disabled={checkBlock.data} placeholder={checkBlock.data ? '차단되었습니다.' : ''} />
         <button type="button" onClick={submit}>
           전송
         </button>

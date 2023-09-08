@@ -12,6 +12,9 @@
     padding: 10px;
     flex-grow: 1;
     overflow-y: scroll; /* 채팅 리스트가 넘칠 때 스크롤 표시 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .msgBox{

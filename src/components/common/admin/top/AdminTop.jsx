@@ -12,12 +12,11 @@ import { msgCntState, latestMessageState } from "../../../../store/chat";
 
 /* 상단 유저와 관련 된 정보를 보여주기 위한 컴포넌트입니다 */
 const AdminTop = () => {
+  //msg count 리코일 상태 저장소에서 가져옵니다. 
   const messageCount = useRecoilValue(msgCntState);
+  //미리보기 msg를 리코일 상태 저장소에서 가져옵니다. 
   const latestMessage = useRecoilValue(latestMessageState);
-
-  /* websocket */
-  // const { latestMessage, messageCount } = useWebSocket("ws://localhost:9002");
-
+  
   /* user : 유저에 대한 객체 */
   /* logout : 로그아웃 기능을 하기 위함 함수 */
   const { user, logout } = useAuth();
@@ -118,7 +117,7 @@ const AdminTop = () => {
           setOpen={setOpen}
           onSubmit={onSubmit}
         />
-        <PreviewMessage latestMessage={latestMessage} />
+       {latestMessage ? <PreviewMessage latestMessage={latestMessage} /> : null} 
       </div>
     </>
   );

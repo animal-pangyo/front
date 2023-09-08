@@ -28,11 +28,11 @@ const ChatList = ({ list }) => {
             /* createdAt: 채팅 시간 */
             /* img: 채팅 이미지 */
             /* index: 인덱스 */
-            list.map(({ msg, createdAt, img, authorId }, index) => (
+            list.map(({ msg, createdAt, img, author_id }, index) => (
               /* 상대가 입력한 채팅은 left, 로그인한 대상이 입력한 채팅은 right_on을 classname으로 지정합니다. */
               <li
                 key={index}
-                className={`${authorId === user.id ? "left" : styled.right_on}`}
+                className={`${author_id === user.id ? styled.right_on :  "left" }`}
               >
                 {/* 채팅이 이미지라면 이미지 컴포넌트를 렌더링합니다. */}
                 {img ? (
@@ -216,6 +216,7 @@ const Chat = ({ data }) => {
 
   // 서버로 채팅 내용을 전달합니다/
   const submit = () => {
+    console.log("왜 전송 2번됨?")
     // 내용을 입력하지 않으면 종료합니다.
     if (!text) {
       alert("내용을 입력해주세요.");
@@ -233,6 +234,7 @@ const Chat = ({ data }) => {
       id: userId,
       target: data.users.target,
     });
+    setText('')
   };
 
   useEffect(() => {

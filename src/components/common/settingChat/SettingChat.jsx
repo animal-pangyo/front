@@ -21,17 +21,9 @@ const SettingChat = () => {
 
   /* 유저 차단을 토글하는 함수입니다. */
   const handleBlock = async (user_id) => {
-    if (!window.confirm('차단 시 모든 대화가 삭제됩니다. 차단하시겠습니까?')) {
-      return;
-    }
-    
-    // 유저와의 대화 삭제
-    await deleteChat.mutateAsync(chatidx);
-
     // 유저 차단 해제
     await toggleBlock.mutateAsync(user_id);
     alert("처리되었습니다");
-    setChatingIdState("");
     fetchBlockedChatList();
   };
 

@@ -76,7 +76,7 @@ const Right = ({ users, visible, close, chatidx }) => {
   const exit = async () => {
     if (
       !confirm(
-        "채팅방을 나가시겠습니까? 대화방은 목록에서 삭제되고 대화 내용을 다시 볼 수 없습니다."
+        "채팅방을 나가시겠습니까? 대화방은 대화중인 모든 유저의 목록에서 삭제되고 대화 내용을 다시 볼 수 없습니다."
       )
     ) {
       return;

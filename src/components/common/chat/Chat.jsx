@@ -11,7 +11,7 @@ const Chat = ({ handleCloseModal }) => {
     isError,
   } = useQuery("chatList", fetchChatList);
   const chatList = resData?.data.data;
-
+  
   return (
     <div className={styled.chatBox}>
       {!chatList || chatList.length === 0 ? (

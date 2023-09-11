@@ -34,7 +34,7 @@ function ChatListItem({ msgListItem, handleCloseModal }) {
     if (
       isButtonVisible &&
       !confirm(
-        "채팅방을 나가시겠습니까? 대화방은 목록에서 삭제되고 대화 내용을 다시 볼 수 없습니다."
+        "채팅방을 나가시겠습니까? 대화방은 대화중인 모든 유저의 목록에서 삭제되고 대화 내용을 다시 볼 수 없습니다."
       )
     ) {
       return;
@@ -42,6 +42,7 @@ function ChatListItem({ msgListItem, handleCloseModal }) {
     if (isExitButton) {
       /* 채팅룸 나가기 확인 후 채팅룸을 제거합니다/ */
       deleteChat.mutate(chatId);
+      handleCloseModal();
       alert("처리되었습니다");
     }
   };

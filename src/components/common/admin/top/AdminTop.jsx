@@ -5,18 +5,29 @@ import JoinModal from "../../../modal/joinModal/JoinModal";
 import ChatModal from "../../../modal/chatModal/chatModal";
 import useMessage from "../../../../hooks/useMessage";
 import PreviewMessage from "../../Preview/previewMessage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import useWebSocket from "../../../../hooks/useWebSocket";
 import { useRecoilValue } from "recoil";
 import { msgCntState, latestMessageState } from "../../../../store/chat";
 
 /* 상단 유저와 관련 된 정보를 보여주기 위한 컴포넌트입니다 */
-const AdminTop = () => {
+const AdminTop = ({unReadMsgCnt}) => {
   //msg count 리코일 상태 저장소에서 가져옵니다. 
   const messageCount = useRecoilValue(msgCntState);
   //미리보기 msg를 리코일 상태 저장소에서 가져옵니다. 
   const latestMessage = useRecoilValue(latestMessageState);
-  
+  const [msgCount, setMsgCount] = useState(unReadMsgCnt);
+//  console.log(unReadMsgCnt, "unReadMsgCnt")
+
+  useEffect(()=>{
+    if(messageCount || messageCount === 0){
+      setMsgCount(messageCount)
+    }else{
+      setMsgCount(unReadMsgCnt)
+    }
+  },[messageCount, unReadMsgCnt])
+
+
   /* user : 유저에 대한 객체 */
   /* logout : 로그아웃 기능을 하기 위함 함수 */
   const { user, logout } = useAuth();
@@ -67,10 +78,10 @@ const AdminTop = () => {
               <>
                 <div className={styled.chat} onClick={() => setChatOpen(true)}>
                   채팅
-                  {messageCount > 0 && (
+                  { msgCount > 0 && (
                     <div className={styled.chatCircle}>
                       <span className={styled.messageCount}>
-                        {messageCount}
+                        { msgCount}
                       </span>
                     </div>
                   )}

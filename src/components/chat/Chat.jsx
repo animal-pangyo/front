@@ -196,7 +196,7 @@ const Chat = ({ data }) => {
     const filename = file.name;
 
     /* 이미지 파일만 업로드 가능합니다. */
-    if (!filename.match(/.(png|jpg|jpeg|git)$/)) {
+    if (!filename.match(/.(png|jpg|jpeg|git|svg)$/)) {
       alert("이미지만 업로드 가능합니다.");
       e.target.value = "";
       return;
@@ -226,7 +226,7 @@ const Chat = ({ data }) => {
   // 서버로 채팅 내용을 전달합니다/
   const submit = () => {
     // 내용을 입력하지 않으면 종료합니다.
-    if (!text) {
+    if (!text.trim()) {
       alert("내용을 입력해주세요.");
       return;
     }
@@ -256,7 +256,7 @@ const Chat = ({ data }) => {
 
   // textarea에서 엔터키를 입력했을 때 전송되는 기능
   const handleKeyup = (e) => {
-e.preventDefault();
+    e.preventDefault();
 
     /* 쉬프트와 엔터를 동시에 입력하면 개항만 가능 */
     if (e.code === 'Enter' && e.shiftKey) {
@@ -264,7 +264,7 @@ e.preventDefault();
     }
 
     /* 엔터 입력 시 전송 */
-    if (e.code === 'Enter' && text) {
+    if (e.code === 'Enter' && text.trim()) {
       e.preventDefault();
       submit();
     }
@@ -325,7 +325,7 @@ e.preventDefault();
         />
         {/* 버튼 클릭 시 메시지 전송 */}
         {/* disabled: 차단 여부에 따라 활성화 여부를 결정 */}
-        <button type="button" onClick={submit} disabled={checkBlock.data || checkBlockToMe.data} >
+        <button type="button" onClick={submit} disabled={checkBlock.data || checkBlockToMe.data}>
           전송
         </button>
       </div>

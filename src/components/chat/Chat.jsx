@@ -256,7 +256,7 @@ const Chat = ({ data }) => {
 
   // textarea에서 엔터키를 입력했을 때 전송되는 기능
   const handleKeyup = (e) => {
-    e.preventDefault();
+e.preventDefault();
 
     /* 쉬프트와 엔터를 동시에 입력하면 개항만 가능 */
     if (e.code === 'Enter' && e.shiftKey) {
@@ -264,7 +264,8 @@ const Chat = ({ data }) => {
     }
 
     /* 엔터 입력 시 전송 */
-    if (e.code === 'Enter') {
+    if (e.code === 'Enter' && text) {
+      e.preventDefault();
       submit();
     }
   };

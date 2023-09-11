@@ -11,7 +11,6 @@ const AddressSelect = ({ searchAddress}) => {
 
   // 시, 구, 동 선택 시 호출되는 함수들
   const handleCityChange = (result) => {
-    // console.log(e.target.value,  result)
     setSelectedCity(result);
     setSelectedDistrict('');
     setSelectedTown('');

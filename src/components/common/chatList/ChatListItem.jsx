@@ -49,7 +49,6 @@ function ChatListItem({ msgListItem, handleCloseModal }) {
 
   const openChat = (userId) => {
     if (!isExitButton) {
-      console.log("Open 1:1 Chat", userId);
       setChatingIdState(userId);
       handleCloseModal();
     }

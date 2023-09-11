@@ -6,9 +6,8 @@ import ChatModal from "../../../modal/chatModal/chatModal";
 import useMessage from "../../../../hooks/useMessage";
 import PreviewMessage from "../../Preview/previewMessage";
 import { useEffect, useState } from "react";
-// import useWebSocket from "../../../../hooks/useWebSocket";
-import { useRecoilValue } from "recoil";
-import { msgCntState, latestMessageState } from "../../../../store/chat";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { msgCntState, latestMessageState, chatingIdState } from "../../../../store/chat";
 
 /* 상단 유저와 관련 된 정보를 보여주기 위한 컴포넌트입니다 */
 const AdminTop = ({unReadMsgCnt}) => {
@@ -16,16 +15,18 @@ const AdminTop = ({unReadMsgCnt}) => {
   const messageCount = useRecoilValue(msgCntState);
   //미리보기 msg를 리코일 상태 저장소에서 가져옵니다. 
   const latestMessage = useRecoilValue(latestMessageState);
+
   const [msgCount, setMsgCount] = useState(unReadMsgCnt);
-//  console.log(unReadMsgCnt, "unReadMsgCnt")
+
+  const setChatingIdState = useSetRecoilState(chatingIdState)
 
   useEffect(()=>{
-    if(messageCount || messageCount === 0){
-      setMsgCount(messageCount)
-    }else{
-      setMsgCount(unReadMsgCnt)
+    if(typeof messageCount !== 'number'){
+      return;
     }
-  },[messageCount, unReadMsgCnt])
+    setMsgCount(messageCount)
+   
+  },[messageCount])
 
 
   /* user : 유저에 대한 객체 */
@@ -40,6 +41,13 @@ const AdminTop = ({unReadMsgCnt}) => {
 
   /* 화면 상단 메시지를 출력하기 위한 setMessage 함수 */
   const [, setMessage] = useMessage();
+
+  const logoutHandler = () => {
+    setOpen(false);
+    setChatOpen(false);
+    setChatingIdState('');
+    logout();
+  }
 
   /* 유저와 관련 된 처리를 하기 위한 훅입니다. */
   const auth = useAuth();
@@ -94,7 +102,7 @@ const AdminTop = ({unReadMsgCnt}) => {
                   </span>
                   {/* className : className이름 설정 */}
                   {/* onClick : 로그아웃 텍스트 클릭 시 호출 될 함수 */}
-                  <div className={styled.logout} onClick={logout}>
+                  <div className={styled.logout} onClick={logoutHandler}>
                     로그아웃
                   </div>
                 </div>

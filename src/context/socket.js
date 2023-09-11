@@ -17,7 +17,7 @@ export const useSocket = () => {
     }
 
     /* 서버와의 웹소켓 연결을 시작합니다 */
-    const newSocket = io(`http://${location.hostname}:9002`);
+    const newSocket = io(`https://${location.hostname}:9002`);
     setSocket(newSocket);
     on(newSocket);
   };
@@ -46,7 +46,6 @@ export const useSocket = () => {
     });
 
     socket.on('alert', (e) =>{
-     // console.log(e, "alert", e.msgCnt, e.latestMsg)
       setLatestMessageState(e.latestMsg);
       setMsgCntState(e.msgCnt);
     })

@@ -46,8 +46,8 @@ export const useSocket = () => {
     });
 
     socket.on('alert', (e) =>{
-      console.log(e, "alert", e.msgCnt, e.latestMsg.text)
-      setLatestMessageState(e.latestMsg.text);
+     // console.log(e, "alert", e.msgCnt, e.latestMsg)
+      setLatestMessageState(e.latestMsg);
       setMsgCntState(e.msgCnt);
     })
   };

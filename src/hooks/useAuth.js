@@ -76,6 +76,9 @@ const useAuth = () => {
       // 로그인 하는 경우 소켓을 연결합니다.
       socket.connectSocket();
     },
+    onError(err){
+      alert('로그인 정보를 확인해주세요.')
+    }
   });
 
   /* 회원가입 버튼을 클릭 시 호출되는 함수입니다. */
@@ -84,6 +87,9 @@ const useAuth = () => {
     mutationFn(form) {
       return authApi.join(form);
     },
+    onError(err){
+      alert('회원가입 정보를 확인해주세요.')
+    }
   });
 
   /* 로그아웃 버튼을 클릭 시 호출되는 함수입니다. */

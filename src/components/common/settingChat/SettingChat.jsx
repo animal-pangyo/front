@@ -38,11 +38,11 @@ const SettingChat = () => {
         <ul className={styled.ul}>
           {blockedChatList.map((user) => (
             <div className={styled.listBox}>
-              <li key={user.idx}>{user.user_id}</li>
+              <li key={user.idx}>{user.block_user}</li>
               {/* 차단 해제 버튼을 클릭 하는 경우 해당 유저를 차단 해제 합니다. */}
               <button
                 className={styled.blockBtn}
-                onClick={() => handleBlock(user.user_id)}
+                onClick={() => handleBlock(user.block_user)}
               >
                 차단해제
               </button>

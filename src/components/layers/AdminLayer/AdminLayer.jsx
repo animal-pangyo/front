@@ -4,7 +4,7 @@ import styled from "./admin-layer.module.css";
 import { useContext, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { chatingIdState } from "../../../store/chat";
-import { useChatQuery } from "../../../hooks/useChat";
+import { useChatQuery, useUnreadMessageCountQuery } from "../../../hooks/useChat";
 import Chat from "../../chat/Chat";
 import { SocketContext } from "../../../context/socket";
 import { getUserId } from "../../../services/api";
@@ -18,6 +18,11 @@ const AuthLayer = ({ children }) => {
   const list = useChatQuery(chatingId);
   /* 소켓 상태를 가져옵니다. */
   const socket = useContext(SocketContext);
+  /* 유저가 읽지 않은 메시지 개수를 가져옵니다. */
+  const userId = getUserId();
+
+  const unReadMsgQuery = useUnreadMessageCountQuery(userId);
+  const unReadMsgCnt = unReadMsgQuery.data;
 
   /* 어플리케이션에 접속 후 로그인 상태라면 소켓을 연결합니다. */
   useEffect(() => {
@@ -40,7 +45,7 @@ const AuthLayer = ({ children }) => {
       {/* className : className이름 설정 */}
       <div className={styled.right}>
         {/* 상단 유저관련 컴포넌트 렌더링 */}
-        <AdminTop />
+        <AdminTop unReadMsgCnt={unReadMsgCnt}/>
         {/* className : className이름 설정 */}
         <main className={styled.content}>
           {/* 전달받은 자식 컴포넌트 렌더링 */}

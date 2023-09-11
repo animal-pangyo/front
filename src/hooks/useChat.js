@@ -15,12 +15,25 @@ export const useChatQuery = (id) => {
       return response.data;
     },
     async onSuccess({ users }) {
-      const response = await chatApi.getUnreadMessageCount(users.target);
+      const response = await chatApi.getUnreadMessageCountAll();
       setMessageCount(response.data);
     },
     enabled: !!id,
   });
 }
+
+/* 아직 읽지 않은 채팅 메시지 카운트를 가져옵니다. */
+export const useUnreadMessageCountQuery = (id) => (
+  useQuery({
+    queryKey: [ "count", id],
+    async queryFn() {
+      /* 해당 유저에 대한 차단여부를 가져오는 쿼리입니다. */
+      const response = await chatApi.getUnreadMessageCountAll(id);
+      console.log("useChat,---", response.data)
+      return response.data;
+    },
+  })
+);
   
 
 /* 해당 유저에 대한 차단여부를 가져오는 쿼리입니다. */

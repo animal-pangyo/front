@@ -87,3 +87,14 @@ export const getUnreadMessageCount = (target) => {
     userId
   });
 }
+
+/* 유저가 읽지 않은 채팅의 모든 개수를 가져오는 api */
+export const getUnreadMessageCountAll = (id) => {
+  try{
+    const userId = getUserId();
+    return axios.get(`${URL}/chat/${userId}/count`);
+  }catch(err){
+    console.error('err', err)
+  }
+ 
+}

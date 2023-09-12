@@ -1,46 +1,53 @@
+/* .settingChatBox 스타일 */
 .settingChatBox {
   width: 100%; /* 모달의 너비 조정 */
   height: 400px; /* 모달의 높이 조정 */
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  margin-top: 26px;
+  overflow: auto; /* 내용이 넘칠 때 스크롤 표시 */
+  display: flex; /* 자식 요소들을 수직으로 배치하기 위해 Flex 레이아웃 사용 */
+  flex-direction: column; /* 자식 요소들을 수직으로 배치 */
+  margin-top: 26px; /* 위쪽 여백 추가 */
 }
 
+/* .h3 스타일 */
 .h3 {
-  display: flex;
-  justify-content: center;
+  display: flex; /* 자식 요소들을 수평으로 배치하기 위해 Flex 레이아웃 사용 */
+  justify-content: center; /* 수평 정렬을 중앙으로 설정 */
 }
 
+/* .p 스타일 */
 .p {
-  justify-content: center;
-  display: flex;
+  justify-content: center; /* 수평 정렬을 중앙으로 설정 */
+  display: flex; /* 자식 요소들을 수평으로 배치하기 위해 Flex 레이아웃 사용 */
 }
 
+/* .ul 스타일 */
 .ul {
-  overflow: auto;
+  overflow: auto; /* 내용이 넘칠 때 스크롤 표시 */
 }
 
+/* .li 스타일 */
 .li {
-  list-style: none;
+  list-style: none; /* 목록 표시 스타일 제거 */
 }
 
+/* .listBox 스타일 */
 .listBox {
-  display: flex;
-  width: 280px;
-  justify-content: space-between;
-  margin: 10px;
-  align-items: center;
+  display: flex; /* 자식 요소들을 수평으로 배치하기 위해 Flex 레이아웃 사용 */
+  width: 280px; /* 너비 280px로 설정 */
+  justify-content: space-between; /* 자식 요소 사이의 간격을 최대화하여 양 끝으로 정렬 */
+  margin: 10px; /* 여백 설정 */
+  align-items: center; /* 수직 정렬을 중앙으로 설정 */
 }
 
+/* .blockBtn 스타일 */
 .blockBtn {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  font-size: 1em;
-  font-weight: 100;
-  background-color: #1d4461;
-  color: #fff;
-  cursor: pointer;
-  height: 33px;
-  transition: border-color 0.25s;
+  border-radius: 8px; /* 모서리를 둥글게 처리 */
+  border: 1px solid transparent; /* 테두리 설정 */
+  font-size: 1em; /* 글꼴 크기 설정 */
+  font-weight: 100; /* 글꼴 두께 설정 */
+  background-color: #1d4461; /* 배경색 설정 */
+  color: #fff; /* 글꼴 색상 설정 */
+  cursor: pointer; /* 커서 스타일을 포인터로 설정 */
+  height: 33px; /* 높이 설정 */
+  transition: border-color 0.25s; /* 테두리 색상 전환 효과 */
 }

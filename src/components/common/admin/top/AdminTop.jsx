@@ -85,10 +85,14 @@ const AdminTop = ({unReadMsgCnt}) => {
             user ? (
               <>
                 <div className={styled.chat} onClick={() => setChatOpen(true)}>
+                   {/* "채팅" 텍스트를 렌더링하고, 클릭 시 setChatOpen 함수를 호출하여 채팅창을 엽니다. */}
                   채팅
+                   {/* 만약 msgCount가 0보다 크다면 다음을 렌더링합니다. */}
                   { msgCount > 0 && (
                     <div className={styled.chatCircle}>
+                      {/* 채팅 메시지 개수를 나타내는 원 모양 아이콘 */}
                       <span className={styled.messageCount}>
+                          {/* msgCount 변수의 값을 표시 */}
                         { msgCount}
                       </span>
                     </div>
@@ -123,6 +127,7 @@ const AdminTop = ({unReadMsgCnt}) => {
             )
           }
         </div>
+         {/* 채팅 모달 컴포넌트 추가 */}
         <ChatModal open={chatOpen} setOpen={setChatOpen} />
 
         {/* 유저 정보를 수정하기 위해 사용되는 모달 */}
@@ -136,6 +141,7 @@ const AdminTop = ({unReadMsgCnt}) => {
           setOpen={setOpen}
           onSubmit={onSubmit}
         />
+          {/* latestMessage 가 있을 때 미리보기 컴포넌트를 렌더링 */}
        {latestMessage ? <PreviewMessage latestMessage={latestMessage} /> : null} 
       </div>
     </>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "./previewMessage.module.css";
 
+// PreviewMessage 컴포넌트 정의
 const PreviewMessage = ({latestMessage}) => {
+    // latestMessage가 없을 경우 컴포넌트를 아무것도 렌더링하지 않음
   if(!latestMessage) return;
 
   // latestMessage를 상태로 관리
@@ -24,7 +26,10 @@ const PreviewMessage = ({latestMessage}) => {
         return () => clearTimeout(timeout);
   }, [latestMessage]);
 
+  // showMessage에 따라 다른 클래스를 선택하여 messageClassName에 할당
   const messageClassName = showMessage ? `${styled.previewMsg}` : `${styled.previewMsgs}`;
+
+    // 렌더링
     return (
       <div className={styled.previewMsgBox}>
         <div className={messageClassName}>         
@@ -34,4 +39,5 @@ const PreviewMessage = ({latestMessage}) => {
     )
 };
 
+// PreviewMessage 컴포넌트를 내보냄
 export default PreviewMessage;
